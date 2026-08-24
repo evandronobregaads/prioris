@@ -498,4 +498,453 @@ e efetivamente concluídas dentro do período analisado.
 Registros históricos relevantes não deverão ser alterados automaticamente
 apenas porque o usuário iniciou um novo ciclo ou uma nova semana.
 ## 12. Histórias de Usuário
-## 13. Casos de Uso
+
+**As histórias de** usuário descrevem funcionalidades do Prioris a partir da perspectiva de quem utilizará o sistema.
+
+A estrutura utilizada será:
+
+**Como [ator], quero [ação], para [benefício ou objetivo].**
+
+### HU-001 — Criar conta
+
+**Como** visitante,
+**quero** criar uma conta no Prioris,
+**para** utilizar as funcionalidades personalizadas do sistema.
+
+**Requisitos relacionados:** RF-001.
+
+---
+
+### HU-002 — Realizar login
+
+**Como** usuário cadastrado,
+**quero** realizar login no Prioris,
+**para** acessar meus objetivos, tarefas e demais informações pessoais.
+
+**Requisitos relacionados:** RF-002 e RF-003.
+
+---
+
+### HU-003 — Gerenciar objetivos
+
+**Como** usuário autenticado,
+**quero** cadastrar e acompanhar meus objetivos,
+**para** manter clareza sobre aquilo que desejo alcançar.
+
+**Requisitos relacionados:** RF-004, RF-005 e RF-006.
+
+---
+
+### HU-004 — Planejar um ciclo de 12 semanas
+
+**Como** usuário autenticado,
+**quero** criar um ciclo de planejamento de 12 semanas e associar objetivos a ele,
+**para** transformar objetivos de longo prazo em períodos menores de execução.
+
+**Requisitos relacionados:** RF-007, RF-008, RF-009 e RF-010.
+
+---
+
+### HU-005 — Gerenciar metas
+
+**Como** usuário autenticado,
+**quero** dividir meus objetivos em metas menores,
+**para** acompanhar de maneira mais clara o caminho necessário para alcançá-los.
+
+**Requisitos relacionados:** RF-011, RF-012 e RF-013.
+
+---
+
+### HU-006 — Gerenciar tarefas
+
+**Como** usuário autenticado,
+**quero** cadastrar, editar, concluir e excluir tarefas,
+**para** organizar as ações que preciso executar.
+
+**Requisitos relacionados:** RF-014, RF-015, RF-016, RF-017 e RF-018.
+
+---
+
+### HU-007 — Classificar tarefas pelo método ABCDE
+
+**Como** usuário autenticado,
+**quero** classificar minhas tarefas utilizando o método ABCDE,
+**para** diferenciar atividades importantes, adiáveis, delegáveis ou elimináveis.
+
+**Requisitos relacionados:** RF-019 e RF-020.
+
+---
+
+### HU-008 — Definir minha prioridade principal
+
+**Como** usuário autenticado,
+**quero** escolher uma tarefa como minha prioridade principal do dia,
+**para** concentrar meus esforços na atividade que possui maior importância naquele momento.
+
+**Requisitos relacionados:** RF-021, RF-022 e RF-023.
+
+---
+
+### HU-009 — Planejar minha semana
+
+**Como** usuário autenticado,
+**quero** selecionar as ações estratégicas que deverão ser executadas durante a semana,
+**para** manter minhas atividades alinhadas aos objetivos do ciclo de 12 semanas.
+
+**Requisitos relacionados:** RF-024, RF-025 e RF-026.
+
+---
+
+### HU-010 — Realizar uma sessão de foco
+
+**Como** usuário autenticado,
+**quero** iniciar uma sessão de foco vinculada a uma tarefa,
+**para** trabalhar nela durante um período determinado sem perder a concentração.
+
+**Requisitos relacionados:** RF-027, RF-028, RF-029, RF-030 e RF-031.
+
+---
+
+### HU-011 — Utilizar conteúdo de concentração
+
+**Como** usuário autenticado,
+**quero** reproduzir vídeos ou playlists de concentração durante uma sessão de foco,
+**para** criar um ambiente que favoreça minha concentração.
+
+**Requisitos relacionados:** RF-032, RF-033 e RF-034.
+
+---
+
+### HU-012 — Consultar meu dashboard
+
+**Como** usuário autenticado,
+**quero** visualizar um resumo das minhas tarefas, prioridade, tempo de foco e progresso,
+**para** compreender rapidamente minha situação atual.
+
+**Requisitos relacionados:** RF-035, RF-036, RF-037, RF-038 e RF-039.
+
+---
+
+### HU-013 — Acompanhar meu Score de Execução
+
+**Como** usuário autenticado,
+**quero** visualizar meu Score de Execução semanal,
+**para** verificar quanto das ações estratégicas planejadas eu realmente executei.
+
+**Requisitos relacionados:** RF-040 e RF-041.
+
+---
+
+### HU-014 — Realizar revisão semanal
+
+**Como** usuário autenticado,
+**quero** revisar os resultados da minha semana,
+**para** identificar avanços, dificuldades e ajustes necessários para a semana seguinte.
+
+**Requisitos relacionados:** RF-042, RF-043 e RF-044.
+
+---
+
+### HU-015 — Consultar histórico
+
+**Como** usuário autenticado,
+**quero** consultar meus registros anteriores,
+**para** acompanhar minha evolução ao longo do tempo.
+
+**Requisitos relacionados:** RF-045.
+
+---
+
+# 13. Casos de Uso
+
+### 13.1 Diagrama de Casos de Uso
+
+O diagrama abaixo representa os principais atores e interações do sistema
+Prioris.
+
+![Diagrama de Casos de Uso do Prioris](diagrama-casos-de-uso-prioris.png)
+
+Os casos de uso representam as principais interações realizadas entre os atores e o sistema.
+
+## UC-001 — Cadastrar usuário
+
+**Ator principal:** Visitante.
+
+**Objetivo:** Criar uma nova conta no Prioris.
+
+**Pré-condição:** O visitante não possuir conta cadastrada com o mesmo e-mail.
+
+**Fluxo principal:**
+
+1. O visitante acessa a opção de cadastro.
+2. O sistema apresenta o formulário.
+3. O visitante informa os dados obrigatórios.
+4. O sistema valida as informações.
+5. O sistema verifica se o e-mail já está cadastrado.
+6. O sistema registra o novo usuário.
+7. O sistema informa que o cadastro foi realizado com sucesso.
+
+**Fluxos alternativos:**
+
+* Caso existam campos obrigatórios inválidos, o sistema deverá informar o erro.
+* Caso o e-mail já esteja cadastrado, o sistema não deverá criar uma nova conta.
+
+**Pós-condição:** O usuário estará cadastrado no sistema.
+
+---
+
+## UC-002 — Realizar login
+
+**Ator principal:** Usuário cadastrado.
+
+**Objetivo:** Acessar a área autenticada do Prioris.
+
+**Pré-condição:** Possuir uma conta cadastrada.
+
+**Fluxo principal:**
+
+1. O usuário acessa a tela de login.
+2. Informa e-mail e senha.
+3. O sistema valida as credenciais.
+4. O sistema autentica o usuário.
+5. O sistema direciona o usuário ao dashboard.
+
+**Fluxo alternativo:**
+
+* Caso as credenciais sejam inválidas, o sistema informa que não foi possível realizar a autenticação.
+
+**Pós-condição:** O usuário estará autenticado.
+
+---
+
+## UC-003 — Gerenciar objetivos
+
+**Ator principal:** Usuário autenticado.
+
+**Objetivo:** Criar e manter objetivos pessoais ou profissionais.
+
+**Pré-condição:** O usuário deverá estar autenticado.
+
+**Fluxo principal:**
+
+1. O usuário acessa a área de objetivos.
+2. O sistema apresenta seus objetivos existentes.
+3. O usuário escolhe cadastrar um novo objetivo.
+4. Informa os dados solicitados.
+5. O sistema valida e registra o objetivo.
+6. O objetivo passa a ser apresentado na listagem.
+
+**Fluxos alternativos:**
+
+* O usuário poderá editar um objetivo existente.
+* O usuário poderá excluir um objetivo quando permitido pelas regras do sistema.
+
+**Pós-condição:** As alterações realizadas estarão persistidas no banco de dados.
+
+---
+
+## UC-004 — Criar ciclo de 12 semanas
+
+**Ator principal:** Usuário autenticado.
+
+**Objetivo:** Criar um período estruturado de execução.
+
+**Pré-condição:** O usuário deverá estar autenticado.
+
+**Fluxo principal:**
+
+1. O usuário acessa a área de ciclos.
+2. Seleciona a opção para criar um novo ciclo.
+3. Informa a data de início.
+4. Define os objetivos associados ao ciclo.
+5. O sistema calcula o período de 12 semanas.
+6. O sistema registra o ciclo.
+7. O sistema apresenta as informações do novo ciclo.
+
+**Pós-condição:** Um novo ciclo de planejamento estará disponível ao usuário.
+
+---
+
+## UC-005 — Gerenciar tarefas
+
+**Ator principal:** Usuário autenticado.
+
+**Objetivo:** Criar e administrar as tarefas que deverão ser executadas.
+
+**Pré-condição:** O usuário deverá estar autenticado.
+
+**Fluxo principal:**
+
+1. O usuário acessa a área de tarefas.
+2. Seleciona a opção de nova tarefa.
+3. Informa título, descrição e demais informações desejadas.
+4. O usuário poderá relacionar a tarefa a uma meta ou objetivo.
+5. O sistema valida os dados.
+6. O sistema registra a tarefa.
+7. A nova tarefa passa a ser apresentada na listagem.
+
+**Fluxos alternativos:**
+
+* O usuário poderá editar a tarefa.
+* O usuário poderá marcar a tarefa como concluída.
+* O usuário poderá excluir ou descartar a tarefa conforme as regras do sistema.
+
+**Pós-condição:** A alteração estará registrada no sistema.
+
+---
+
+## UC-006 — Classificar tarefa pelo método ABCDE
+
+**Ator principal:** Usuário autenticado.
+
+**Objetivo:** Definir a importância estratégica de uma tarefa.
+
+**Pré-condição:** A tarefa deverá existir e pertencer ao usuário.
+
+**Fluxo principal:**
+
+1. O usuário seleciona uma tarefa.
+2. Escolhe uma classificação entre A, B, C, D ou E.
+3. O sistema registra a classificação.
+4. O sistema apresenta a identificação visual correspondente.
+
+**Pós-condição:** A tarefa ficará associada à classificação escolhida.
+
+---
+
+## UC-007 — Definir prioridade principal do dia
+
+**Ator principal:** Usuário autenticado.
+
+**Objetivo:** Definir qual tarefa deverá receber maior atenção no dia.
+
+**Pré-condição:** Deverá existir pelo menos uma tarefa ativa.
+
+**Fluxo principal:**
+
+1. O usuário acessa suas tarefas do dia.
+2. O sistema poderá apresentar perguntas de apoio à priorização.
+3. O usuário seleciona uma tarefa.
+4. Escolhe a opção de defini-la como prioridade principal.
+5. O sistema verifica se já existe outra prioridade para o mesmo dia.
+6. Caso exista, substitui a definição anterior mediante a ação do usuário.
+7. A nova prioridade é destacada no dashboard.
+
+**Pós-condição:** Existirá no máximo uma prioridade principal definida para aquela data.
+
+---
+
+## UC-008 — Planejar semana
+
+**Ator principal:** Usuário autenticado.
+
+**Objetivo:** Definir as ações estratégicas da semana.
+
+**Pré-condição:** O usuário deverá possuir planejamento ou ciclo ativo.
+
+**Fluxo principal:**
+
+1. O usuário acessa o planejamento semanal.
+2. O sistema apresenta informações relacionadas ao ciclo atual.
+3. O usuário seleciona ou cria ações estratégicas para a semana.
+4. As atividades são organizadas conforme o período definido.
+5. O sistema salva o planejamento.
+
+**Pós-condição:** O plano semanal estará disponível para orientar as atividades do usuário.
+
+---
+
+## UC-009 — Iniciar sessão de foco
+
+**Ator principal:** Usuário autenticado.
+
+**Ator secundário:** YouTube IFrame Player API.
+
+**Objetivo:** Executar uma tarefa durante um período de concentração.
+
+**Pré-condição:** O usuário deverá estar autenticado.
+
+**Fluxo principal:**
+
+1. O usuário acessa o modo foco.
+2. Seleciona uma tarefa.
+3. Define ou utiliza os tempos configurados de foco e descanso.
+4. Opcionalmente seleciona conteúdo de concentração.
+5. O usuário inicia a sessão.
+6. O temporizador é iniciado.
+7. Quando selecionado, o conteúdo do YouTube é reproduzido.
+8. O usuário poderá pausar ou retomar a sessão.
+9. Ao concluir ou encerrar a sessão, o sistema registra o tempo realizado.
+
+**Fluxos alternativos:**
+
+* Caso o conteúdo do YouTube esteja indisponível, o temporizador deverá continuar funcionando.
+* Caso a sessão seja encerrada antecipadamente, o sistema poderá registrar o tempo efetivamente realizado.
+
+**Pós-condição:** A sessão realizada estará registrada no histórico do usuário.
+
+---
+
+## UC-010 — Consultar dashboard
+
+**Ator principal:** Usuário autenticado.
+
+**Objetivo:** Visualizar informações resumidas sobre planejamento e execução.
+
+**Pré-condição:** O usuário deverá estar autenticado.
+
+**Fluxo principal:**
+
+1. O usuário acessa o dashboard.
+2. O sistema consulta os dados relacionados à conta.
+3. O sistema apresenta a prioridade principal.
+4. Apresenta tarefas planejadas e concluídas.
+5. Apresenta informações do ciclo ativo.
+6. Apresenta tempo de foco e indicadores disponíveis.
+
+**Pós-condição:** Não há alteração de dados.
+
+---
+
+## UC-011 — Consultar Score de Execução
+
+**Ator principal:** Usuário autenticado.
+
+**Objetivo:** Avaliar o nível de execução do planejamento semanal.
+
+**Pré-condição:** Existirem ações estratégicas planejadas para a semana.
+
+**Fluxo principal:**
+
+1. O usuário acessa seus indicadores.
+2. O sistema identifica as ações estratégicas planejadas.
+3. O sistema identifica quantas foram concluídas.
+4. O sistema calcula o Score de Execução.
+5. O percentual é apresentado ao usuário.
+
+**Fluxo alternativo:**
+
+* Caso não existam ações planejadas, o sistema deverá informar que não há dados suficientes para calcular o indicador.
+
+**Pós-condição:** Não há alteração de dados.
+
+---
+
+## UC-012 — Realizar revisão semanal
+
+**Ator principal:** Usuário autenticado.
+
+**Objetivo:** Avaliar a execução da semana e preparar ajustes futuros.
+
+**Pré-condição:** O usuário deverá possuir registros referentes à semana analisada.
+
+**Fluxo principal:**
+
+1. O usuário acessa a revisão semanal.
+2. O sistema apresenta ações planejadas e concluídas.
+3. O sistema apresenta o Score de Execução.
+4. O sistema apresenta o progresso do ciclo.
+5. O usuário registra suas observações sobre a semana.
+6. O sistema salva a revisão.
+
+**Pós-condição:** A revisão ficará disponível no histórico do usuário.
