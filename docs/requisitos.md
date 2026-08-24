@@ -138,6 +138,8 @@ A primeira versão do Prioris deverá contemplar:
 - planejamento semanal;
 - acompanhamento das tarefas concluídas;
 - temporizador de foco configurável;
+- reprodução de vídeos ou playlists de concentração do YouTube durante as sessões de foco;
+- controles básicos de reprodução e volume integrados ao modo foco;
 - registro de sessões de foco;
 - dashboard com informações resumidas;
 - indicadores básicos de execução e progresso;
@@ -148,7 +150,8 @@ A primeira versão do Prioris deverá contemplar:
 Poderão ser incorporadas em versões futuras:
 
 - integração com Google Calendar;
-- integração com serviços de música;
+- integração com Spotify;
+- integração com Apple Music;
 - integração com APIs externas de livros;
 - módulo completo de acompanhamento de leitura;
 - notificações push;
