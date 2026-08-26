@@ -4,13 +4,13 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="rmIjshEij4Ig6vUAVcf--1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;" value="&lt;font style=&quot;font-size: 24px;&quot; face=&quot;Courier New&quot;&gt;&lt;b&gt;PRIORIS&lt;/b&gt;&lt;/font&gt;" vertex="1">
-          <mxGeometry height="680" width="445" x="230" y="40" as="geometry" />
+        <mxCell id="rmIjshEij4Ig6vUAVcf--1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;" value="&lt;font style=&quot;font-size: 24px;&quot; face=&quot;Courier New&quot;&gt;&lt;b&gt;P R I O R I S&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="680" width="445" x="222.5" y="40" as="geometry" />
         </mxCell>
         <mxCell id="rmIjshEij4Ig6vUAVcf--23" edge="1" parent="1" source="rmIjshEij4Ig6vUAVcf--2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="rmIjshEij4Ig6vUAVcf--10">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="160" y="80" />
+              <mxPoint x="160" y="130" />
               <mxPoint x="160" y="110" />
             </Array>
           </mxGeometry>
@@ -18,13 +18,13 @@
         <mxCell id="rmIjshEij4Ig6vUAVcf--24" edge="1" parent="1" source="rmIjshEij4Ig6vUAVcf--2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="rmIjshEij4Ig6vUAVcf--11">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="160" y="80" />
+              <mxPoint x="160" y="130" />
               <mxPoint x="160" y="160" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="rmIjshEij4Ig6vUAVcf--2" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontFamily=Courier New;" value="VISITANTE" vertex="1">
-          <mxGeometry height="80" width="40" x="25" y="40" as="geometry" />
+          <mxGeometry height="80" width="40" x="40" y="90" as="geometry" />
         </mxCell>
         <mxCell id="rmIjshEij4Ig6vUAVcf--25" edge="1" parent="1" source="rmIjshEij4Ig6vUAVcf--3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="rmIjshEij4Ig6vUAVcf--12">
           <mxGeometry relative="1" as="geometry">
@@ -107,18 +107,18 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="rmIjshEij4Ig6vUAVcf--3" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontFamily=Courier New;" value="USUÁRIO&lt;div&gt;AUTENTICADO&lt;/div&gt;" vertex="1">
-          <mxGeometry height="80" width="40" x="25" y="400" as="geometry" />
+          <mxGeometry height="80" width="40" x="40" y="400" as="geometry" />
         </mxCell>
         <mxCell id="rmIjshEij4Ig6vUAVcf--38" edge="1" parent="1" source="rmIjshEij4Ig6vUAVcf--4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="rmIjshEij4Ig6vUAVcf--20">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="700.03" y="80.03" />
-              <mxPoint x="700.03" y="560.03" />
+              <mxPoint x="700" y="120" />
+              <mxPoint x="700" y="560" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="rmIjshEij4Ig6vUAVcf--4" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontFamily=Courier New;" value="YOUTUBE IFRAME&lt;div&gt;PLAYER API&lt;/div&gt;" vertex="1">
-          <mxGeometry height="80" width="40" x="745" y="40" as="geometry" />
+          <mxGeometry height="80" width="40" x="750" y="70" as="geometry" />
         </mxCell>
         <mxCell id="rmIjshEij4Ig6vUAVcf--10" parent="1" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Courier New;" value="Cadastrar usuário" vertex="1">
           <mxGeometry height="40" width="180" x="355" y="90" as="geometry" />
