@@ -166,4 +166,4 @@ GROUP BY
 
 ORDER BY
     c.id_ciclo,
-    o.id_objetivo2;
+    o.id_objetivo;
