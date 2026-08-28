@@ -86,15 +86,6 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}/objetivos")
-    public ResponseEntity<List<ObjetivoResponseDTO>> listarObjetivos(
-            @PathVariable Long id
-    ) {
-        return ResponseEntity.ok(
-                objetivoService.listarPorUsuario(id)
-        );
-    }
-
     @PostMapping("/{id}/objetivos")
     public ResponseEntity<ObjetivoResponseDTO> cadastrarObjetivo(
             @PathVariable Long id,

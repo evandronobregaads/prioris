@@ -115,4 +115,22 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.CONFLICT)
                 .body(erro);
     }
+    @ExceptionHandler(ObjetivoJaAssociadoAoCicloException.class)
+    public ResponseEntity<ErroResponseDTO> tratarObjetivoJaAssociado(
+            ObjetivoJaAssociadoAoCicloException exception,
+            HttpServletRequest request
+    ) {
+
+        ErroResponseDTO erro = new ErroResponseDTO(
+                LocalDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                "Conflict",
+                exception.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(erro);
+    }
 }
