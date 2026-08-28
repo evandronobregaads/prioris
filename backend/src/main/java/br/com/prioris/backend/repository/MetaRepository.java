@@ -22,4 +22,11 @@ public interface MetaRepository extends JpaRepository<Meta, Long> {
             Long idUsuario,
             String status
     );
+    Optional<Meta>
+    findByIdMetaAndObjetivo_Usuario_IdUsuarioAndStatusNotAndObjetivo_StatusNot(
+            Long idMeta,
+            Long idUsuario,
+            String statusMeta,
+            String statusObjetivo
+    );
 }

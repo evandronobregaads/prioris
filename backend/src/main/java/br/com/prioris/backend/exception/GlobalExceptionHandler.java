@@ -79,4 +79,22 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(erro);
     }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErroResponseDTO> tratarArgumentoInvalido(
+            IllegalArgumentException exception,
+            HttpServletRequest request
+    ) {
+
+        ErroResponseDTO erro = new ErroResponseDTO(
+                LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                "Bad Request",
+                exception.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(erro);
+    }
 }
