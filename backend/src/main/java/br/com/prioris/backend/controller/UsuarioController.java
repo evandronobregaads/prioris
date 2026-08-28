@@ -1,16 +1,18 @@
 package br.com.prioris.backend.controller;
 
-import br.com.prioris.backend.dto.UsuarioResponseDTO;
+import br.com.prioris.backend.dto.*;
 import br.com.prioris.backend.service.UsuarioService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import br.com.prioris.backend.dto.UsuarioRequestDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 
-import br.com.prioris.backend.dto.UsuarioAtualizacaoDTO;
-import br.com.prioris.backend.dto.UsuarioPatchDTO;
+import br.com.prioris.backend.service.ObjetivoService;
+
+import br.com.prioris.backend.dto.ObjetivoRequestDTO;
+import br.com.prioris.backend.dto.ObjetivoResponseDTO;
+import br.com.prioris.backend.service.ObjetivoService;
 
 import java.util.List;
 
@@ -19,9 +21,14 @@ import java.util.List;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
+    private final ObjetivoService objetivoService;
 
-    public UsuarioController(UsuarioService usuarioService) {
+    public UsuarioController(
+            UsuarioService usuarioService,
+            ObjetivoService objetivoService
+    ) {
         this.usuarioService = usuarioService;
+        this.objetivoService = objetivoService;
     }
 
     @GetMapping
@@ -77,5 +84,28 @@ public class UsuarioController {
         usuarioService.excluir(id);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/objetivos")
+    public ResponseEntity<List<ObjetivoResponseDTO>> listarObjetivos(
+            @PathVariable Long id
+    ) {
+        return ResponseEntity.ok(
+                objetivoService.listarPorUsuario(id)
+        );
+    }
+
+    @PostMapping("/{id}/objetivos")
+    public ResponseEntity<ObjetivoResponseDTO> cadastrarObjetivo(
+            @PathVariable Long id,
+            @Valid @RequestBody ObjetivoRequestDTO dto
+    ) {
+
+        ObjetivoResponseDTO objetivo =
+                objetivoService.cadastrar(id, dto);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(objetivo);
     }
 }

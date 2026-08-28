@@ -1,17 +1,15 @@
 package br.com.prioris.backend.service;
+import br.com.prioris.backend.dto.*;
+import br.com.prioris.backend.entity.Objetivo;
 import br.com.prioris.backend.exception.RecursoNaoEncontradoException;
 
-import br.com.prioris.backend.dto.UsuarioResponseDTO;
 import br.com.prioris.backend.entity.Usuario;
+import br.com.prioris.backend.repository.ObjetivoRepository;
 import br.com.prioris.backend.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
-import br.com.prioris.backend.dto.UsuarioRequestDTO;
 import br.com.prioris.backend.exception.EmailJaCadastradoException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import br.com.prioris.backend.dto.UsuarioAtualizacaoDTO;
-import br.com.prioris.backend.dto.UsuarioPatchDTO;
 
 import java.util.List;
 
@@ -185,6 +183,106 @@ public class UsuarioService {
                                 "Usuário não encontrado com o id: " + id
                         )
                 );
+    }
+
+    @Service
+    public static class ObjetivoService {
+
+        private final ObjetivoRepository objetivoRepository;
+        private final UsuarioRepository usuarioRepository;
+
+        public ObjetivoService(
+                ObjetivoRepository objetivoRepository,
+                UsuarioRepository usuarioRepository
+        ) {
+            this.objetivoRepository = objetivoRepository;
+            this.usuarioRepository = usuarioRepository;
+        }
+
+        public List<ObjetivoResponseDTO> listarTodos(Long idUsuario) {
+
+            buscarUsuarioAtivo(idUsuario);
+
+            return objetivoRepository
+                    .findAllByUsuario_IdUsuarioOrderByIdObjetivoAsc(idUsuario)
+                    .stream()
+                    .map(this::converterParaResponse)
+                    .toList();
+        }
+
+        public ObjetivoResponseDTO buscarPorId(
+                Long idUsuario,
+                Long idObjetivo
+        ) {
+
+            buscarUsuarioAtivo(idUsuario);
+
+            Objetivo objetivo = objetivoRepository
+                    .findByIdObjetivoAndUsuario_IdUsuario(
+                            idObjetivo,
+                            idUsuario
+                    )
+                    .orElseThrow(() ->
+                            new RecursoNaoEncontradoException(
+                                    "Objetivo não encontrado com o id: "
+                                            + idObjetivo
+                            )
+                    );
+
+            return converterParaResponse(objetivo);
+        }
+
+        public ObjetivoResponseDTO cadastrar(
+                Long idUsuario,
+                ObjetivoRequestDTO dto
+        ) {
+
+            Usuario usuario = buscarUsuarioAtivo(idUsuario);
+
+            Objetivo objetivo = new Objetivo();
+
+            objetivo.setUsuario(usuario);
+            objetivo.setTitulo(dto.getTitulo().trim());
+            objetivo.setDescricao(dto.getDescricao());
+            objetivo.setArea(dto.getArea().trim().toUpperCase());
+            objetivo.setMotivo(dto.getMotivo());
+            objetivo.setPrazo(dto.getPrazo());
+            objetivo.setStatus("ATIVO");
+
+            Objetivo objetivoSalvo =
+                    objetivoRepository.save(objetivo);
+
+            return converterParaResponse(objetivoSalvo);
+        }
+
+        private Usuario buscarUsuarioAtivo(Long idUsuario) {
+
+            return usuarioRepository
+                    .findByIdUsuarioAndAtivoTrue(idUsuario)
+                    .orElseThrow(() ->
+                            new RecursoNaoEncontradoException(
+                                    "Usuário não encontrado com o id: "
+                                            + idUsuario
+                            )
+                    );
+        }
+
+        private ObjetivoResponseDTO converterParaResponse(
+                Objetivo objetivo
+        ) {
+
+            return new ObjetivoResponseDTO(
+                    objetivo.getIdObjetivo(),
+                    objetivo.getUsuario().getIdUsuario(),
+                    objetivo.getTitulo(),
+                    objetivo.getDescricao(),
+                    objetivo.getArea(),
+                    objetivo.getMotivo(),
+                    objetivo.getPrazo(),
+                    objetivo.getStatus(),
+                    objetivo.getDataCriacao()
+            );
+        }
     }
 }
 
