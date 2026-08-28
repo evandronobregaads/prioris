@@ -97,4 +97,22 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(erro);
     }
+    @ExceptionHandler(PrioridadeDiariaJaDefinidaException.class)
+    public ResponseEntity<ErroResponseDTO> tratarPrioridadeJaDefinida(
+            PrioridadeDiariaJaDefinidaException exception,
+            HttpServletRequest request
+    ) {
+
+        ErroResponseDTO erro = new ErroResponseDTO(
+                LocalDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                "Conflict",
+                exception.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(erro);
+    }
 }
