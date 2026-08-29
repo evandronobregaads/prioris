@@ -2,6 +2,8 @@ package br.com.prioris.backend.controller;
 
 import br.com.prioris.backend.dto.*;
 import br.com.prioris.backend.service.UsuarioService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +20,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/usuarios")
+@Tag(
+        name = "Usuários",
+        description = "Gerenciamento dos usuários do Prioris"
+)
 public class UsuarioController {
+
 
     private final UsuarioService usuarioService;
     private final ObjetivoService objetivoService;
@@ -31,11 +38,19 @@ public class UsuarioController {
         this.objetivoService = objetivoService;
     }
 
+    @Operation(
+            summary = "Listar usuários",
+            description = "Retorna todos os usuários ativos cadastrados no Prioris."
+    )
     @GetMapping
     public ResponseEntity<List<UsuarioResponseDTO>> listarTodos() {
         return ResponseEntity.ok(usuarioService.listarTodos());
     }
 
+    @Operation(
+            summary = "Buscar usuário por ID",
+            description = "Retorna os dados de um usuário ativo pelo identificador."
+    )
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioResponseDTO> buscarPorId(
             @PathVariable Long id
@@ -43,6 +58,10 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.buscarPorId(id));
     }
 
+    @Operation(
+            summary = "Cadastrar usuário",
+            description = "Cria um novo usuário no Prioris."
+    )
     @PostMapping
     public ResponseEntity<UsuarioResponseDTO> cadastrar(
             @Valid @RequestBody UsuarioRequestDTO dto
@@ -55,6 +74,10 @@ public class UsuarioController {
                 .body(usuario);
     }
 
+    @Operation(
+            summary = "Atualizar usuário",
+            description = "Atualiza integralmente os dados editáveis do usuário."
+    )
     @PutMapping("/{id}")
     public ResponseEntity<UsuarioResponseDTO> atualizar(
             @PathVariable Long id,
@@ -66,6 +89,10 @@ public class UsuarioController {
         );
     }
 
+    @Operation(
+            summary = "Atualizar usuário parcialmente",
+            description = "Atualiza apenas os campos enviados na requisição."
+    )
     @PatchMapping("/{id}")
     public ResponseEntity<UsuarioResponseDTO> atualizarParcialmente(
             @PathVariable Long id,
@@ -76,6 +103,11 @@ public class UsuarioController {
                 usuarioService.atualizarParcialmente(id, dto)
         );
     }
+
+    @Operation(
+            summary = "Desativar usuário",
+            description = "Realiza a exclusão lógica do usuário."
+    )
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(
             @PathVariable Long id

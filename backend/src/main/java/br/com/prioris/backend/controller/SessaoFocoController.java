@@ -4,6 +4,7 @@ import br.com.prioris.backend.dto.SessaoFocoFinalizacaoDTO;
 import br.com.prioris.backend.dto.SessaoFocoRequestDTO;
 import br.com.prioris.backend.dto.SessaoFocoResponseDTO;
 import br.com.prioris.backend.service.SessaoFocoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/usuarios/{idUsuario}/sessoes-foco")
+@Tag(
+        name = "Sessões de Foco",
+        description = "Gerenciamento das sessões de foco e Pomodoro"
+)
 public class SessaoFocoController {
 
     private final SessaoFocoService sessaoFocoService;

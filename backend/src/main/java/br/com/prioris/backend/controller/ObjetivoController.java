@@ -5,6 +5,7 @@ import br.com.prioris.backend.dto.ObjetivoPatchDTO;
 import br.com.prioris.backend.dto.ObjetivoRequestDTO;
 import br.com.prioris.backend.dto.ObjetivoResponseDTO;
 import br.com.prioris.backend.service.ObjetivoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/usuarios/{idUsuario}/objetivos")
+@Tag(
+        name = "Objetivos",
+        description = "Gerenciamento dos objetivos do usuário"
+)
 public class ObjetivoController {
 
     private final ObjetivoService objetivoService;

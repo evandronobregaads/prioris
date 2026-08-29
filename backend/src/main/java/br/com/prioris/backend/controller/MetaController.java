@@ -2,6 +2,7 @@ package br.com.prioris.backend.controller;
 
 import br.com.prioris.backend.dto.*;
 import br.com.prioris.backend.service.MetaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,10 @@ import java.util.List;
 @RestController
 @RequestMapping(
         "/api/usuarios/{idUsuario}/objetivos/{idObjetivo}/metas"
+)
+@Tag(
+        name = "Metas",
+        description = "Gerenciamento das metas vinculadas aos objetivos"
 )
 public class MetaController {
 

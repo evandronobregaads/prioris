@@ -2,6 +2,7 @@ package br.com.prioris.backend.controller;
 
 import br.com.prioris.backend.dto.*;
 import br.com.prioris.backend.service.RevisaoSemanalService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/usuarios/{idUsuario}")
+@Tag(
+        name = "Revisão Semanal",
+        description = "Registro das revisões e evolução semanal"
+)
 public class RevisaoSemanalController {
 
     private final RevisaoSemanalService revisaoService;

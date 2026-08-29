@@ -3,6 +3,7 @@ package br.com.prioris.backend.controller;
 import br.com.prioris.backend.dto.PrioridadeDiariaRequestDTO;
 import br.com.prioris.backend.dto.PrioridadeDiariaResponseDTO;
 import br.com.prioris.backend.service.PrioridadeDiariaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping(
         "/api/usuarios/{idUsuario}/prioridade-diaria"
+)
+@Tag(
+        name = "Prioridade Diária",
+        description = "Definição e histórico da Prioridade #1 do dia"
 )
 public class PrioridadeDiariaController {
 
