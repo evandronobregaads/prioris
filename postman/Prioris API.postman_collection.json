@@ -1,0 +1,3387 @@
+{
+  "info": {
+    "_postman_id": "a0094d72-a2ed-4123-8a5f-748a81615020",
+    "name": "Prioris API",
+    "description": "# **Collection de testes da API REST do Prioris.**\n\n##### Contém requisições para usuários, objetivos, metas, tarefas, prioridade diária, ciclos de 12 semanas, planejamento semanal, revisão semanal e sessões de foco.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54816546",
+    "_collection_link": "https://go.postman.co/collection/54816546-a0094d72-a2ed-4123-8a5f-748a81615020?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "01 - Usuários",
+      "item": [
+        {
+          "name": "GET - Listar usuários",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Resposta deve ser uma lista\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta).to.be.an(\"array\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar usuário",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Usuário deve possuir um ID\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.idUsuario).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Usuário não deve expor senha\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta).to.not.have.property(\"senha\");\r",
+                  "    pm.expect(resposta).to.not.have.property(\"senhaHash\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Cadastrar usuário",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Usuário deve ser criado com ID\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.idUsuario).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Senha não deve aparecer na resposta\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta).to.not.have.property(\"senha\");\r",
+                  "    pm.expect(resposta).to.not.have.property(\"senhaHash\");\r",
+                  "});\r",
+                  "\r",
+                  "const resposta = pm.response.json();\r",
+                  "\r",
+                  "pm.collectionVariables.set(\r",
+                  "    \"idUsuario\",\r",
+                  "    resposta.idUsuario\r",
+                  ");"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nome\": \"Usuario Collection\",\r\n  \"email\": \"collection@prioris.app\",\r\n  \"senha\": \"prioris123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Atualizar usuário",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Nome deve ter sido atualizado\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.nome)\r",
+                  "        .to.eql(\"Usuario Collection Atualizado\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"E-mail deve ter sido atualizado\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.email)\r",
+                  "        .to.eql(\"collection.atualizado@prioris.app\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nome\": \"Usuario Collection Atualizado\",\r\n  \"email\": \"collection.atualizado@prioris.app\",\r\n  \"senha\": \"novasenha123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH - Atualizar usuário",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"PATCH deve atualizar somente o campo enviado\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.nome)\r",
+                  "        .to.eql(\"Usuario Collection PATCH\");\r",
+                  "\r",
+                  "    pm.expect(resposta.email)\r",
+                  "        .to.exist;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nome\": \"Usuario Collection PATCH\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Desativar usuário",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 204\", function () {\r",
+                  "    pm.response.to.have.status(204);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "02 - Objetivos",
+      "item": [
+        {
+          "name": "GET - Listar objetivos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Resposta deve ser uma lista\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta).to.be.an(\"array\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/objetivos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "objetivos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar objetivo por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Objetivo deve possuir ID\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.idObjetivo).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Objetivo deve pertencer ao usuário atual\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.idUsuario)\r",
+                  "        .to.eql(Number(pm.collectionVariables.get(\"idUsuario\")));\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/objetivos/{{idObjetivo}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "objetivos",
+                "{{idObjetivo}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Criar objetivo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Objetivo deve ser criado com ID\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.idObjetivo).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Status inicial deve ser ATIVO\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.status).to.eql(\"ATIVO\");\r",
+                  "});\r",
+                  "\r",
+                  "const resposta = pm.response.json();\r",
+                  "\r",
+                  "pm.collectionVariables.set(\r",
+                  "    \"idObjetivo\",\r",
+                  "    resposta.idObjetivo\r",
+                  ");"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"titulo\": \"Concluir o Prioris\",\r\n  \"descricao\": \"Finalizar a versão funcional do sistema para entrega e apresentação.\",\r\n  \"area\": \"CARREIRA\",\r\n  \"motivo\": \"Concluir o projeto com antecedência e ter tempo para estudar a apresentação.\",\r\n  \"prazo\": \"2026-09-05\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/objetivos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "objetivos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Atualizar objetivo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Título deve ter sido atualizado\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.titulo)\r",
+                  "        .to.eql(\"Concluir versão final do Prioris\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Objetivo deve continuar ativo\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.status).to.eql(\"ATIVO\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"titulo\": \"Concluir versão final do Prioris\",\r\n  \"descricao\": \"Finalizar back-end, front-end, testes e documentação do sistema.\",\r\n  \"area\": \"CARREIRA\",\r\n  \"motivo\": \"Concluir o projeto com antecedência para revisar todo o funcionamento.\",\r\n  \"prazo\": \"2026-09-05\",\r\n  \"status\": \"ATIVO\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/objetivos/{{idObjetivo}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "objetivos",
+                "{{idObjetivo}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH - Atualizar objetivo parcialmente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Status do objetivo deve ser PAUSADO\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.status).to.eql(\"PAUSADO\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"ATIVO\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/objetivos/{{idObjetivo}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "objetivos",
+                "{{idObjetivo}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Excluir objetivo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 204\", function () {\r",
+                  "    pm.response.to.have.status(204);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/objetivos/{{idObjetivo}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "objetivos",
+                "{{idObjetivo}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "03 - Metas",
+      "item": [
+        {
+          "name": "GET - Listar metas",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Resposta deve ser uma lista\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta).to.be.an(\"array\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/objetivos/{{idObjetivo}}/metas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "objetivos",
+                "{{idObjetivo}}",
+                "metas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar meta por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Meta deve possuir ID\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.idMeta).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Meta deve pertencer ao objetivo atual\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.idObjetivo)\r",
+                  "        .to.eql(Number(pm.collectionVariables.get(\"idObjetivo\")));\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/objetivos/{{idObjetivo}}/metas/{{idMeta}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "objetivos",
+                "{{idObjetivo}}",
+                "metas",
+                "{{idMeta}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Criar meta",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Meta deve ser criada com ID\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.idMeta).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Status inicial deve ser PENDENTE\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.status).to.eql(\"PENDENTE\");\r",
+                  "});\r",
+                  "\r",
+                  "const resposta = pm.response.json();\r",
+                  "\r",
+                  "pm.collectionVariables.set(\r",
+                  "    \"idMeta\",\r",
+                  "    resposta.idMeta\r",
+                  ");"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"titulo\": \"Finalizar back-end do Prioris\",\r\n  \"descricao\": \"Concluir os módulos principais, documentação e testes da API.\",\r\n  \"prazo\": \"2026-09-03\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/objetivos/{{idObjetivo}}/metas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "objetivos",
+                "{{idObjetivo}}",
+                "metas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Atualizar meta",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Título deve ter sido atualizado\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.titulo)\r",
+                  "        .to.eql(\"Finalizar API REST do Prioris\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Status deve ser EM_ANDAMENTO\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.status).to.eql(\"EM_ANDAMENTO\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"titulo\": \"Finalizar API REST do Prioris\",\r\n  \"descricao\": \"Concluir endpoints, validações, testes e documentação da API.\",\r\n  \"prazo\": \"2026-09-03\",\r\n  \"status\": \"EM_ANDAMENTO\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/objetivos/{{idObjetivo}}/metas/{{idMeta}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "objetivos",
+                "{{idObjetivo}}",
+                "metas",
+                "{{idMeta}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH - Atualizar meta parcialmente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Status da meta deve ser CONCLUIDA\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.status).to.eql(\"CONCLUIDA\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"EM_ANDAMENTO\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/objetivos/{{idObjetivo}}/metas/{{idMeta}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "objetivos",
+                "{{idObjetivo}}",
+                "metas",
+                "{{idMeta}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Excluir meta",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 204\", function () {\r",
+                  "    pm.response.to.have.status(204);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/objetivos/{{idObjetivo}}/metas/{{idMeta}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "objetivos",
+                "{{idObjetivo}}",
+                "metas",
+                "{{idMeta}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "04 - Tarefas",
+      "item": [
+        {
+          "name": "GET - Listar tarefas",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Resposta deve ser uma lista\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta).to.be.an(\"array\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/tarefas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "tarefas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar tarefa por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Tarefa deve possuir ID\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.idTarefa).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Tarefa deve pertencer ao usuário atual\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.idUsuario)\r",
+                  "        .to.eql(Number(pm.collectionVariables.get(\"idUsuario\")));\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/tarefas/{{idTarefa}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "tarefas",
+                "{{idTarefa}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Cadastrar tarefa",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Tarefa deve ser criada com ID\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.idTarefa).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Classificação deve ser A\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.classificacaoAbcde).to.eql(\"A\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Status inicial deve ser PENDENTE\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.status).to.eql(\"PENDENTE\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Tarefa deve estar vinculada à meta atual\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.idMeta)\r",
+                  "        .to.eql(Number(pm.collectionVariables.get(\"idMeta\")));\r",
+                  "\r",
+                  "    pm.expect(resposta.idObjetivo).to.eql(null);\r",
+                  "});\r",
+                  "\r",
+                  "const resposta = pm.response.json();\r",
+                  "\r",
+                  "pm.collectionVariables.set(\r",
+                  "    \"idTarefa\",\r",
+                  "    resposta.idTarefa\r",
+                  ");"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"idMeta\": {{idMeta}},\r\n  \"titulo\": \"Finalizar documentação da API\",\r\n  \"descricao\": \"Revisar Swagger, testes automatizados e Collection do Postman.\",\r\n  \"classificacaoAbcde\": \"A\",\r\n  \"dataPlanejada\": \"2026-08-31\",\r\n  \"prazo\": \"2026-08-31T18:00:00\",\r\n  \"tempoEstimado\": 120\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/tarefas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "tarefas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Atualizar tarefa",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Título deve ter sido atualizado\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.titulo)\r",
+                  "        .to.eql(\"Finalizar documentação e testes da API\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Status deve ser EM_ANDAMENTO\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.status)\r",
+                  "        .to.eql(\"EM_ANDAMENTO\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Tempo estimado deve ser 150 minutos\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.tempoEstimado)\r",
+                  "        .to.eql(150);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"idMeta\": {{idMeta}},\r\n  \"titulo\": \"Finalizar documentação e testes da API\",\r\n  \"descricao\": \"Concluir Swagger, testes unitários e Collection do Postman.\",\r\n  \"classificacaoAbcde\": \"A\",\r\n  \"dataPlanejada\": \"2026-08-31\",\r\n  \"prazo\": \"2026-08-31T18:00:00\",\r\n  \"tempoEstimado\": 150,\r\n  \"status\": \"EM_ANDAMENTO\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/tarefas/{{idTarefa}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "tarefas",
+                "{{idTarefa}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH - Atualizar tarefa parcialmente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Tarefa deve estar concluída\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.status)\r",
+                  "        .to.eql(\"CONCLUIDA\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"EM_ANDAMENTO\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/tarefas/{{idTarefa}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "tarefas",
+                "{{idTarefa}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Excluir tarefa",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 204\", function () {\r",
+                  "    pm.response.to.have.status(204);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/tarefas/{{idTarefa}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "tarefas",
+                "{{idTarefa}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "05 - Prioridade Diária",
+      "item": [
+        {
+          "name": "POST - Definir prioridade do dia",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Prioridade deve possuir ID\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.idPrioridadeDiaria).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Prioridade deve utilizar a tarefa atual\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.idTarefa)\r",
+                  "        .to.eql(Number(pm.collectionVariables.get(\"idTarefa\")));\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Data da prioridade deve existir\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.dataPrioridade).to.exist;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"idTarefa\": {{idTarefa}}\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/prioridade-diaria",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "prioridade-diaria"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Consultar prioridade de hoje",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Deve retornar a Prioridade #1 de hoje\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.idPrioridadeDiaria).to.exist;\r",
+                  "    pm.expect(resposta.dataPrioridade).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Tarefa deve ser a tarefa definida como prioridade\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.idTarefa)\r",
+                  "        .to.eql(Number(pm.collectionVariables.get(\"idTarefa\")));\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/prioridade-diaria/hoje",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "prioridade-diaria",
+                "hoje"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH - Alterar prioridade de hoje",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Prioridade deve continuar vinculada à tarefa informada\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.idTarefa)\r",
+                  "        .to.eql(Number(pm.collectionVariables.get(\"idTarefa\")));\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"idTarefa\": {{idTarefa}}\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/prioridade-diaria/hoje",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "prioridade-diaria",
+                "hoje"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Consultar histórico de prioridades",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Histórico deve ser uma lista\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta).to.be.an(\"array\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Histórico deve possuir pelo menos a prioridade atual\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.length).to.be.at.least(1);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/prioridade-diaria/historico",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "prioridade-diaria",
+                "historico"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Remover prioridade de hoje",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 204\", function () {\r",
+                  "    pm.response.to.have.status(204);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/prioridade-diaria/hoje",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "prioridade-diaria",
+                "hoje"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "06 - Ciclos de 12 Semanas",
+      "item": [
+        {
+          "name": "Objetivos do Ciclo",
+          "item": [
+            {
+              "name": "GET - Listar objetivos do ciclo",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status deve ser 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Resposta deve ser uma lista\", function () {\r",
+                      "    const resposta = pm.response.json();\r",
+                      "    pm.expect(resposta).to.be.an(\"array\");\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Ciclo deve possuir pelo menos um objetivo\", function () {\r",
+                      "    const resposta = pm.response.json();\r",
+                      "    pm.expect(resposta.length).to.be.at.least(1);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/ciclos/{{idCiclo}}/objetivos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "usuarios",
+                    "{{idUsuario}}",
+                    "ciclos",
+                    "{{idCiclo}}",
+                    "objetivos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "POST - Vincular objetivo ao ciclo",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status deve ser 201 ou 200\", function () {\r",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/ciclos/{{idCiclo}}/objetivos/{{idObjetivo}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "usuarios",
+                    "{{idUsuario}}",
+                    "ciclos",
+                    "{{idCiclo}}",
+                    "objetivos",
+                    "{{idObjetivo}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE - Desvincular objetivo do ciclo",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status deve ser 204\", function () {\r",
+                      "    pm.response.to.have.status(204);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/ciclos/{{idCiclo}}/objetivos/{{idObjetivo}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "usuarios",
+                    "{{idUsuario}}",
+                    "ciclos",
+                    "{{idCiclo}}",
+                    "objetivos",
+                    "{{idObjetivo}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "GET - Listar ciclos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Resposta deve ser uma lista\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta).to.be.an(\"array\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/ciclos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "ciclos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Criar ciclo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Ciclo deve ser criado com ID\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.idCiclo).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Data final deve existir\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.dataFim).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "const resposta = pm.response.json();\r",
+                  "\r",
+                  "pm.collectionVariables.set(\r",
+                  "    \"idCiclo\",\r",
+                  "    resposta.idCiclo\r",
+                  ");"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"titulo\": \"Ciclo Prioris - 12 Semanas\",\r\n  \"descricao\": \"Ciclo de execução focado na conclusão e evolução do projeto Prioris.\",\r\n  \"dataInicio\": \"2026-08-31\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/ciclos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "ciclos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar ciclo por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Ciclo deve possuir ID\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.idCiclo).to.exist;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/ciclos/{{idCiclo}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "ciclos",
+                "{{idCiclo}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Atualizar ciclo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Título deve ter sido atualizado\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.titulo)\r",
+                  "        .to.eql(\"Ciclo Prioris - Execução 2026\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Status deve ser EM_ANDAMENTO\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.status).to.eql(\"EM_ANDAMENTO\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"titulo\": \"Ciclo Prioris - Execução 2026\",\r\n  \"descricao\": \"Ciclo estratégico de 12 semanas para execução das metas do Prioris.\",\r\n  \"dataInicio\": \"2026-08-31\",\r\n  \"status\": \"EM_ANDAMENTO\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/ciclos/{{idCiclo}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "ciclos",
+                "{{idCiclo}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH - Atualizar ciclo parcialmente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Ciclo deve estar em andamento\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.status).to.eql(\"EM_ANDAMENTO\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"EM_ANDAMENTO\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/ciclos/{{idCiclo}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "ciclos",
+                "{{idCiclo}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Excluir ciclo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 204\", function () {\r",
+                  "    pm.response.to.have.status(204);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/ciclos/{{idCiclo}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "ciclos",
+                "{{idCiclo}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "07 - Planejamento Semanal",
+      "item": [
+        {
+          "name": "Tarefas do Planejamento",
+          "item": [
+            {
+              "name": "POST - Adicionar tarefa ao planejamento",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Tarefa deve ser adicionada ao planejamento\", function () {\r",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/planejamentos-semanais/{{idPlanejamento}}/tarefas/{{idTarefa}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "usuarios",
+                    "{{idUsuario}}",
+                    "planejamentos-semanais",
+                    "{{idPlanejamento}}",
+                    "tarefas",
+                    "{{idTarefa}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET - Listar tarefas do planejamento",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status deve ser 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Resposta deve ser uma lista\", function () {\r",
+                      "    const resposta = pm.response.json();\r",
+                      "    pm.expect(resposta).to.be.an(\"array\");\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Planejamento deve possuir pelo menos uma tarefa\", function () {\r",
+                      "    const resposta = pm.response.json();\r",
+                      "    pm.expect(resposta.length).to.be.at.least(1);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/planejamentos-semanais/{{idPlanejamento}}/tarefas",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "usuarios",
+                    "{{idUsuario}}",
+                    "planejamentos-semanais",
+                    "{{idPlanejamento}}",
+                    "tarefas"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE - Remover tarefa do planejamento",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status deve ser 204\", function () {\r",
+                      "    pm.response.to.have.status(204);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/planejamentos-semanais/{{idPlanejamento}}/tarefas/{{idTarefa}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "usuarios",
+                    "{{idUsuario}}",
+                    "planejamentos-semanais",
+                    "{{idPlanejamento}}",
+                    "tarefas",
+                    "{{idTarefa}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "GET - Listar planejamentos semanais",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Resposta deve ser uma lista\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta).to.be.an(\"array\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/planejamentos-semanais",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "planejamentos-semanais"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar planejamento por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Planejamento deve possuir ID\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.idPlanejamentoSemanal).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Planejamento deve possuir Score de Execução\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.scoreExecucao).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Score deve estar entre 0 e 100\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(Number(resposta.scoreExecucao))\r",
+                  "        .to.be.at.least(0);\r",
+                  "\r",
+                  "    pm.expect(Number(resposta.scoreExecucao))\r",
+                  "        .to.be.at.most(100);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Totais de tarefas devem ser coerentes\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.totalTarefasConcluidas)\r",
+                  "        .to.be.at.most(resposta.totalTarefasPlanejadas);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Score deve corresponder às tarefas concluídas\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    const planejadas = resposta.totalTarefasPlanejadas;\r",
+                  "    const concluidas = resposta.totalTarefasConcluidas;\r",
+                  "\r",
+                  "    const scoreEsperado =\r",
+                  "        planejadas === 0\r",
+                  "            ? 0\r",
+                  "            : (concluidas / planejadas) * 100;\r",
+                  "\r",
+                  "    pm.expect(Number(resposta.scoreExecucao))\r",
+                  "        .to.eql(Number(scoreEsperado.toFixed(2)));\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/planejamentos-semanais/{{idPlanejamento}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "planejamentos-semanais",
+                "{{idPlanejamento}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Criar planejamento semanal",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Planejamento deve ser criado com ID\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.idPlanejamentoSemanal).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Semana do ciclo deve ser 1\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.semanaCiclo).to.eql(1);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Data final da semana deve existir\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.dataFimSemana).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "const resposta = pm.response.json();\r",
+                  "\r",
+                  "pm.collectionVariables.set(\r",
+                  "    \"idPlanejamento\",\r",
+                  "    resposta.idPlanejamentoSemanal\r",
+                  ");"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"idCiclo\": {{idCiclo}},\r\n  \"semanaCiclo\": 1,\r\n  \"dataInicioSemana\": \"2026-08-31\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/planejamentos-semanais",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "planejamentos-semanais"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Atualizar planejamento semanal",
+          "request": {
+            "method": "PUT",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Excluir planejamento semanal",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 204\", function () {\r",
+                  "    pm.response.to.have.status(204);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/planejamentos-semanais/{{idPlanejamento}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "planejamentos-semanais",
+                "{{idPlanejamento}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "08 - Revisão Semanal",
+      "item": [
+        {
+          "name": "GET - Buscar revisão semanal",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Revisão deve possuir ID\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.idRevisaoSemanal).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Revisão deve possuir informações da semana\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.principaisConquistas).to.exist;\r",
+                  "    pm.expect(resposta.dificuldades).to.exist;\r",
+                  "    pm.expect(resposta.ajustesProximaSemana).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Score histórico deve existir\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.scoreExecucao).to.exist;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/planejamentos-semanais/{{idPlanejamento}}/revisao",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "planejamentos-semanais",
+                "{{idPlanejamento}}",
+                "revisao"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Criar revisão semanal",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Revisão deve ser criada com ID\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.idRevisaoSemanal).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Principais conquistas devem estar preenchidas\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.principaisConquistas).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Dificuldades devem estar preenchidas\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.dificuldades).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Ajustes para próxima semana devem estar preenchidos\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.ajustesProximaSemana).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Score de Execução deve existir\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.scoreExecucao).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Score deve estar entre 0 e 100\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(Number(resposta.scoreExecucao))\r",
+                  "        .to.be.at.least(0);\r",
+                  "\r",
+                  "    pm.expect(Number(resposta.scoreExecucao))\r",
+                  "        .to.be.at.most(100);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"principaisConquistas\": \"Concluí os testes unitários, organizei a documentação da API e avancei na Collection do Postman.\",\r\n  \"dificuldades\": \"Tive dificuldades na organização dos testes e na validação de alguns fluxos da API.\",\r\n  \"ajustesProximaSemana\": \"Priorizar a implementação do front-end e reservar tempo para revisar a apresentação.\",\r\n  \"observacoes\": \"A semana apresentou boa evolução no desenvolvimento do Prioris.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/planejamentos-semanais/{{idPlanejamento}}/revisao",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "planejamentos-semanais",
+                "{{idPlanejamento}}",
+                "revisao"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Atualizar revisão semanal",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Principais conquistas devem ter sido atualizadas\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.principaisConquistas)\r",
+                  "        .to.eql(\"Concluí os testes unitários, Swagger e grande parte da Collection do Postman.\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Observações devem ter sido atualizadas\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.observacoes)\r",
+                  "        .to.eql(\"Revisão semanal atualizada após nova análise do progresso.\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Score histórico deve continuar existindo\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.scoreExecucao).to.exist;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"principaisConquistas\": \"Concluí os testes unitários, Swagger e grande parte da Collection do Postman.\",\r\n  \"dificuldades\": \"O principal desafio foi organizar corretamente os fluxos encadeados da API.\",\r\n  \"ajustesProximaSemana\": \"Concluir o front-end e iniciar a preparação para a apresentação.\",\r\n  \"observacoes\": \"Revisão semanal atualizada após nova análise do progresso.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/planejamentos-semanais/{{idPlanejamento}}/revisao",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "planejamentos-semanais",
+                "{{idPlanejamento}}",
+                "revisao"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH - Atualizar revisão parcialmente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Observações devem ter sido alteradas\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.observacoes)\r",
+                  "        .to.eql(\"PATCH realizado com sucesso na revisão semanal.\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Score histórico deve continuar existindo\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.scoreExecucao).to.exist;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"principaisConquistas\": \"Concluí os testes unitários, Swagger e grande parte da Collection do Postman.\",\r\n  \"dificuldades\": \"O principal desafio foi organizar corretamente os fluxos encadeados da API.\",\r\n  \"ajustesProximaSemana\": \"Concluir o front-end e iniciar a preparação para a apresentação.\",\r\n  \"observacoes\": \"PATCH realizado com sucesso na revisão semanal.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/planejamentos-semanais/{{idPlanejamento}}/revisao",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "planejamentos-semanais",
+                "{{idPlanejamento}}",
+                "revisao"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Histórico de revisões semanais",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Histórico deve ser uma lista\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta).to.be.an(\"array\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Histórico deve possuir pelo menos uma revisão\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.length).to.be.at.least(1);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/revisoes-semanais",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "revisoes-semanais"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Excluir revisão semanal",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 204\", function () {\r",
+                  "    pm.response.to.have.status(204);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/planejamentos-semanais/{{idPlanejamento}}/revisao",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "planejamentos-semanais",
+                "{{idPlanejamento}}",
+                "revisao"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "09 - Sessões de Foco",
+      "item": [
+        {
+          "name": "POST - Iniciar sessão de foco",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Sessão deve ser criada com ID\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.idSessaoFoco).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Sessão deve iniciar em andamento\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.status).to.eql(\"EM_ANDAMENTO\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Tempo de foco planejado deve ser 25 minutos\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.tempoFocoPlanejado).to.eql(25);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Tempo de descanso planejado deve ser 5 minutos\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.tempoDescansoPlanejado).to.eql(5);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Sessão deve estar vinculada à tarefa atual\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.idTarefa)\r",
+                  "        .to.eql(Number(pm.collectionVariables.get(\"idTarefa\")));\r",
+                  "});\r",
+                  "\r",
+                  "const resposta = pm.response.json();\r",
+                  "\r",
+                  "pm.collectionVariables.set(\r",
+                  "    \"idSessao\",\r",
+                  "    resposta.idSessaoFoco\r",
+                  ");"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"idTarefa\": {{idTarefa}},\r\n  \"tempoFocoPlanejado\": 25,\r\n  \"tempoDescansoPlanejado\": 5\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/sessoes-foco",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "sessoes-foco"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar sessões de foco",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Resposta deve ser uma lista\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta).to.be.an(\"array\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/sessoes-foco",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "sessoes-foco"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Consultar histórico de sessões",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar sessão por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Sessão deve possuir ID\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.idSessaoFoco).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Sessão deve possuir status\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "    pm.expect(resposta.status).to.exist;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/sessoes-foco/{{idSessao}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "sessoes-foco",
+                "{{idSessao}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH - Pausar sessão",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Sessão deve ficar PAUSADA\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.status)\r",
+                  "        .to.eql(\"PAUSADA\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/sessoes-foco/{{idSessao}}/pausar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "sessoes-foco",
+                "{{idSessao}}",
+                "pausar"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH - Retomar sessão",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Sessão deve voltar para EM_ANDAMENTO\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.status)\r",
+                  "        .to.eql(\"EM_ANDAMENTO\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/sessoes-foco/{{idSessao}}/retomar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "sessoes-foco",
+                "{{idSessao}}",
+                "retomar"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH - Finalizar sessão",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Sessão deve ficar CONCLUIDA\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.status)\r",
+                  "        .to.eql(\"CONCLUIDA\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Tempo realizado deve ser registrado\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.tempoFocoRealizado)\r",
+                  "        .to.eql(25);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"tempoFocoRealizado\": 25\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/sessoes-foco/{{idSessao}}/finalizar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "sessoes-foco",
+                "{{idSessao}}",
+                "finalizar"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH -  Interromper sessão",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status deve ser 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Sessão deve ficar INTERROMPIDA\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.status)\r",
+                  "        .to.eql(\"INTERROMPIDA\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Tempo realizado deve ser registrado\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.tempoFocoRealizado)\r",
+                  "        .to.eql(12);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"tempoFocoRealizado\": 12\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/sessoes-foco/{{idSessao}}/interromper",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "sessoes-foco",
+                "{{idSessao}}",
+                "interromper"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "10 - Cenários de Erro",
+      "item": [
+        {
+          "name": "GET - Usuário inexistente → 404",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Deve retornar 404 Not Found\", function () {\r",
+                  "    pm.response.to.have.status(404);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Resposta deve ser JSON\", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+                  "        .to.include(\"application/json\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "999999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Usuário inválido → 400",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Deve retornar 400 Bad Request\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Resposta deve ser JSON\", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+                  "        .to.include(\"application/json\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nome\": \"\",\r\n  \"email\": \"email-invalido\",\r\n  \"senha\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Tarefa com Meta + Objetivo → 400",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Deve retornar 400 Bad Request\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Regra Meta OU Objetivo deve ser respeitada\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.mensagem)\r",
+                  "        .to.include(\"meta\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Deve retornar a mensagem correta\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.mensagem).to.eql(\r",
+                  "        \"A tarefa não pode estar vinculada a uma meta e a um objetivo ao mesmo tempo\"\r",
+                  "    );\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"idMeta\": {{idMeta}},\r\n  \"idObjetivo\": {{idObjetivo}},\r\n  \"titulo\": \"Tarefa inválida\",\r\n  \"descricao\": \"Esta tarefa não pode possuir meta e objetivo simultaneamente.\",\r\n  \"classificacaoAbcde\": \"A\",\r\n  \"tempoEstimado\": 30\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/tarefas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "tarefas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Sessão de foco inválida → 400",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Deve retornar 400 Bad Request\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Deve rejeitar tempo de foco igual a zero\", function () {\r",
+                  "    const texto = pm.response.text();\r",
+                  "\r",
+                  "    pm.expect(texto)\r",
+                  "        .to.include(\"O tempo de foco deve ser maior que zero\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"idTarefa\": {{idTarefa}},\r\n  \"tempoFocoPlanejado\": 0,\r\n  \"tempoDescansoPlanejado\": 5\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/sessoes-foco",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "sessoes-foco"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Revisão semanal duplicada → 409",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Deve retornar 409 Conflict\", function () {\r",
+                  "    pm.response.to.have.status(409);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Deve impedir segunda revisão para o mesmo planejamento\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.mensagem).to.exist;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"principaisConquistas\": \"Tentativa de criar segunda revisão.\",\r\n  \"dificuldades\": \"Teste de conflito.\",\r\n  \"ajustesProximaSemana\": \"Nenhum.\",\r\n  \"observacoes\": \"Cenário propositalmente inválido.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/planejamentos-semanais/{{idPlanejamento}}/revisao",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "planejamentos-semanais",
+                "{{idPlanejamento}}",
+                "revisao"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Prioridade diária duplicada → 409",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Deve retornar 409 Conflict\", function () {\r",
+                  "    pm.response.to.have.status(409);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Deve impedir segunda Prioridade #1 no mesmo dia\", function () {\r",
+                  "    const resposta = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(resposta.mensagem)\r",
+                  "        .to.eql(\"Já existe uma Prioridade #1 definida para hoje\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"idTarefa\": {{idTarefa}}\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{idUsuario}}/prioridade-diaria",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{idUsuario}}",
+                "prioridade-diaria"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": ""
+    },
+    {
+      "key": "idUsuario",
+      "value": ""
+    },
+    {
+      "key": "idObjetivo",
+      "value": ""
+    },
+    {
+      "key": "idMeta",
+      "value": ""
+    },
+    {
+      "key": "idTarefa",
+      "value": ""
+    },
+    {
+      "key": "idCiclo",
+      "value": ""
+    },
+    {
+      "key": "idPlanejamento",
+      "value": ""
+    },
+    {
+      "key": "idSessao",
+      "value": ""
+    }
+  ]
+}
