@@ -1,10 +1,575 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Revisão Semanal — Prioris</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin
+    >
+
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Manrope:wght@600;700;800&display=swap"
+            rel="stylesheet"
+    >
+
+    <link
+            rel="stylesheet"
+            href="../css/style.css"
+    >
+
 </head>
+
 <body>
-$END$
+
+<div class="app">
+
+
+    <!-- ==================================================
+         SIDEBAR
+    =================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-top">
+
+            <a
+                    class="brand"
+                    href="../index.html"
+            >
+
+                <div class="brand-icon">
+
+                    <img
+                            src="../logo-prioris.svg"
+                            alt="Logo Prioris"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        PRIORIS
+                    </strong>
+
+                    <span>
+                        Priorize. Foque. Avance.
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <nav class="sidebar-nav">
+
+                <a
+                        href="../index.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">▦</span>
+                    <span>Dashboard</span>
+                </a>
+
+
+                <a
+                        href="./prioridade.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">★</span>
+                    <span>Prioridade #1</span>
+                </a>
+
+
+                <a
+                        href="./tarefas.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">✓</span>
+                    <span>Tarefas</span>
+                </a>
+
+
+                <a
+                        href="./objetivos.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">◎</span>
+                    <span>Objetivos e Metas</span>
+                </a>
+
+
+                <a
+                        href="./ciclo.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">◷</span>
+                    <span>Ciclo de 12 Semanas</span>
+                </a>
+
+
+                <a
+                        href="./planejamento.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">▤</span>
+                    <span>Planejamento</span>
+                </a>
+
+
+                <a
+                        href="./foco.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">◉</span>
+                    <span>Sessão de Foco</span>
+                </a>
+
+
+                <a
+                        href="./revisao.html"
+                        class="nav-item active"
+                >
+                    <span class="nav-icon">↗</span>
+                    <span>Revisão Semanal</span>
+                </a>
+
+            </nav>
+
+        </div>
+
+
+        <div class="sidebar-footer">
+
+            <div class="user-avatar">
+                U
+            </div>
+
+            <div class="user-info">
+
+                <strong id="nome-usuario">
+                    Carregando...
+                </strong>
+
+                <span>
+            Minha conta
+        </span>
+
+            </div>
+
+            <button
+                    id="btn-logout"
+                    class="sidebar-logout"
+                    type="button"
+                    aria-label="Sair"
+                    title="Sair"
+            >
+                ↪
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ==================================================
+         CONTEÚDO
+    =================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="eyebrow">
+                    EVOLUÇÃO CONTÍNUA
+                </p>
+
+                <h1>
+                    Revisão Semanal
+                </h1>
+
+                <p class="subtitle">
+                    Analise sua execução, aprenda com a semana e ajuste o próximo ciclo de ações.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- ==================================================
+             PLANEJAMENTO DA SEMANA
+        =================================================== -->
+
+        <section
+                id="secao-revisao-atual"
+                class="card revisao-atual-card"
+        >
+
+            <div class="loading-text">
+                Carregando semana atual...
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             SCORE
+        =================================================== -->
+
+        <section
+                id="revisao-score-grid"
+                class="revisao-score-grid hidden"
+        >
+
+            <article class="stat-card">
+
+                <div class="stat-icon blue">
+                    ▤
+                </div>
+
+                <div>
+
+                    <span>
+                        Tarefas planejadas
+                    </span>
+
+                    <strong id="revisao-total-planejadas">
+                        0
+                    </strong>
+
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-icon green">
+                    ✓
+                </div>
+
+                <div>
+
+                    <span>
+                        Tarefas concluídas
+                    </span>
+
+                    <strong id="revisao-total-concluidas">
+                        0
+                    </strong>
+
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-icon orange">
+                    %
+                </div>
+
+                <div>
+
+                    <span>
+                        Score de Execução
+                    </span>
+
+                    <strong id="revisao-score">
+                        0%
+                    </strong>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- ==================================================
+             FORMULÁRIO DA REVISÃO
+        =================================================== -->
+
+        <section
+                id="secao-form-revisao"
+                class="card revisao-form-card hidden"
+        >
+
+            <div class="card-header">
+
+                <div>
+
+                    <p class="card-eyebrow">
+                        REFLEXÃO
+                    </p>
+
+                    <h3 id="titulo-form-revisao">
+                        Revisar esta semana
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <form id="form-revisao">
+
+                <input
+                        id="revisao-id"
+                        type="hidden"
+                >
+
+                <input
+                        id="revisao-id-planejamento"
+                        type="hidden"
+                >
+
+
+                <!-- CONQUISTAS -->
+
+                <div class="revisao-campo revisao-campo-conquistas">
+
+                    <div class="revisao-campo-header">
+
+                        <span class="revisao-campo-icon">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <label for="revisao-conquistas">
+                                Principais conquistas
+                            </label>
+
+                            <p>
+                                O que funcionou bem nesta semana?
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <textarea
+                            id="revisao-conquistas"
+                            rows="5"
+                            required
+                            placeholder="Ex.: Finalizei o CRUD do front-end e consegui manter o foco nas tarefas estratégicas."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- DIFICULDADES -->
+
+                <div class="revisao-campo revisao-campo-dificuldades">
+
+                    <div class="revisao-campo-header">
+
+                        <span class="revisao-campo-icon">
+                            !
+                        </span>
+
+                        <div>
+
+                            <label for="revisao-dificuldades">
+                                Dificuldades
+                            </label>
+
+                            <p>
+                                O que atrapalhou sua execução?
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <textarea
+                            id="revisao-dificuldades"
+                            rows="5"
+                            required
+                            placeholder="Ex.: Subestimei o tempo necessário para algumas tarefas e tive muitas interrupções."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- AJUSTES -->
+
+                <div class="revisao-campo revisao-campo-ajustes">
+
+                    <div class="revisao-campo-header">
+
+                        <span class="revisao-campo-icon">
+                            ↗
+                        </span>
+
+                        <div>
+
+                            <label for="revisao-ajustes">
+                                Ajustes para a próxima semana
+                            </label>
+
+                            <p>
+                                O que você fará diferente?
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <textarea
+                            id="revisao-ajustes"
+                            rows="5"
+                            required
+                            placeholder="Ex.: Reduzir o número de tarefas estratégicas e reservar blocos de foco pela manhã."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- OBSERVAÇÕES -->
+
+                <div class="form-group">
+
+                    <label for="revisao-observacoes">
+                        Observações adicionais
+                    </label>
+
+                    <textarea
+                            id="revisao-observacoes"
+                            rows="4"
+                            placeholder="Registre qualquer outro aprendizado relevante."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="revisao-info-box">
+
+                    <strong>
+                        💡 Execução sem revisão vira repetição.
+                    </strong>
+
+                    <span>
+                        Use esta etapa para transformar resultados em aprendizado
+                        e aprendizado em melhores decisões para a próxima semana.
+                    </span>
+
+                </div>
+
+
+                <div
+                        id="mensagem-form-revisao"
+                        class="form-message"
+                ></div>
+
+
+                <div class="modal-actions revisao-form-actions">
+
+                    <button
+                            id="btn-cancelar-edicao-revisao"
+                            type="button"
+                            class="button-outline hidden"
+                    >
+                        Cancelar edição
+                    </button>
+
+
+                    <button
+                            id="btn-salvar-revisao"
+                            type="submit"
+                            class="secondary-focus-button"
+                    >
+                        ✓ Salvar revisão
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- ==================================================
+             REVISÃO JÁ REALIZADA
+        =================================================== -->
+
+        <section
+                id="secao-revisao-realizada"
+                class="card revisao-realizada-card hidden"
+        >
+        </section>
+
+
+        <!-- ==================================================
+             HISTÓRICO
+        =================================================== -->
+
+        <section class="revisao-historico-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="card-eyebrow">
+                        APRENDIZADO
+                    </p>
+
+                    <h2>
+                        Histórico de Revisões
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                    id="lista-revisoes"
+                    class="revisoes-page-grid"
+            >
+
+                <div class="loading-text">
+                    Carregando revisões...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script
+        type="module"
+        src="../js/revisao.js"
+></script>
+
 </body>
+
 </html>

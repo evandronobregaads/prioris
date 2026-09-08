@@ -1,10 +1,783 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Objetivos e Metas — Prioris</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin
+    >
+
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Manrope:wght@600;700;800&display=swap"
+            rel="stylesheet"
+    >
+
+    <link
+            rel="stylesheet"
+            href="../css/style.css"
+    >
+
 </head>
+
 <body>
-$END$
+
+<div class="app">
+
+    <!-- ========================================
+         SIDEBAR
+    ========================================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-top">
+
+            <a
+                    class="brand"
+                    href="../index.html"
+            >
+
+                <div class="brand-icon">
+
+                    <img
+                            src="../logo-prioris.svg"
+                            alt="Logo Prioris"
+                    >
+
+                </div>
+
+                <div>
+
+                    <strong>PRIORIS</strong>
+
+                    <span>
+                        Priorize. Foque. Avance.
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <nav class="sidebar-nav">
+
+                <a
+                        href="../index.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">▦</span>
+                    <span>Dashboard</span>
+                </a>
+
+
+                <a
+                        href="prioridade.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">★</span>
+                    <span>Prioridade #1</span>
+                </a>
+
+
+                <a
+                        href="./tarefas.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">✓</span>
+                    <span>Tarefas</span>
+                </a>
+
+
+                <a
+                        href="./objetivos.html"
+                        class="nav-item active"
+                >
+                    <span class="nav-icon">◎</span>
+                    <span>Objetivos e Metas</span>
+                </a>
+
+
+                <a
+                        href="./ciclo.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">◷</span>
+                    <span>Ciclo de 12 Semanas</span>
+                </a>
+
+
+                <a
+                        href="./planejamento.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">▤</span>
+                    <span>Planejamento</span>
+                </a>
+
+
+                <a
+                        href="foco.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">◉</span>
+                    <span>Sessão de Foco</span>
+                </a>
+
+
+                <a
+                        href="revisao.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">↗</span>
+                    <span>Revisão Semanal</span>
+                </a>
+
+            </nav>
+
+        </div>
+
+
+        <div class="sidebar-footer">
+
+            <div class="user-avatar">
+                U
+            </div>
+
+            <div class="user-info">
+
+                <strong id="nome-usuario">
+                    Carregando...
+                </strong>
+
+                <span>
+            Minha conta
+        </span>
+
+            </div>
+
+            <button
+                    id="btn-logout"
+                    class="sidebar-logout"
+                    type="button"
+                    aria-label="Sair"
+                    title="Sair"
+            >
+                ↪
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ========================================
+         CONTEÚDO PRINCIPAL
+    ========================================= -->
+
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="eyebrow">
+                    VISÃO E DIREÇÃO
+                </p>
+
+                <h1>
+                    Objetivos e Metas
+                </h1>
+
+                <p class="subtitle">
+                    Transforme sua visão de longo prazo em metas claras e executáveis.
+                </p>
+
+            </div>
+
+
+            <button
+                    id="btn-novo-objetivo"
+                    class="secondary-focus-button"
+                    type="button"
+            >
+                + Novo objetivo
+            </button>
+
+        </header>
+
+
+        <!-- ========================================
+             RESUMO
+        ========================================= -->
+
+        <section class="objectives-summary">
+
+            <article class="stat-card">
+
+                <div class="stat-icon blue">
+                    ◎
+                </div>
+
+                <div>
+
+                    <span>
+                        Objetivos ativos
+                    </span>
+
+                    <strong id="resumo-objetivos-ativos">
+                        0
+                    </strong>
+
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-icon green">
+                    ✓
+                </div>
+
+                <div>
+
+                    <span>
+                        Metas concluídas
+                    </span>
+
+                    <strong id="resumo-metas-concluidas">
+                        0
+                    </strong>
+
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-icon orange">
+                    ◷
+                </div>
+
+                <div>
+
+                    <span>
+                        Metas em andamento
+                    </span>
+
+                    <strong id="resumo-metas-andamento">
+                        0
+                    </strong>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- ========================================
+             FILTROS
+        ========================================= -->
+
+        <section class="card objetivos-filtros">
+
+            <div class="objetivos-filtros-grid">
+
+                <input
+                        id="filtro-objetivo"
+                        type="search"
+                        placeholder="Buscar objetivo..."
+                >
+
+
+                <select id="filtro-area">
+
+                    <option value="">
+                        Todas as áreas
+                    </option>
+
+                    <option value="CARREIRA">
+                        Carreira
+                    </option>
+
+                    <option value="FAMILIA">
+                        Família
+                    </option>
+
+                    <option value="FINANCAS">
+                        Finanças
+                    </option>
+
+                    <option value="SAUDE">
+                        Saúde
+                    </option>
+
+                    <option value="DESENVOLVIMENTO">
+                        Desenvolvimento
+                    </option>
+
+                    <option value="SOCIAL_COMUNITARIO">
+                        Social / Comunitário
+                    </option>
+
+                </select>
+
+
+                <select id="filtro-status-objetivo">
+
+                    <option value="">
+                        Todos os status
+                    </option>
+
+                    <option value="ATIVO">
+                        Ativo
+                    </option>
+
+                    <option value="PAUSADO">
+                        Pausado
+                    </option>
+
+                    <option value="CONCLUIDO">
+                        Concluído
+                    </option>
+
+                </select>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             LISTA DE OBJETIVOS
+        ========================================= -->
+
+        <section class="objetivos-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="card-eyebrow">
+                        VISÃO DE LONGO PRAZO
+                    </p>
+
+                    <h2 id="titulo-contagem-objetivos">
+                        Carregando objetivos...
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                    id="lista-objetivos-page"
+                    class="objetivos-page-grid"
+            >
+
+                <div class="loading-text">
+                    Carregando objetivos...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ==================================================
+     MODAL OBJETIVO
+================================================== -->
+
+<div
+        id="modal-objetivo"
+        class="modal-overlay hidden"
+>
+
+    <div class="modal-card">
+
+        <div class="modal-header">
+
+            <div>
+
+                <p class="card-eyebrow">
+                    OBJETIVO
+                </p>
+
+                <h2 id="modal-objetivo-titulo">
+                    Novo objetivo
+                </h2>
+
+            </div>
+
+
+            <button
+                    id="btn-fechar-objetivo"
+                    class="modal-close"
+                    type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="form-objetivo">
+
+            <input
+                    id="objetivo-id"
+                    type="hidden"
+            >
+
+
+            <div class="form-group">
+
+                <label for="objetivo-titulo">
+                    Título *
+                </label>
+
+                <input
+                        id="objetivo-titulo"
+                        type="text"
+                        maxlength="150"
+                        required
+                        placeholder="Ex.: Concluir o Prioris"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="objetivo-descricao">
+                    Descrição
+                </label>
+
+                <textarea
+                        id="objetivo-descricao"
+                        rows="3"
+                        placeholder="Descreva o que deseja alcançar."
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="objetivo-motivo">
+                    Por que este objetivo é importante?
+                </label>
+
+                <textarea
+                        id="objetivo-motivo"
+                        rows="3"
+                        placeholder="Qual é o propósito deste objetivo?"
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="objetivo-area">
+                        Área
+                    </label>
+
+                    <select id="objetivo-area">
+
+                        <option value="CARREIRA">
+                            Carreira
+                        </option>
+
+                        <option value="FAMILIA">
+                            Família
+                        </option>
+
+                        <option value="FINANCAS">
+                            Finanças
+                        </option>
+
+                        <option value="SAUDE">
+                            Saúde
+                        </option>
+
+                        <option value="DESENVOLVIMENTO">
+                            Desenvolvimento
+                        </option>
+
+                        <option value="SOCIAL_COMUNITARIO">
+                            Social / Comunitário
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="objetivo-prazo">
+                        Prazo
+                    </label>
+
+                    <input
+                            id="objetivo-prazo"
+                            type="date"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="objetivo-status">
+                    Status
+                </label>
+
+                <select id="objetivo-status">
+
+                    <option value="ATIVO">
+                        Ativo
+                    </option>
+
+                    <option value="PAUSADO">
+                        Pausado
+                    </option>
+
+                    <option value="CONCLUIDO">
+                        Concluído
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div
+                    id="mensagem-form-objetivo"
+                    class="form-message"
+            ></div>
+
+
+            <div class="modal-actions">
+
+                <button
+                        id="btn-cancelar-objetivo"
+                        type="button"
+                        class="button-outline"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                        type="submit"
+                        class="secondary-focus-button"
+                >
+                    Salvar objetivo
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     MODAL META
+================================================== -->
+
+<div
+        id="modal-meta"
+        class="modal-overlay hidden"
+>
+
+    <div class="modal-card">
+
+        <div class="modal-header">
+
+            <div>
+
+                <p class="card-eyebrow">
+                    META
+                </p>
+
+                <h2 id="modal-meta-titulo">
+                    Nova meta
+                </h2>
+
+                <p
+                        id="meta-objetivo-nome"
+                        class="modal-context"
+                ></p>
+
+            </div>
+
+
+            <button
+                    id="btn-fechar-meta"
+                    class="modal-close"
+                    type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="form-meta">
+
+            <input
+                    id="meta-id"
+                    type="hidden"
+            >
+
+            <input
+                    id="meta-id-objetivo"
+                    type="hidden"
+            >
+
+
+            <div class="form-group">
+
+                <label for="meta-titulo">
+                    Título *
+                </label>
+
+                <input
+                        id="meta-titulo"
+                        type="text"
+                        required
+                        maxlength="150"
+                        placeholder="Ex.: Finalizar o front-end"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="meta-descricao">
+                    Descrição
+                </label>
+
+                <textarea
+                        id="meta-descricao"
+                        rows="4"
+                        placeholder="Descreva o resultado esperado."
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="meta-prazo">
+                        Prazo
+                    </label>
+
+                    <input
+                            id="meta-prazo"
+                            type="date"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="meta-status">
+                        Status
+                    </label>
+
+                    <select id="meta-status">
+
+                        <option value="PENDENTE">
+                            Pendente
+                        </option>
+
+                        <option value="EM_ANDAMENTO">
+                            Em andamento
+                        </option>
+
+                        <option value="CONCLUIDA">
+                            Concluída
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div
+                    id="mensagem-form-meta"
+                    class="form-message"
+            ></div>
+
+
+            <div class="modal-actions">
+
+                <button
+                        id="btn-cancelar-meta"
+                        type="button"
+                        class="button-outline"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                        type="submit"
+                        class="secondary-focus-button"
+                >
+                    Salvar meta
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script
+        type="module"
+        src="../js/objetivos.js"
+></script>
+
 </body>
+
 </html>

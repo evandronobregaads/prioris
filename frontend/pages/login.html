@@ -1,10 +1,410 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Entrar — Prioris</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin
+    >
+
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Manrope:wght@600;700;800&display=swap"
+            rel="stylesheet"
+    >
+
+    <link
+            rel="stylesheet"
+            href="../css/style.css"
+    >
+
 </head>
-<body>
-$END$
+
+<body class="auth-body">
+
+
+<!-- =====================================================
+     PRIORIS — LOGIN
+===================================================== -->
+
+<main class="auth-page">
+
+
+    <!-- =================================================
+         LADO INSTITUCIONAL
+    ================================================== -->
+
+    <section class="auth-brand-panel">
+
+        <div class="auth-brand-content">
+
+
+            <a
+                    href="./login.html"
+                    class="auth-brand"
+            >
+
+                <div class="brand-icon">
+
+                    <img
+                            src="../logo-prioris.svg"
+                            alt="Logo Prioris"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        PRIORIS
+                    </strong>
+
+                    <span>
+                        Priorize. Foque. Avance.
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <div class="auth-brand-message">
+
+                <p class="auth-eyebrow">
+                    PRODUTIVIDADE COM PROPÓSITO
+                </p>
+
+
+                <h1>
+                    Transforme prioridades
+                    em progresso real.
+                </h1>
+
+
+                <p>
+                    Organize seus objetivos, planeje semanas
+                    estratégicas e concentre sua energia
+                    no que realmente importa.
+                </p>
+
+            </div>
+
+
+            <div class="auth-flow">
+
+                <div class="auth-flow-item">
+
+                    <span>
+                        01
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Priorize
+                        </strong>
+
+                        <p>
+                            Descubra o que merece sua atenção primeiro.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="auth-flow-item">
+
+                    <span>
+                        02
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Foque
+                        </strong>
+
+                        <p>
+                            Proteja seu tempo e execute uma tarefa por vez.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="auth-flow-item">
+
+                    <span>
+                        03
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Avance
+                        </strong>
+
+                        <p>
+                            Revise resultados e evolua semana após semana.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="auth-brand-footer">
+
+            <span>
+                VISÃO
+            </span>
+
+            <span>
+                →
+            </span>
+
+            <span>
+                PRIORIDADE
+            </span>
+
+            <span>
+                →
+            </span>
+
+            <span>
+                EXECUÇÃO
+            </span>
+
+            <span>
+                →
+            </span>
+
+            <span>
+                EVOLUÇÃO
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         LOGIN
+    ================================================== -->
+
+    <section class="auth-form-panel">
+
+        <div class="auth-form-container">
+
+
+            <div class="auth-mobile-logo">
+
+                <img
+                        src="./assets/img/logo-prioris.png"
+                        alt="Prioris"
+                >
+
+                <strong>
+                    PRIORIS
+                </strong>
+
+            </div>
+
+
+            <header class="auth-form-header">
+
+                <p class="auth-eyebrow">
+                    BEM-VINDO DE VOLTA
+                </p>
+
+
+                <h2>
+                    Entre na sua conta
+                </h2>
+
+
+                <p>
+                    Continue de onde parou e avance
+                    nas suas prioridades.
+                </p>
+
+            </header>
+
+
+
+            <!-- FORM -->
+
+            <form
+                    id="login-form"
+                    class="auth-form"
+            >
+
+
+                <!-- EMAIL -->
+
+                <div class="auth-form-group">
+
+                    <label for="login-email">
+                        E-mail
+                    </label>
+
+
+                    <div class="auth-input-wrapper">
+
+                        <span class="auth-input-icon">
+                            @
+                        </span>
+
+
+                        <input
+                                id="login-email"
+                                type="email"
+                                autocomplete="email"
+                                required
+                                placeholder="seuemail@exemplo.com"
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SENHA -->
+
+                <div class="auth-form-group">
+
+                    <div class="auth-label-row">
+
+                        <label for="login-senha">
+                            Senha
+                        </label>
+
+                    </div>
+
+
+                    <div class="auth-input-wrapper">
+
+                        <span class="auth-input-icon">
+                            •
+                        </span>
+
+
+                        <input
+                                id="login-senha"
+                                type="password"
+                                autocomplete="current-password"
+                                required
+                                placeholder="Digite sua senha"
+                        >
+
+
+                        <button
+                                id="btn-toggle-password"
+                                type="button"
+                                class="auth-password-toggle"
+                                aria-label="Mostrar ou ocultar senha"
+                        >
+                            Mostrar
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- MENSAGEM -->
+
+                <div
+                        id="login-message"
+                        class="auth-message"
+                ></div>
+
+
+
+                <!-- BOTÃO -->
+
+                <button
+                        id="btn-login"
+                        type="submit"
+                        class="auth-submit-button"
+                >
+
+                    Entrar no Prioris
+
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- CADASTRO -->
+
+            <div class="auth-register">
+
+                <span>
+                    Ainda não possui uma conta?
+                </span>
+
+
+                <a href="./cadastro.html">
+                    Criar conta
+                </a>
+
+            </div>
+
+
+
+            <div class="auth-security">
+
+                <span>
+                    🔒
+                </span>
+
+                <p>
+                    Sua senha é protegida antes de ser armazenada.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script
+        type="module"
+        src="../js/login.js"
+></script>
+
 </body>
+
 </html>

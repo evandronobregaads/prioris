@@ -1,23 +1,596 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <title>Prioris</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
+    <title>Prioris — Priorize. Foque. Avance.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Manrope:wght@600;700;800&display=swap"
+            rel="stylesheet"
+    >
+    <link
+            rel="stylesheet"
+            href="./css/style.css"
+    >
 </head>
-<script src="js/app.js"></script>
+
 <body>
-    <main>
-        <h1>Prioris</h1>
-        <p>Priorize. Foque. Avance.</p>
-        <p id="status-api">
-            Verificando conexão com a API...
-        </p>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-top">
+
+            <a class="brand" href="index.html">
+                <div class="brand-icon">
+
+                    <img
+                            src="logo-prioris.svg"
+                            alt="Logo Prioris"
+                    >
+
+                </div>
+
+                <div>
+                    <strong>PRIORIS</strong>
+                    <span>Priorize. Foque. Avance.</span>
+                </div>
+            </a>
+
+            <nav class="sidebar-nav">
+
+                <a href="#" class="nav-item active">
+                    <span class="nav-icon">▦</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="./pages/prioridade.html" class="nav-item">
+                    <span class="nav-icon">★</span>
+                    <span>Prioridade #1</span>
+                </a>
+
+                <a href="./pages/tarefas.html" class="nav-item">
+                    <span class="nav-icon">✓</span>
+                    <span>Tarefas</span>
+                </a>
+
+                <a href="./pages/objetivos.html" class="nav-item">
+                    <span class="nav-icon">◎</span>
+                    <span>Objetivos e Metas</span>
+                </a>
+
+                <a href="./pages/ciclo.html" class="nav-item">
+                    <span class="nav-icon">◷</span>
+                    <span>Ciclo de 12 Semanas</span>
+                </a>
+
+                <a href="./pages/planejamento.html" class="nav-item">
+                    <span class="nav-icon">▤</span>
+                    <span>Planejamento</span>
+                </a>
+
+                <a href="./pages/foco.html" class="nav-item">
+                    <span class="nav-icon">◉</span>
+                    <span>Sessão de Foco</span>
+                </a>
+
+                <a href="./pages/revisao.html" class="nav-item">
+                    <span class="nav-icon">↗</span>
+                    <span>Revisão Semanal</span>
+                </a>
+
+            </nav>
+
+        </div>
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-user">
+
+                <div class="user-avatar">
+                    U
+                </div>
+
+
+                <div class="user-info">
+
+                    <strong id="nome-usuario">
+                        Usuário Prioris
+                    </strong>
+
+                    <span>
+                Minha conta
+            </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                    id="btn-logout"
+                    type="button"
+                    class="sidebar-logout"
+                    title="Sair"
+            >
+                ↪
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= CONTEÚDO ================= -->
+
+    <main class="main-content">
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="eyebrow">
+                    VISÃO GERAL
+                </p>
+
+                <h1 id="saudacao-usuario">
+                    Bom dia! 👋
+                </h1>
+
+                <p class="subtitle">
+                    Foque no que realmente importa e avance um passo de cada vez.
+                </p>
+
+            </div>
+
+            <div class="topbar-actions">
+
+                <div
+                        id="api-status"
+                        class="api-status"
+                >
+                    <span class="api-dot"></span>
+                    Verificando API...
+                </div>
+
+                <button
+                        class="icon-button"
+                        aria-label="Notificações"
+                >
+                    ♢
+                </button>
+
+                <div class="date-card">
+                    <span>Hoje</span>
+                    <strong id="current-date">
+                        31 AGO
+                    </strong>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- PRIORIDADE PRINCIPAL -->
+
+        <section class="priority-card">
+
+            <div class="priority-content">
+
+                <div class="priority-label">
+                    <span>★</span>
+                    PRIORIDADE #1 DE HOJE
+                </div>
+
+                <h2 id="prioridade-titulo">
+                    Carregando prioridade...
+                </h2>
+
+                <p>
+                    Esta é a tarefa mais importante para você avançar
+                    em direção aos seus objetivos hoje.
+                </p>
+
+                <div class="priority-meta">
+
+                    <span
+                        id="prioridade-abcde"
+                        class="tag tag-a"
+                    >
+                        -
+                    </span>
+
+                    <span>
+                        ⏱ <span id="prioridade-tempo">--</span> min
+                    </span>
+
+                    <span id="prioridade-status">
+                        Carregando...
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="priority-action">
+
+                <button
+                        id="btn-iniciar-foco-prioridade"
+                        class="focus-button"
+                        type="button"
+                >
+                    <span class="focus-button-icon">▶</span>
+                    <span>Iniciar foco</span>
+                </button>
+
+                <span
+                        id="descricao-foco-prioridade"
+                        class="focus-description"
+                >
+                    Pomodoro 25 / 5
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRIMEIRA LINHA -->
+
+        <section class="dashboard-grid dashboard-grid-main">
+
+            <!-- CICLO -->
+
+            <article class="card cycle-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <p class="card-eyebrow">
+                            CICLO ATUAL
+                        </p>
+
+                        <h3 id="ciclo-titulo">
+                            Carregando ciclo...
+                        </h3>
+                    </div>
+
+                    <span
+                            id="ciclo-status"
+                            class="status-badge">
+                        ...
+                    </span>
+
+                </div>
+
+                <div class="cycle-week">
+
+                    <div>
+                        <span>Semana atual</span>
+                        <strong id="ciclo-semana">- de 12</strong>
+                    </div>
+
+                    <strong
+                            id="ciclo-percentual"
+                            class="cycle-percentage">
+                        0%
+                    </strong>
+
+                </div>
+
+                <div class="progress-track">
+                    <div
+                            id="ciclo-barra"
+                            class="progress-bar"
+                            style="width: 0%;"
+                    ></div>
+                </div>
+
+                <div class="cycle-footer">
+
+                    <span id="ciclo-data-inicio">--</span>
+                    <span id="ciclo-data-fim">--</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- SCORE -->
+
+            <article class="card score-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <p class="card-eyebrow">
+                            SCORE DE EXECUÇÃO
+                        </p>
+
+                        <h3>
+                            Desempenho semanal
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div class="score-content">
+
+                    <div
+                            id="score-ring"
+                            class="score-ring"
+                            style="--score: 0%;"
+                    >
+
+                        <div class="score-inner">
+                            <strong id="score-valor">0%</strong>
+                            <span>execução</span>
+                        </div>
+
+                    </div>
+
+                    <div class="score-info">
+
+                        <strong id="score-mensagem">
+                            Carregando...
+                        </strong>
+
+                        <p>
+                            A referência de execução do Prioris
+                            é manter o score próximo ou acima de 85%.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- INDICADORES -->
+
+        <section class="stats-grid">
+
+            <article class="stat-card">
+
+                <div class="stat-icon purple">
+                    ✓
+                </div>
+
+                <div>
+                    <span>
+                        Tarefas planejadas
+                    </span>
+
+                    <strong id="total-planejadas">
+                        0
+                    </strong>
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-icon green">
+                    ✓
+                </div>
+
+                <div>
+                    <span>
+                        Concluídas
+                    </span>
+
+                    <strong id="total-concluidas">
+                        0
+                    </strong>
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-icon orange">
+                    ◷
+                </div>
+
+                <div>
+                    <span>
+                        Minutos de foco
+                    </span>
+
+                    <strong id="minutos-foco">
+                        0
+                    </strong>
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-icon blue">
+                    ◎
+                </div>
+
+                <div>
+                    <span>
+                        Objetivos ativos
+                    </span>
+
+                    <strong id="total-objetivos-ativos">
+                        0
+                    </strong>
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- SEGUNDA LINHA -->
+
+        <section class="dashboard-grid dashboard-grid-bottom">
+
+            <!-- TAREFAS -->
+
+            <article class="card tasks-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <p class="card-eyebrow">
+                            PLANEJAMENTO SEMANAL
+                        </p>
+
+                        <h3>
+                            Tarefas estratégicas
+                        </h3>
+                    </div>
+
+                    <button class="text-button">
+                        Ver todas →
+                    </button>
+
+                </div>
+
+                <div
+                        id="lista-tarefas-estrategicas"
+                        class="tasks-list"
+                >
+                    <p class="loading-text">
+                        Carregando tarefas...
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- FOCO -->
+
+            <article class="card focus-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <p class="card-eyebrow">
+                            MODO FOCO
+                        </p>
+
+                        <h3>
+                            Hora de executar
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div class="pomodoro">
+
+                    <span class="pomodoro-label">
+                        FOCO
+                    </span>
+
+                    <strong>
+                        25:00
+                    </strong>
+
+                    <span>
+                        minutos
+                    </span>
+
+                </div>
+
+                <button
+                        id="btn-iniciar-sessao-dashboard"
+                        class="secondary-focus-button"
+                        type="button"
+                >
+                    ▶ Iniciar sessão
+                </button>
+
+                <p class="focus-tip">
+                    Uma tarefa. Sem distrações.
+                    Até o cronômetro terminar.
+                </p>
+
+            </article>
+
+        </section>
+
+
+        <!-- OBJETIVOS -->
+
+        <section class="card goals-card">
+
+            <div class="card-header">
+
+                <div>
+                    <p class="card-eyebrow">
+                        VISÃO DE LONGO PRAZO
+                    </p>
+
+                    <h3>
+                        Objetivos em andamento
+                    </h3>
+                </div>
+
+                <button class="text-button">
+                    Ver objetivos →
+                </button>
+
+            </div>
+
+
+            <div
+                    id="lista-objetivos"
+                    class="goals-grid"
+            >
+                <p class="loading-text">
+                    Carregando objetivos...
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <footer class="page-footer">
+
+            <span>
+                PRIORIS
+            </span>
+
+            <span>
+                Priorize. Foque. Avance.
+            </span>
+
+        </footer>
+
     </main>
 
-    <script
+</div>
+
+<script
         type="module"
         src="./js/app.js"
-    ></script>
+></script>
+
 </body>
+
 </html>

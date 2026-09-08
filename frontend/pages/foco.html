@@ -1,10 +1,729 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="referrer"
+            content="strict-origin-when-cross-origin"
+    >
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Sessão de Foco — Prioris</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin
+    >
+
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Manrope:wght@600;700;800&display=swap"
+            rel="stylesheet"
+    >
+
+    <link
+            rel="stylesheet"
+            href="../css/style.css"
+    >
+
 </head>
+
 <body>
-$END$
+
+<div class="app">
+
+
+    <!-- ==================================================
+         SIDEBAR
+    =================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-top">
+
+            <a
+                    class="brand"
+                    href="../index.html"
+            >
+
+                <div class="brand-icon">
+
+                    <img
+                            src="../logo-prioris.svg"
+                            alt="Logo Prioris"
+                    >
+
+                </div>
+
+                <div>
+
+                    <strong>
+                        PRIORIS
+                    </strong>
+
+                    <span>
+                        Priorize. Foque. Avance.
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <nav class="sidebar-nav">
+
+                <a
+                        href="../index.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">▦</span>
+                    <span>Dashboard</span>
+                </a>
+
+
+                <a
+                        href="./prioridade.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">★</span>
+                    <span>Prioridade #1</span>
+                </a>
+
+
+                <a
+                        href="./tarefas.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">✓</span>
+                    <span>Tarefas</span>
+                </a>
+
+
+                <a
+                        href="./objetivos.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">◎</span>
+                    <span>Objetivos e Metas</span>
+                </a>
+
+
+                <a
+                        href="./ciclo.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">◷</span>
+                    <span>Ciclo de 12 Semanas</span>
+                </a>
+
+
+                <a
+                        href="./planejamento.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">▤</span>
+                    <span>Planejamento</span>
+                </a>
+
+
+                <a
+                        href="./foco.html"
+                        class="nav-item active"
+                >
+                    <span class="nav-icon">◉</span>
+                    <span>Sessão de Foco</span>
+                </a>
+
+
+                <a
+                        href="revisao.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">↗</span>
+                    <span>Revisão Semanal</span>
+                </a>
+
+            </nav>
+
+        </div>
+
+
+        <div class="sidebar-footer">
+
+            <div class="user-avatar">
+                U
+            </div>
+
+            <div class="user-info">
+
+                <strong id="nome-usuario">
+                    Carregando...
+                </strong>
+
+                <span>
+            Minha conta
+        </span>
+
+            </div>
+
+            <button
+                    id="btn-logout"
+                    class="sidebar-logout"
+                    type="button"
+                    aria-label="Sair"
+                    title="Sair"
+            >
+                ↪
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ==================================================
+         CONTEÚDO
+    =================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="eyebrow">
+                    EXECUÇÃO PROFUNDA
+                </p>
+
+                <h1>
+                    Sessão de Foco
+                </h1>
+
+                <p class="subtitle">
+                    Elimine distrações e concentre-se em uma tarefa por vez.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- ==================================================
+             ÁREA PRINCIPAL
+        =================================================== -->
+
+        <div class="foco-layout">
+
+
+            <!-- ==================================================
+                 TIMER
+            =================================================== -->
+
+            <section class="card foco-timer-card">
+
+
+                <!-- MODO -->
+
+                <div class="foco-mode">
+
+                    <span
+                            id="foco-modo"
+                            class="foco-mode-badge"
+                    >
+                        FOCO
+                    </span>
+
+                </div>
+
+
+                <!-- TAREFA -->
+
+                <div class="foco-tarefa">
+
+                    <span>
+                        TAREFA DA SESSÃO
+                    </span>
+
+
+                    <strong id="foco-tarefa-titulo">
+                        Nenhuma tarefa selecionada
+                    </strong>
+
+                </div>
+
+
+                <!-- TIMER -->
+
+                <div
+                        id="foco-timer"
+                        class="foco-timer"
+                >
+                    25:00
+                </div>
+
+
+                <p
+                        id="foco-status-texto"
+                        class="foco-status-texto"
+                >
+                    Configure sua sessão e pressione iniciar.
+                </p>
+
+
+                <!-- CONTROLES -->
+
+                <div
+                        id="foco-controles"
+                        class="foco-controles"
+                >
+
+                    <button
+                            id="btn-iniciar-foco"
+                            type="button"
+                            class="secondary-focus-button"
+                    >
+                        ▶ Iniciar foco
+                    </button>
+
+
+                    <button
+                            id="btn-pausar-foco"
+                            type="button"
+                            class="button-outline hidden"
+                    >
+                        ❚❚ Pausar
+                    </button>
+
+
+                    <button
+                            id="btn-retomar-foco"
+                            type="button"
+                            class="secondary-focus-button hidden"
+                    >
+                        ▶ Retomar
+                    </button>
+
+
+                    <button
+                            id="btn-finalizar-foco"
+                            type="button"
+                            class="button-outline hidden"
+                    >
+                        ✓ Finalizar
+                    </button>
+
+
+                    <button
+                            id="btn-interromper-foco"
+                            type="button"
+                            class="button-danger-focus hidden"
+                    >
+                        Interromper
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================================================
+                 CONFIGURAÇÃO
+            =================================================== -->
+
+            <aside class="card foco-config-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <p class="card-eyebrow">
+                            CONFIGURAÇÃO
+                        </p>
+
+                        <h3>
+                            Preparar sessão
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TAREFA -->
+
+                <div class="form-group">
+
+                    <label for="foco-tarefa-select">
+                        Tarefa
+                    </label>
+
+
+                    <select id="foco-tarefa-select">
+
+                        <option value="">
+                            Sessão sem tarefa específica
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- TEMPO FOCO -->
+
+                <div class="form-group">
+
+                    <label for="foco-tempo">
+                        Tempo de foco
+                    </label>
+
+
+                    <select id="foco-tempo">
+
+                        <option value="15">
+                            15 minutos
+                        </option>
+
+                        <option
+                                value="25"
+                                selected
+                        >
+                            25 minutos
+                        </option>
+
+                        <option value="30">
+                            30 minutos
+                        </option>
+
+                        <option value="45">
+                            45 minutos
+                        </option>
+
+                        <option value="50">
+                            50 minutos
+                        </option>
+
+                        <option value="60">
+                            60 minutos
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DESCANSO -->
+
+                <div class="form-group">
+
+                    <label for="foco-descanso">
+                        Tempo de descanso
+                    </label>
+
+
+                    <select id="foco-descanso">
+
+                        <option value="5">
+                            5 minutos
+                        </option>
+
+                        <option value="10">
+                            10 minutos
+                        </option>
+
+                        <option value="15">
+                            15 minutos
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="foco-config-info">
+
+                    <strong>
+                        🎯 Uma tarefa por vez.
+                    </strong>
+
+                    <span>
+                        Durante a sessão, proteja seu tempo
+                        de interrupções e distrações.
+                    </span>
+
+                </div>
+
+
+                <div
+                        id="mensagem-foco"
+                        class="form-message"
+                ></div>
+
+            </aside>
+
+        </div>
+
+
+        <!-- ==================================================
+             SOM DE FOCO
+        =================================================== -->
+
+        <section class="card foco-audio-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <p class="card-eyebrow">
+                        AMBIENTE
+                    </p>
+
+                    <h3>
+                        Som de Foco
+                    </h3>
+
+                </div>
+
+
+                <span class="foco-youtube-badge">
+                    YouTube
+                </span>
+
+            </div>
+
+
+            <p class="foco-audio-description">
+                Use um som ambiente para reduzir distrações
+                e criar um ritual consistente de concentração.
+            </p>
+
+
+            <div class="foco-audio-layout">
+
+
+                <!-- PLAYER -->
+
+                <div class="youtube-player-shell">
+
+                    <div id="youtube-player"></div>
+
+                    <div
+                            id="youtube-player-loading"
+                            class="youtube-player-loading"
+                    >
+
+                        <span>♪</span>
+
+                        <strong>
+                            Preparando Som de Foco...
+                        </strong>
+
+                        <p>
+                            Conectando o Prioris ao YouTube.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- OPÇÕES -->
+
+                <div class="foco-audio-opcoes">
+
+                    <button
+                            type="button"
+                            class="foco-audio-option active"
+                            data-audio="focus"
+                    >
+                        <span>🌧</span>
+
+                        <div>
+                            <strong>
+                                Foco profundo
+                            </strong>
+
+                            <small>
+                                Sons ambientes
+                            </small>
+                        </div>
+                    </button>
+
+
+                    <button
+                            type="button"
+                            class="foco-audio-option"
+                            data-audio="nature"
+                    >
+                        <span>🌿</span>
+
+                        <div>
+                            <strong>
+                                Natureza
+                            </strong>
+
+                            <small>
+                                Ambiente tranquilo
+                            </small>
+                        </div>
+                    </button>
+
+
+                    <button
+                            type="button"
+                            class="foco-audio-option"
+                            data-audio="lofi"
+                    >
+                        <span>☕</span>
+
+                        <div>
+                            <strong>
+                                Lo-fi
+                            </strong>
+
+                            <small>
+                                Ritmo leve
+                            </small>
+                        </div>
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             RESUMO
+        =================================================== -->
+
+        <section class="foco-resumo-grid">
+
+
+            <article class="stat-card">
+
+                <div class="stat-icon green">
+                    ◉
+                </div>
+
+                <div>
+
+                    <span>
+                        Sessões concluídas
+                    </span>
+
+                    <strong id="foco-total-sessoes">
+                        0
+                    </strong>
+
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-icon blue">
+                    ◷
+                </div>
+
+                <div>
+
+                    <span>
+                        Minutos de foco
+                    </span>
+
+                    <strong id="foco-total-minutos">
+                        0
+                    </strong>
+
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-icon orange">
+                    ★
+                </div>
+
+                <div>
+
+                    <span>
+                        Sessão atual
+                    </span>
+
+                    <strong id="foco-sessao-status">
+                        —
+                    </strong>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- ==================================================
+             HISTÓRICO
+        =================================================== -->
+
+        <section class="foco-historico-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="card-eyebrow">
+                        DISCIPLINA
+                    </p>
+
+                    <h2>
+                        Histórico de Foco
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                    id="lista-sessoes-foco"
+                    class="sessoes-foco-list"
+            >
+
+                <div class="loading-text">
+                    Carregando sessões...
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<script
+        type="module"
+        src="../js/foco.js"
+></script>
+
 </body>
+
 </html>

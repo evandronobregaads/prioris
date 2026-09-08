@@ -1,10 +1,454 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Criar conta — Prioris</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin
+    >
+
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Manrope:wght@600;700;800&display=swap"
+            rel="stylesheet"
+    >
+
+    <link
+            rel="stylesheet"
+            href="../css/style.css"
+    >
+
 </head>
-<body>
-$END$
+
+<body class="auth-body">
+
+
+<main class="auth-page">
+
+
+    <!-- =====================================================
+         PAINEL DA MARCA
+    ====================================================== -->
+
+    <section class="auth-brand-panel">
+
+        <div class="auth-brand-content">
+
+
+            <a
+                    href="./login.html"
+                    class="auth-brand"
+            >
+
+                <div class="brand-icon">
+
+                    <img
+                            src="../logo-prioris.svg"
+                            alt="Logo Prioris"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        PRIORIS
+                    </strong>
+
+                    <span>
+                        Priorize. Foque. Avance.
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <div class="auth-brand-message">
+
+                <p class="auth-eyebrow">
+                    COMECE PELO QUE IMPORTA
+                </p>
+
+
+                <h1>
+                    Construa semanas
+                    com mais direção.
+                </h1>
+
+
+                <p>
+                    Transforme objetivos em ações concretas,
+                    concentre sua energia nas prioridades
+                    e acompanhe sua evolução.
+                </p>
+
+            </div>
+
+
+            <div class="auth-flow">
+
+                <div class="auth-flow-item">
+
+                    <span>
+                        01
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Defina objetivos
+                        </strong>
+
+                        <p>
+                            Saiba para onde deseja avançar.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="auth-flow-item">
+
+                    <span>
+                        02
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Planeje a execução
+                        </strong>
+
+                        <p>
+                            Transforme objetivos em prioridades semanais.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="auth-flow-item">
+
+                    <span>
+                        03
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Revise e evolua
+                        </strong>
+
+                        <p>
+                            Aprenda com cada semana concluída.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="auth-brand-footer">
+
+            <span>VISÃO</span>
+            <span>→</span>
+
+            <span>PRIORIDADE</span>
+            <span>→</span>
+
+            <span>EXECUÇÃO</span>
+            <span>→</span>
+
+            <span>EVOLUÇÃO</span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CADASTRO
+    ====================================================== -->
+
+    <section class="auth-form-panel">
+
+        <div class="auth-form-container auth-register-container">
+
+
+            <div class="auth-mobile-logo">
+
+                <img
+                        src="./assets/img/logo-prioris.png"
+                        alt="Prioris"
+                >
+
+                <strong>
+                    PRIORIS
+                </strong>
+
+            </div>
+
+
+            <header class="auth-form-header">
+
+                <p class="auth-eyebrow">
+                    NOVA CONTA
+                </p>
+
+
+                <h2>
+                    Crie sua conta
+                </h2>
+
+
+                <p>
+                    Comece agora a organizar suas prioridades
+                    e acompanhar seu progresso.
+                </p>
+
+            </header>
+
+
+            <!-- =================================================
+                 FORM
+            ================================================== -->
+
+            <form
+                    id="cadastro-form"
+                    class="auth-form"
+            >
+
+
+                <!-- NOME -->
+
+                <div class="auth-form-group">
+
+                    <label for="cadastro-nome">
+                        Nome
+                    </label>
+
+
+                    <div class="auth-input-wrapper">
+
+                        <span class="auth-input-icon">
+                            ◉
+                        </span>
+
+
+                        <input
+                                id="cadastro-nome"
+                                type="text"
+                                autocomplete="name"
+                                required
+                                minlength="2"
+                                maxlength="100"
+                                placeholder="Como podemos chamar você?"
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- EMAIL -->
+
+                <div class="auth-form-group">
+
+                    <label for="cadastro-email">
+                        E-mail
+                    </label>
+
+
+                    <div class="auth-input-wrapper">
+
+                        <span class="auth-input-icon">
+                            @
+                        </span>
+
+
+                        <input
+                                id="cadastro-email"
+                                type="email"
+                                autocomplete="email"
+                                required
+                                maxlength="150"
+                                placeholder="seuemail@exemplo.com"
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SENHA -->
+
+                <div class="auth-form-group">
+
+                    <label for="cadastro-senha">
+                        Senha
+                    </label>
+
+
+                    <div class="auth-input-wrapper">
+
+                        <span class="auth-input-icon">
+                            •
+                        </span>
+
+
+                        <input
+                                id="cadastro-senha"
+                                type="password"
+                                autocomplete="new-password"
+                                required
+                                minlength="6"
+                                placeholder="Crie uma senha"
+                        >
+
+
+                        <button
+                                id="btn-toggle-cadastro-password"
+                                type="button"
+                                class="auth-password-toggle"
+                        >
+                            Mostrar
+                        </button>
+
+                    </div>
+
+
+                    <small class="auth-helper">
+                        Use pelo menos 6 caracteres.
+                    </small>
+
+                </div>
+
+
+
+                <!-- CONFIRMAR SENHA -->
+
+                <div class="auth-form-group">
+
+                    <label for="cadastro-confirmar-senha">
+                        Confirmar senha
+                    </label>
+
+
+                    <div class="auth-input-wrapper">
+
+                        <span class="auth-input-icon">
+                            ✓
+                        </span>
+
+
+                        <input
+                                id="cadastro-confirmar-senha"
+                                type="password"
+                                autocomplete="new-password"
+                                required
+                                minlength="6"
+                                placeholder="Digite a senha novamente"
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- MENSAGEM -->
+
+                <div
+                        id="cadastro-message"
+                        class="auth-message"
+                ></div>
+
+
+
+                <!-- BOTÃO -->
+
+                <button
+                        id="btn-cadastrar"
+                        type="submit"
+                        class="auth-submit-button"
+                >
+
+                    Criar minha conta
+
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+            </form>
+
+
+
+            <!-- LOGIN -->
+
+            <div class="auth-register">
+
+                <span>
+                    Já possui uma conta?
+                </span>
+
+
+                <a href="./login.html">
+                    Entrar
+                </a>
+
+            </div>
+
+
+
+            <div class="auth-security">
+
+                <span>
+                    🔒
+                </span>
+
+                <p>
+                    Sua senha será protegida com criptografia antes de ser armazenada.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script
+        type="module"
+        src="../js/cadastro.js"
+></script>
+
 </body>
+
 </html>

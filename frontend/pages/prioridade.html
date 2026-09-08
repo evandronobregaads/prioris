@@ -1,10 +1,428 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Prioridade #1 — Prioris</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin
+    >
+
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Manrope:wght@600;700;800&display=swap"
+            rel="stylesheet"
+    >
+
+    <link
+            rel="stylesheet"
+            href="../css/style.css"
+    >
+
 </head>
+
 <body>
-$END$
+
+<div class="app">
+
+
+    <!-- ==================================================
+         SIDEBAR
+    =================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-top">
+
+            <a
+                    class="brand"
+                    href="../index.html"
+            >
+
+                <div class="brand-icon">
+
+                    <img
+                            src="../logo-prioris.svg"
+                            alt="Logo Prioris"
+                    >
+
+                </div>
+
+                <div>
+
+                    <strong>
+                        PRIORIS
+                    </strong>
+
+                    <span>
+                        Priorize. Foque. Avance.
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <nav class="sidebar-nav">
+
+                <a
+                        href="../index.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">▦</span>
+                    <span>Dashboard</span>
+                </a>
+
+
+                <a
+                        href="./prioridade.html"
+                        class="nav-item active"
+                >
+                    <span class="nav-icon">★</span>
+                    <span>Prioridade #1</span>
+                </a>
+
+
+                <a
+                        href="./tarefas.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">✓</span>
+                    <span>Tarefas</span>
+                </a>
+
+
+                <a
+                        href="./objetivos.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">◎</span>
+                    <span>Objetivos e Metas</span>
+                </a>
+
+
+                <a
+                        href="./ciclo.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">◷</span>
+                    <span>Ciclo de 12 Semanas</span>
+                </a>
+
+
+                <a
+                        href="./planejamento.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">▤</span>
+                    <span>Planejamento</span>
+                </a>
+
+
+                <a
+                        href="foco.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">◉</span>
+                    <span>Sessão de Foco</span>
+                </a>
+
+
+                <a
+                        href="revisao.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">↗</span>
+                    <span>Revisão Semanal</span>
+                </a>
+
+            </nav>
+
+        </div>
+
+
+        <div class="sidebar-footer">
+
+            <div class="user-avatar">
+                U
+            </div>
+
+            <div class="user-info">
+
+                <strong id="nome-usuario">
+                    Carregando...
+                </strong>
+
+                <span>
+            Minha conta
+        </span>
+
+            </div>
+
+            <button
+                    id="btn-logout"
+                    class="sidebar-logout"
+                    type="button"
+                    aria-label="Sair"
+                    title="Sair"
+            >
+                ↪
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ==================================================
+         CONTEÚDO
+    =================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="eyebrow">
+                    FOCO DIÁRIO
+                </p>
+
+                <h1>
+                    Prioridade #1
+                </h1>
+
+                <p class="subtitle">
+                    Escolha a tarefa que mais contribui para o seu avanço hoje.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- ==================================================
+             PRIORIDADE ATUAL
+        =================================================== -->
+
+        <section
+                id="secao-prioridade-atual"
+                class="prioridade-destaque-page"
+        >
+
+            <div class="loading-text">
+                Carregando prioridade de hoje...
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             ESCOLHER PRIORIDADE
+        =================================================== -->
+
+        <section
+                id="secao-definir-prioridade"
+                class="card definir-prioridade-card"
+        >
+
+            <div class="card-header">
+
+                <div>
+
+                    <p class="card-eyebrow">
+                        DECISÃO
+                    </p>
+
+                    <h3>
+                        Defina sua tarefa mais importante
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <p class="prioridade-section-description">
+                Entre todas as tarefas disponíveis, qual delas,
+                se concluída hoje, produzirá o maior impacto?
+            </p>
+
+
+            <div class="selecionar-prioridade">
+
+                <select id="select-tarefa-prioridade">
+
+                    <option value="">
+                        Selecione uma tarefa...
+                    </option>
+
+                </select>
+
+
+                <button
+                        id="btn-definir-prioridade"
+                        type="button"
+                        class="priority-action-button"
+                >
+                    ★ Definir como Prioridade #1
+                </button>
+
+            </div>
+
+
+            <div
+                    id="mensagem-prioridade"
+                    class="form-message"
+            ></div>
+
+        </section>
+
+
+        <!-- ==================================================
+             TRÊS PERGUNTAS
+        =================================================== -->
+
+        <section class="prioridade-reflexao">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="card-eyebrow">
+                        CLAREZA
+                    </p>
+
+                    <h2>
+                        Antes de decidir
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="prioridade-perguntas-grid">
+
+
+                <article class="prioridade-pergunta-card">
+
+                    <span class="prioridade-pergunta-numero">
+                        01
+                    </span>
+
+                    <h3>
+                        Qual é o principal problema que preciso resolver?
+                    </h3>
+
+                    <p>
+                        Identifique o obstáculo que mais limita
+                        seu progresso neste momento.
+                    </p>
+
+                </article>
+
+
+                <article class="prioridade-pergunta-card">
+
+                    <span class="prioridade-pergunta-numero">
+                        02
+                    </span>
+
+                    <h3>
+                        O que somente eu posso realizar?
+                    </h3>
+
+                    <p>
+                        Foque nas ações que dependem diretamente
+                        da sua responsabilidade.
+                    </p>
+
+                </article>
+
+
+                <article class="prioridade-pergunta-card">
+
+                    <span class="prioridade-pergunta-numero">
+                        03
+                    </span>
+
+                    <h3>
+                        Qual tarefa gera o maior impacto agora?
+                    </h3>
+
+                    <p>
+                        Escolha aquilo que realmente movimenta
+                        seus objetivos para frente.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             HISTÓRICO
+        =================================================== -->
+
+        <section class="prioridade-historico-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="card-eyebrow">
+                        CONSISTÊNCIA
+                    </p>
+
+                    <h2>
+                        Histórico de Prioridades
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                    id="lista-historico-prioridades"
+                    class="historico-prioridades-list"
+            >
+
+                <div class="loading-text">
+                    Carregando histórico...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script
+        type="module"
+        src="../js/prioridade.js"
+></script>
+
 </body>
+
 </html>

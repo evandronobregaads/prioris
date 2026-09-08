@@ -1,10 +1,484 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Ciclo de 12 Semanas — Prioris</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin
+    >
+
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Manrope:wght@600;700;800&display=swap"
+            rel="stylesheet"
+    >
+
+    <link
+            rel="stylesheet"
+            href="../css/style.css"
+    >
 </head>
+
 <body>
-$END$
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-top">
+
+            <a class="brand" href="./index.html">
+                <div class="brand-icon">
+
+                    <img
+                            src="../logo-prioris.svg"
+                            alt="Logo Prioris"
+                    >
+
+                </div>
+
+                <div>
+                    <strong>PRIORIS</strong>
+                    <span>Priorize. Foque. Avance.</span>
+                </div>
+            </a>
+
+
+            <nav class="sidebar-nav">
+
+                <a
+                        href="../index.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">▦</span>
+                    <span>Dashboard</span>
+                </a>
+
+
+                <a
+                        href="prioridade.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">★</span>
+                    <span>Prioridade #1</span>
+                </a>
+
+
+                <a
+                        href="./tarefas.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">✓</span>
+                    <span>Tarefas</span>
+                </a>
+
+
+                <a
+                        href="./objetivos.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">◎</span>
+                    <span>Objetivos e Metas</span>
+                </a>
+
+
+                <a
+                        href="./ciclo.html"
+                        class="nav-item active"
+                >
+                    <span class="nav-icon">◷</span>
+                    <span>Ciclo de 12 Semanas</span>
+                </a>
+
+
+                <a
+                        href="./planejamento.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">▤</span>
+                    <span>Planejamento</span>
+                </a>
+
+
+                <a
+                        href="foco.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">◉</span>
+                    <span>Sessão de Foco</span>
+                </a>
+
+
+                <a
+                        href="revisao.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">↗</span>
+                    <span>Revisão Semanal</span>
+                </a>
+
+            </nav>
+
+        </div>
+
+
+        <div class="sidebar-footer">
+
+            <div class="user-avatar">
+                U
+            </div>
+
+            <div class="user-info">
+
+                <strong id="nome-usuario">
+                    Carregando...
+                </strong>
+
+                <span>
+            Minha conta
+        </span>
+
+            </div>
+
+            <button
+                    id="btn-logout"
+                    class="sidebar-logout"
+                    type="button"
+                    aria-label="Sair"
+                    title="Sair"
+            >
+                ↪
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- CONTEÚDO -->
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="eyebrow">
+                    EXECUÇÃO EM 12 SEMANAS
+                </p>
+
+                <h1>
+                    Ciclos de 12 Semanas
+                </h1>
+
+                <p class="subtitle">
+                    Transforme objetivos de longo prazo em ciclos curtos de execução.
+                </p>
+
+            </div>
+
+
+            <button
+                    id="btn-novo-ciclo"
+                    class="secondary-focus-button"
+                    type="button"
+            >
+                + Novo ciclo
+            </button>
+
+        </header>
+
+
+        <!-- CICLO ATUAL -->
+
+        <section
+                id="secao-ciclo-atual"
+                class="card ciclo-atual-page"
+        >
+
+            <div class="loading-text">
+                Carregando ciclo atual...
+            </div>
+
+        </section>
+
+
+        <!-- OBJETIVOS DO CICLO -->
+
+        <section
+                id="secao-objetivos-ciclo"
+                class="card objetivos-ciclo-page hidden"
+        >
+
+            <div class="card-header">
+
+                <div>
+
+                    <p class="card-eyebrow">
+                        DIREÇÃO DO CICLO
+                    </p>
+
+                    <h3>
+                        Objetivos associados
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="associar-objetivo">
+
+                <select id="select-objetivo-ciclo">
+
+                    <option value="">
+                        Selecione um objetivo...
+                    </option>
+
+                </select>
+
+
+                <button
+                        id="btn-associar-objetivo"
+                        type="button"
+                        class="button-meta"
+                >
+                    + Associar objetivo
+                </button>
+
+            </div>
+
+
+            <div
+                    id="lista-objetivos-ciclo"
+                    class="lista-objetivos-ciclo"
+            >
+            </div>
+
+        </section>
+
+
+        <!-- HISTÓRICO -->
+
+        <section class="ciclos-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="card-eyebrow">
+                        HISTÓRICO
+                    </p>
+
+                    <h2 id="titulo-contagem-ciclos">
+                        Carregando ciclos...
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                    id="lista-ciclos"
+                    class="ciclos-page-grid"
+            >
+
+                <div class="loading-text">
+                    Carregando ciclos...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- MODAL CICLO -->
+
+<div
+        id="modal-ciclo"
+        class="modal-overlay hidden"
+>
+
+    <div class="modal-card">
+
+        <div class="modal-header">
+
+            <div>
+
+                <p class="card-eyebrow">
+                    CICLO DE 12 SEMANAS
+                </p>
+
+                <h2 id="modal-ciclo-titulo">
+                    Novo ciclo
+                </h2>
+
+            </div>
+
+
+            <button
+                    id="btn-fechar-ciclo"
+                    class="modal-close"
+                    type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="form-ciclo">
+
+            <input
+                    id="ciclo-id"
+                    type="hidden"
+            >
+
+
+            <div class="form-group">
+
+                <label for="ciclo-titulo">
+                    Título *
+                </label>
+
+                <input
+                        id="ciclo-titulo"
+                        type="text"
+                        required
+                        maxlength="150"
+                        placeholder="Ex.: Ciclo Prioris — Execução 2026"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="ciclo-descricao">
+                    Descrição
+                </label>
+
+                <textarea
+                        id="ciclo-descricao"
+                        rows="4"
+                        placeholder="Qual será o foco principal deste ciclo?"
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="ciclo-data-inicio">
+                        Data de início *
+                    </label>
+
+                    <input
+                            id="ciclo-data-inicio"
+                            type="date"
+                            required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="ciclo-status-form">
+                        Status
+                    </label>
+
+                    <select id="ciclo-status-form">
+
+                        <option value="PLANEJADO">
+                            Planejado
+                        </option>
+
+                        <option value="EM_ANDAMENTO">
+                            Em andamento
+                        </option>
+
+                        <option value="CONCLUIDO">
+                            Concluído
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="ciclo-info-box">
+
+                <strong>
+                    📅 O Prioris calculará automaticamente o fim do ciclo.
+                </strong>
+
+                <span>
+                    O período terá exatamente 12 semanas a partir da data inicial.
+                </span>
+
+            </div>
+
+
+            <div
+                    id="mensagem-form-ciclo"
+                    class="form-message"
+            ></div>
+
+
+            <div class="modal-actions">
+
+                <button
+                        id="btn-cancelar-ciclo"
+                        type="button"
+                        class="button-outline"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                        type="submit"
+                        class="secondary-focus-button"
+                >
+                    Salvar ciclo
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script
+        type="module"
+        src="../js/ciclo.js"
+></script>
+
 </body>
+
 </html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Tarefas — Prioris</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Manrope:wght@600;700;800&display=swap"
+            rel="stylesheet"
+    >
+
+    <link
+            rel="stylesheet"
+            href="../css/style.css"
+    >
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-top">
+
+            <a class="brand" href="../index.html">
+                <div class="brand-icon">
+
+                    <img
+                            src="../logo-prioris.svg"
+                            alt="Logo Prioris"
+                    >
+
+                </div>
+
+                <div>
+
+                    <strong>PRIORIS</strong>
+
+                    <span>
+                        Priorize. Foque. Avance.
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <nav class="sidebar-nav">
+
+                <a
+                        href="../index.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">▦</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <a
+                        href="prioridade.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">★</span>
+                    <span>Prioridade #1</span>
+                </a>
+
+                <a
+                        href="./tarefas.html"
+                        class="nav-item active"
+                >
+                    <span class="nav-icon">✓</span>
+                    <span>Tarefas</span>
+                </a>
+
+                <a
+                        href="./objetivos.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">◎</span>
+                    <span>Objetivos e Metas</span>
+                </a>
+
+                <a
+                        href="./ciclo.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">◷</span>
+                    <span>Ciclo de 12 Semanas</span>
+                </a>
+
+                <a
+                        href="./planejamento.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">▤</span>
+                    <span>Planejamento</span>
+                </a>
+
+                <a
+                        href="./foco.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">◉</span>
+                    <span>Sessão de Foco</span>
+                </a>
+
+                <a
+                        href="revisao.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">↗</span>
+                    <span>Revisão Semanal</span>
+                </a>
+
+
+            </nav>
+
+        </div>
+        <div class="sidebar-footer">
+
+            <div class="user-avatar">
+                U
+            </div>
+
+            <div class="user-info">
+                <strong id="nome-usuario">
+                    Carregando...
+                </strong>
+
+                <span>
+            Minha conta
+        </span>
+            </div>
+
+            <button
+                    id="btn-logout"
+                    class="sidebar-logout"
+                    type="button"
+                    aria-label="Sair"
+                    title="Sair"
+            >
+                ↪
+            </button>
+
+        </div>
+    </aside>
+
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="eyebrow">
+                    EXECUÇÃO
+                </p>
+
+                <h1>
+                    Minhas Tarefas
+                </h1>
+
+                <p class="subtitle">
+                    Organize, priorize e execute o que realmente importa.
+                </p>
+
+            </div>
+
+            <button
+                    id="btn-nova-tarefa"
+                    class="secondary-focus-button"
+                    type="button"
+            >
+                + Nova tarefa
+            </button>
+
+        </header>
+
+
+        <!-- FILTROS -->
+
+        <section class="card tarefas-filtros">
+
+            <div class="tarefas-filtros-grid">
+
+                <input
+                        id="filtro-busca"
+                        type="search"
+                        placeholder="Buscar tarefa..."
+                >
+
+                <select id="filtro-status">
+
+                    <option value="">
+                        Todos os status
+                    </option>
+
+                    <option value="PENDENTE">
+                        Pendente
+                    </option>
+
+                    <option value="EM_ANDAMENTO">
+                        Em andamento
+                    </option>
+
+                    <option value="CONCLUIDA">
+                        Concluída
+                    </option>
+
+                </select>
+
+                <select id="filtro-abcde">
+
+                    <option value="">
+                        Todas as prioridades
+                    </option>
+
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+
+                </select>
+
+            </div>
+
+        </section>
+
+
+        <!-- LISTAGEM -->
+
+        <section class="card tarefas-page-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <p class="card-eyebrow">
+                        TAREFAS
+                    </p>
+
+                    <h3 id="titulo-contagem">
+                        Carregando...
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div
+                    id="lista-tarefas"
+                    class="tarefas-page-list"
+            >
+
+                <div class="loading-text">
+                    Carregando tarefas...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================
+     MODAL
+========================================= -->
+
+<div
+        id="modal-tarefa"
+        class="modal-overlay hidden"
+>
+
+    <div class="modal-card">
+
+        <div class="modal-header">
+
+            <div>
+
+                <p class="card-eyebrow">
+                    TAREFA
+                </p>
+
+                <h2 id="modal-titulo">
+                    Nova tarefa
+                </h2>
+
+            </div>
+
+            <button
+                    id="btn-fechar-modal"
+                    class="modal-close"
+                    type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="form-tarefa">
+
+            <input
+                    id="tarefa-id"
+                    type="hidden"
+            >
+
+
+            <div class="form-group">
+
+                <label for="tarefa-titulo">
+                    Título *
+                </label>
+
+                <input
+                        id="tarefa-titulo"
+                        type="text"
+                        required
+                        maxlength="150"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="tarefa-descricao">
+                    Descrição
+                </label>
+
+                <textarea
+                        id="tarefa-descricao"
+                        rows="4"
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="tarefa-abcde">
+                        Classificação ABCDE
+                    </label>
+
+                    <select id="tarefa-abcde">
+
+                        <option value="">
+                            Sem classificação
+                        </option>
+
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <!-- =========================================
+                         VÍNCULO ESTRATÉGICO
+                    ========================================= -->
+
+                    <div class="form-group">
+
+                        <label for="tarefa-vinculo-tipo">
+                            Vínculo estratégico
+                        </label>
+
+                        <select id="tarefa-vinculo-tipo">
+
+                            <option value="">
+                                Sem vínculo
+                            </option>
+
+                            <option value="OBJETIVO">
+                                Objetivo
+                            </option>
+
+                            <option value="META">
+                                Meta
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div
+                            id="grupo-tarefa-objetivo"
+                            class="form-group hidden"
+                    >
+
+                        <label for="tarefa-objetivo">
+                            Objetivo
+                        </label>
+
+                        <select id="tarefa-objetivo">
+
+                            <option value="">
+                                Selecione um objetivo
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div
+                            id="grupo-tarefa-meta"
+                            class="form-group hidden"
+                    >
+
+                        <label for="tarefa-meta">
+                            Meta
+                        </label>
+
+                        <select id="tarefa-meta">
+
+                            <option value="">
+                                Selecione uma meta
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="tarefa-tempo">
+                        Tempo estimado (min)
+                    </label>
+
+                    <input
+                            id="tarefa-tempo"
+                            type="number"
+                            min="1"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="tarefa-data">
+                        Data planejada
+                    </label>
+
+                    <input
+                            id="tarefa-data"
+                            type="date"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="tarefa-status">
+                        Status
+                    </label>
+
+                    <select id="tarefa-status">
+
+                        <option value="PENDENTE">
+                            Pendente
+                        </option>
+
+                        <option value="EM_ANDAMENTO">
+                            Em andamento
+                        </option>
+
+                        <option value="CONCLUIDA">
+                            Concluída
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div
+                    id="mensagem-form"
+                    class="form-message"
+            ></div>
+
+
+            <div class="modal-actions">
+
+                <button
+                        id="btn-cancelar"
+                        type="button"
+                        class="button-outline"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                        type="submit"
+                        class="secondary-focus-button"
+                >
+                    Salvar tarefa
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script
+        type="module"
+        src="../js/tarefas.js"
+></script>
+
+</body>
+
+</html>

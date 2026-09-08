@@ -1,10 +1,604 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Planejamento Semanal — Prioris</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin
+    >
+
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Manrope:wght@600;700;800&display=swap"
+            rel="stylesheet"
+    >
+
+    <link
+            rel="stylesheet"
+            href="../css/style.css"
+    >
+
 </head>
+
 <body>
-$END$
+
+<div class="app">
+
+
+    <!-- ==================================================
+         SIDEBAR
+    =================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-top">
+
+            <a
+                    class="brand"
+                    href="../index.html"
+            >
+
+                <div class="brand-icon">
+
+                    <img
+                            src="../logo-prioris.svg"
+                            alt="Logo Prioris"
+                    >
+
+                </div>
+
+                <div>
+
+                    <strong>
+                        PRIORIS
+                    </strong>
+
+                    <span>
+                        Priorize. Foque. Avance.
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <nav class="sidebar-nav">
+
+                <a
+                        href="../index.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">▦</span>
+                    <span>Dashboard</span>
+                </a>
+
+
+                <a
+                        href="prioridade.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">★</span>
+                    <span>Prioridade #1</span>
+                </a>
+
+
+                <a
+                        href="./tarefas.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">✓</span>
+                    <span>Tarefas</span>
+                </a>
+
+
+                <a
+                        href="./objetivos.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">◎</span>
+                    <span>Objetivos e Metas</span>
+                </a>
+
+
+                <a
+                        href="./ciclo.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">◷</span>
+                    <span>Ciclo de 12 Semanas</span>
+                </a>
+
+
+                <a
+                        href="./planejamento.html"
+                        class="nav-item active"
+                >
+                    <span class="nav-icon">▤</span>
+                    <span>Planejamento</span>
+                </a>
+
+
+                <a
+                        href="foco.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">◉</span>
+                    <span>Sessão de Foco</span>
+                </a>
+
+
+                <a
+                        href="revisao.html"
+                        class="nav-item"
+                >
+                    <span class="nav-icon">↗</span>
+                    <span>Revisão Semanal</span>
+                </a>
+
+            </nav>
+
+        </div>
+
+
+        <div class="sidebar-footer">
+
+            <div class="user-avatar">
+                U
+            </div>
+
+            <div class="user-info">
+
+                <strong id="nome-usuario">
+                    Carregando...
+                </strong>
+
+                <span>
+            Minha conta
+        </span>
+
+            </div>
+
+            <button
+                    id="btn-logout"
+                    class="sidebar-logout"
+                    type="button"
+                    aria-label="Sair"
+                    title="Sair"
+            >
+                ↪
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ==================================================
+         CONTEÚDO PRINCIPAL
+    =================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="eyebrow">
+                    EXECUÇÃO SEMANAL
+                </p>
+
+                <h1>
+                    Planejamento Semanal
+                </h1>
+
+                <p class="subtitle">
+                    Escolha o que realmente precisa ser executado nesta semana.
+                </p>
+
+            </div>
+
+
+            <button
+                    id="btn-novo-planejamento"
+                    class="secondary-focus-button"
+                    type="button"
+            >
+                + Nova semana
+            </button>
+
+        </header>
+
+
+        <!-- ==================================================
+             PLANEJAMENTO ATUAL
+        =================================================== -->
+
+        <section
+                id="secao-planejamento-atual"
+                class="card planejamento-atual-page"
+        >
+
+            <div class="loading-text">
+                Carregando planejamento atual...
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             SCORE
+        =================================================== -->
+
+        <section
+                id="secao-score-planejamento"
+                class="planejamento-score-grid hidden"
+        >
+
+            <article class="stat-card">
+
+                <div class="stat-icon blue">
+                    ▤
+                </div>
+
+                <div>
+
+                    <span>
+                        Planejadas
+                    </span>
+
+                    <strong id="total-tarefas-planejadas">
+                        0
+                    </strong>
+
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-icon green">
+                    ✓
+                </div>
+
+                <div>
+
+                    <span>
+                        Concluídas
+                    </span>
+
+                    <strong id="total-tarefas-concluidas">
+                        0
+                    </strong>
+
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-icon orange">
+                    %
+                </div>
+
+                <div>
+
+                    <span>
+                        Score de Execução
+                    </span>
+
+                    <strong id="score-execucao-planejamento">
+                        0%
+                    </strong>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- ==================================================
+             TAREFAS ESTRATÉGICAS
+        =================================================== -->
+
+        <section
+                id="secao-tarefas-planejamento"
+                class="card tarefas-planejamento-page hidden"
+        >
+
+            <div class="card-header">
+
+                <div>
+
+                    <p class="card-eyebrow">
+                        EXECUÇÃO
+                    </p>
+
+                    <h3>
+                        Tarefas estratégicas da semana
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <p class="planejamento-section-description">
+                Escolha somente as tarefas que realmente contribuem
+                para os objetivos mais importantes da semana.
+            </p>
+
+
+            <!-- ADICIONAR TAREFA -->
+
+            <div class="associar-tarefa-planejamento">
+
+                <select id="select-tarefa-planejamento">
+
+                    <option value="">
+                        Selecione uma tarefa...
+                    </option>
+
+                </select>
+
+
+                <button
+                        id="btn-adicionar-tarefa-planejamento"
+                        type="button"
+                        class="button-meta"
+                >
+                    + Adicionar tarefa
+                </button>
+
+            </div>
+
+
+            <!-- LISTA -->
+
+            <div
+                    id="lista-tarefas-planejamento"
+                    class="lista-tarefas-planejamento"
+            >
+
+                <div class="loading-text">
+                    Carregando tarefas...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             HISTÓRICO
+        =================================================== -->
+
+        <section class="planejamentos-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="card-eyebrow">
+                        HISTÓRICO SEMANAL
+                    </p>
+
+                    <h2 id="titulo-contagem-planejamentos">
+                        Carregando planejamentos...
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                    id="lista-planejamentos"
+                    class="planejamentos-page-grid"
+            >
+
+                <div class="loading-text">
+                    Carregando planejamentos...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ==================================================
+     MODAL PLANEJAMENTO
+================================================== -->
+
+<div
+        id="modal-planejamento"
+        class="modal-overlay hidden"
+>
+
+    <div class="modal-card">
+
+        <div class="modal-header">
+
+            <div>
+
+                <p class="card-eyebrow">
+                    PLANEJAMENTO SEMANAL
+                </p>
+
+                <h2 id="modal-planejamento-titulo">
+                    Nova semana
+                </h2>
+
+            </div>
+
+
+            <button
+                    id="btn-fechar-planejamento"
+                    class="modal-close"
+                    type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="form-planejamento">
+
+            <input
+                    id="planejamento-id"
+                    type="hidden"
+            >
+
+
+            <!-- CICLO -->
+
+            <div class="form-group">
+
+                <label for="planejamento-ciclo">
+                    Ciclo de 12 Semanas
+                </label>
+
+                <select id="planejamento-ciclo">
+
+                    <option value="">
+                        Sem ciclo associado
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- SEMANA + DATA -->
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="planejamento-semana-ciclo">
+                        Semana do ciclo
+                    </label>
+
+                    <input
+                            id="planejamento-semana-ciclo"
+                            type="number"
+                            min="1"
+                            max="12"
+                            placeholder="1"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="planejamento-data-inicio">
+                        Início da semana *
+                    </label>
+
+                    <input
+                            id="planejamento-data-inicio"
+                            type="date"
+                            required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- OBSERVAÇÕES -->
+
+            <div class="form-group">
+
+                <label for="planejamento-observacoes">
+                    Observações
+                </label>
+
+                <textarea
+                        id="planejamento-observacoes"
+                        rows="4"
+                        placeholder="Qual será o foco principal desta semana?"
+                ></textarea>
+
+            </div>
+
+
+            <div class="planejamento-info-box">
+
+                <strong>
+                    💡 Planeje antes de executar.
+                </strong>
+
+                <span>
+                    A semana terá 7 dias e o Score de Execução será
+                    calculado automaticamente a partir das tarefas
+                    estratégicas concluídas.
+                </span>
+
+            </div>
+
+
+            <div
+                    id="mensagem-form-planejamento"
+                    class="form-message"
+            ></div>
+
+
+            <div class="modal-actions">
+
+                <button
+                        id="btn-cancelar-planejamento"
+                        type="button"
+                        class="button-outline"
+                >
+                    Cancelar
+                </button>
+
+
+                <button
+                        type="submit"
+                        class="secondary-focus-button"
+                >
+                    Salvar planejamento
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script
+        type="module"
+        src="../js/planejamento.js"
+></script>
+
 </body>
+
 </html>
