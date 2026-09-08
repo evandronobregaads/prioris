@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -84,25 +85,39 @@ public class RevisaoSemanalService {
         return converterParaResponse(revisaoSalva);
     }
 
-    public RevisaoSemanalResponseDTO buscar(
+    public Optional<RevisaoSemanalResponseDTO> buscar(
             Long idUsuario,
             Long idPlanejamento
     ) {
 
+        /*
+         * Usuário inexistente ou inativo
+         * continua sendo 404.
+         */
         buscarUsuarioAtivo(idUsuario);
 
+
+        /*
+         * Planejamento inexistente ou pertencente
+         * a outro usuário continua sendo 404.
+         */
         buscarPlanejamentoValido(
                 idUsuario,
                 idPlanejamento
         );
 
-        RevisaoSemanal revisao =
-                buscarRevisao(
-                        idUsuario,
-                        idPlanejamento
-                );
 
-        return converterParaResponse(revisao);
+        /*
+         * A ausência de revisão NÃO é um erro.
+         * Significa apenas que o usuário ainda
+         * precisa realizar a revisão da semana.
+         */
+        return revisaoRepository
+                .findByPlanejamentoSemanal_IdPlanejamentoSemanalAndPlanejamentoSemanal_Usuario_IdUsuario(
+                        idPlanejamento,
+                        idUsuario
+                )
+                .map(this::converterParaResponse);
     }
 
     public List<RevisaoSemanalResponseDTO> listarHistorico(

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/usuarios/{idUsuario}")
@@ -55,11 +56,23 @@ public class RevisaoSemanalController {
             @PathVariable Long idPlanejamento
     ) {
 
-        return ResponseEntity.ok(
+        Optional<RevisaoSemanalResponseDTO> revisao =
                 revisaoService.buscar(
                         idUsuario,
                         idPlanejamento
-                )
+                );
+
+
+        if (revisao.isEmpty()) {
+
+            return ResponseEntity
+                    .noContent()
+                    .build();
+        }
+
+
+        return ResponseEntity.ok(
+                revisao.get()
         );
     }
 

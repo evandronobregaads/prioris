@@ -3,6 +3,7 @@ package br.com.prioris.backend.controller;
 import br.com.prioris.backend.dto.PrioridadeDiariaRequestDTO;
 import br.com.prioris.backend.dto.PrioridadeDiariaResponseDTO;
 import br.com.prioris.backend.service.PrioridadeDiariaService;
+import br.com.prioris.backend.exception.RecursoNaoEncontradoException;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -51,9 +52,23 @@ public class PrioridadeDiariaController {
             @PathVariable Long idUsuario
     ) {
 
-        return ResponseEntity.ok(
-                prioridadeService.buscarHoje(idUsuario)
-        );
+        try {
+
+            PrioridadeDiariaResponseDTO prioridade =
+                    prioridadeService.buscarHoje(
+                            idUsuario
+                    );
+
+            return ResponseEntity.ok(
+                    prioridade
+            );
+
+        } catch (RecursoNaoEncontradoException e) {
+
+            return ResponseEntity
+                    .noContent()
+                    .build();
+        }
     }
 
     @PatchMapping("/hoje")

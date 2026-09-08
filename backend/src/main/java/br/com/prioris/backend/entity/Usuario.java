@@ -24,14 +24,20 @@ public class Usuario {
     private String senhaHash;
 
     @CreationTimestamp
-    @Column(name = "data_criacao", nullable = false, updatable = false)
+    @Column(
+            name = "data_criacao",
+            nullable = false,
+            updatable = false
+    )
     private LocalDateTime dataCriacao;
 
     @Column(nullable = false)
     private Boolean ativo = true;
 
+
     public Usuario() {
     }
+
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -41,6 +47,7 @@ public class Usuario {
         this.idUsuario = idUsuario;
     }
 
+
     public String getNome() {
         return nome;
     }
@@ -48,6 +55,7 @@ public class Usuario {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
 
     public String getEmail() {
         return email;
@@ -57,6 +65,7 @@ public class Usuario {
         this.email = email;
     }
 
+
     public String getSenhaHash() {
         return senhaHash;
     }
@@ -65,6 +74,7 @@ public class Usuario {
         this.senhaHash = senhaHash;
     }
 
+
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
     }
@@ -72,6 +82,7 @@ public class Usuario {
     public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
+
 
     public Boolean getAtivo() {
         return ativo;

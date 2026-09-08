@@ -1,0 +1,10060 @@
+/* =====================================================
+   PRIORIS
+   Dashboard principal
+===================================================== */
+
+:root {
+
+    /* PRIORIS — Identidade oficial */
+
+    --primary: #17324D;
+    --primary-hover: #10283D;
+    --primary-light: #E9EFF3;
+
+    --secondary: #2A9D8F;
+    --secondary-dark: #218579;
+    --secondary-light: #E5F5F2;
+
+    --accent: #E9C46A;
+    --accent-dark: #D9AC42;
+    --accent-light: #FFF7E3;
+
+    --danger: #E76F51;
+    --danger-light: #FCEBE7;
+
+    --rest: #84A98C;
+    --rest-light: #EDF3EE;
+    --success: #2A9D8F;
+
+    --background: #F7F8F5;
+    --surface: #FFFFFF;
+
+    --text-primary: #263238;
+    --text-secondary: #64727A;
+    --text-light: #909A9F;
+
+    --border: #E2E6E3;
+
+    /* ABCDE */
+
+    --abcde-a: #D95D39;
+    --abcde-b: #E9A23B;
+    --abcde-c: #E9C46A;
+    --abcde-d: #5B8DEF;
+    --abcde-e: #8D99AE;
+
+    --shadow:
+            0 8px 24px rgba(23, 50, 77, 0.06);
+
+    --radius-control: 8px;
+    --radius-card: 12px;
+    --radius-panel: 18px;
+}
+
+
+/* ================= RESET ================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family:
+            "Inter",
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+    background: var(--background);
+    color: var(--text-primary);
+
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+.brand strong {
+    font-family: "Manrope", sans-serif;
+}
+
+.score-inner strong,
+.pomodoro strong,
+.stat-card strong,
+.cycle-percentage {
+    font-family: "JetBrains Mono", monospace;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* =====================================================
+   APP
+===================================================== */
+
+.app {
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar {
+
+    position: fixed;
+
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 265px;
+
+    padding: 26px 18px 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background: var(--primary);
+
+    color: white;
+
+    z-index: 100;
+}
+
+
+/* BRAND */
+
+.brand {
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 4px 10px 30px;
+}
+
+.brand-icon {
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    border-radius: 14px;
+    overflow: hidden;
+
+    background: #ffffff;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+}
+
+.brand-icon img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.brand strong {
+
+    display: block;
+
+    font-size: 17px;
+
+    letter-spacing: 1px;
+}
+
+.brand span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 10px;
+
+    color: #9195a5;
+}
+
+
+/* NAV */
+
+.sidebar-nav {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.nav-item {
+
+    min-height: 48px;
+
+    padding: 0 14px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    border-radius: 11px;
+
+    color: #9da1b3;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    transition:
+            background .2s ease,
+            color .2s ease,
+            transform .2s ease;
+}
+
+.nav-item:hover {
+
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    transform: translateX(2px);
+}
+
+.nav-item.active {
+
+    background: rgba(42, 157, 143, 0.16);
+    color: white;
+
+    border-left: 3px solid var(--secondary);
+}
+
+.nav-icon {
+
+    width: 23px;
+
+    text-align: center;
+
+    font-size: 18px;
+}
+
+
+/* USUÁRIO */
+
+.sidebar-footer {
+
+    padding: 15px 9px 4px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    border-top:
+            1px solid rgba(255,255,255,.08);
+}
+
+.user-avatar {
+
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--primary);
+
+    font-weight: 700;
+}
+
+.user-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.user-info strong {
+
+    display: block;
+
+    overflow: hidden;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.user-info span {
+
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 10px;
+
+    color: #828697;
+}
+
+.more-button {
+
+    border: 0;
+    background: transparent;
+
+    color: #8e92a3;
+
+    font-size: 20px;
+}
+
+
+/* =====================================================
+   CONTEÚDO PRINCIPAL
+===================================================== */
+
+.main-content {
+
+    margin-left: 265px;
+
+    min-height: 100vh;
+
+    padding: 38px 44px 22px;
+
+    max-width: 1800px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.topbar {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 30px;
+}
+
+.eyebrow,
+.card-eyebrow {
+    margin-bottom: 7px;
+
+    color: var(--secondary);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+}
+
+.topbar h1 {
+
+    font-size: 30px;
+
+    letter-spacing: -1px;
+}
+
+.subtitle {
+
+    margin-top: 7px;
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+}
+
+.topbar-actions {
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.api-status {
+
+    height: 40px;
+
+    padding: 0 14px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    border:
+            1px solid var(--border);
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.api-dot {
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #b7bac4;
+}
+
+.api-status.connected .api-dot {
+
+    background: var(--success);
+
+    box-shadow:
+            0 0 0 4px rgba(20, 184, 122, .12);
+}
+
+.api-status.error .api-dot {
+
+    background: var(--danger);
+}
+
+.icon-button {
+
+    width: 40px;
+    height: 40px;
+
+    border:
+            1px solid var(--border);
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: var(--text-secondary);
+
+    font-size: 20px;
+}
+
+.date-card {
+
+    min-width: 74px;
+    height: 48px;
+
+    padding: 6px 13px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: white;
+
+    border:
+            1px solid var(--border);
+}
+
+.date-card span {
+
+    color: var(--text-light);
+
+    font-size: 9px;
+    text-transform: uppercase;
+}
+
+.date-card strong {
+
+    margin-top: 1px;
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   PRIORIDADE
+===================================================== */
+
+.priority-card {
+    position: relative;
+    overflow: hidden;
+
+    min-height: 190px;
+
+    margin-bottom: 24px;
+    padding: 30px 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 35px;
+
+    border-radius: var(--radius-panel);
+
+    color: white;
+
+    background:
+            linear-gradient(
+                    120deg,
+                    #17324D 0%,
+                    #1D405E 100%
+            );
+
+    border-top: 4px solid var(--accent);
+
+    box-shadow:
+            0 14px 34px rgba(23, 50, 77, 0.14);
+}
+
+.priority-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 310px;
+    height: 310px;
+
+    right: -95px;
+    top: -130px;
+
+    border-radius: 50%;
+
+    background:
+            rgba(255,255,255,.06);
+}
+
+.priority-content {
+    position: relative;
+    z-index: 2;
+}
+
+.priority-label {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 13px;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+    color: var(--accent);
+}
+
+.priority-card h2 {
+
+    max-width: 650px;
+
+    font-size: 26px;
+
+    letter-spacing: -.6px;
+}
+
+.priority-card p {
+
+    max-width: 650px;
+
+    margin-top: 9px;
+
+    color: #dedbfa;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.priority-meta {
+
+    margin-top: 18px;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 15px;
+
+    color: #ece9ff;
+
+    font-size: 11px;
+}
+
+.tag {
+
+    min-width: 28px;
+    height: 28px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 7px;
+
+    font-weight: 800;
+}
+
+.tag-a {
+
+    color: #4c3eb6;
+
+    background: white;
+}
+
+.priority-action {
+
+    position: relative;
+    z-index: 2;
+
+    min-width: 160px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.focus-button {
+    width: 160px;
+    height: 48px;
+
+    border: none;
+    border-radius: var(--radius-card);
+
+    background: var(--secondary);
+    color: white;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    transition:
+            transform .2s ease,
+            background .2s ease,
+            box-shadow .2s ease;
+}
+
+.focus-button:hover {
+    background: var(--secondary-dark);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+            0 8px 22px rgba(42, 157, 143, .25);
+}
+
+.focus-description {
+
+    color: #d9d5fa;
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.card {
+    padding: 24px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-card);
+
+    box-shadow:
+            0 4px 14px rgba(23, 50, 77, 0.035);
+}
+
+.card-header {
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 14px;
+
+    margin-bottom: 23px;
+}
+
+.card-header h3 {
+
+    font-size: 16px;
+}
+
+.status-badge {
+    padding: 7px 9px;
+
+    border-radius: 7px;
+
+    color: var(--secondary-dark);
+    background: var(--secondary-light);
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: .6px;
+}
+
+
+/* =====================================================
+   GRID PRINCIPAL
+===================================================== */
+
+.dashboard-grid {
+
+    display: grid;
+
+    gap: 22px;
+}
+
+.dashboard-grid-main {
+
+    grid-template-columns:
+            minmax(0, 1.45fr)
+            minmax(280px, .8fr);
+
+    margin-bottom: 22px;
+}
+
+
+/* CICLO */
+
+.cycle-week {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    margin-bottom: 13px;
+}
+
+.cycle-week span {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+}
+
+.cycle-week strong {
+
+    font-size: 20px;
+}
+
+.cycle-percentage {
+
+    color: var(--primary);
+
+    font-size: 18px !important;
+}
+
+.progress-track {
+
+    width: 100%;
+    height: 8px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: #ececf2;
+}
+
+.progress-bar {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: var(--secondary);
+}
+
+.cycle-footer {
+
+    margin-top: 10px;
+
+    display: flex;
+    justify-content: space-between;
+
+    color: var(--text-light);
+
+    font-size: 9px;
+}
+
+
+/* SCORE */
+
+.score-content {
+
+    display: flex;
+    align-items: center;
+
+    gap: 25px;
+}
+
+.score-ring {
+    --score: 85%;
+
+    position: relative;
+
+    width: 120px;
+    height: 120px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+            conic-gradient(
+                    var(--secondary) var(--score),
+                    #E8ECEA 0
+            );
+}
+
+.score-ring::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 94px;
+    height: 94px;
+
+    border-radius: 50%;
+
+    background: white;
+}
+
+.score-inner {
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-inner strong {
+
+    font-size: 27px;
+}
+
+.score-inner span {
+
+    margin-top: -2px;
+
+    color: var(--text-light);
+
+    font-size: 9px;
+}
+
+.score-info strong {
+    color: var(--secondary);
+    font-size: 13px;
+}
+
+.score-info p {
+
+    margin-top: 6px;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   INDICADORES
+===================================================== */
+
+.stats-grid {
+
+    display: grid;
+
+    grid-template-columns:
+            repeat(4, 1fr);
+
+    gap: 16px;
+
+    margin-bottom: 22px;
+}
+
+.stat-card {
+    min-height: 92px;
+
+    padding: 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-card);
+
+    box-shadow:
+            0 4px 14px rgba(23, 50, 77, 0.035);
+}
+
+.stat-icon {
+
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.stat-icon.purple {
+    color: var(--primary);
+    background: var(--primary-light);
+}
+
+.stat-icon.green {
+    color: var(--secondary);
+    background: var(--secondary-light);
+}
+
+.stat-icon.orange {
+    color: #B98422;
+    background: var(--accent-light);
+}
+
+.stat-icon.blue {
+    color: var(--secondary);
+    background: var(--secondary-light);
+}
+
+.stat-card span {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+}
+
+.stat-card strong {
+
+    display: block;
+
+    font-size: 22px;
+}
+
+
+/* =====================================================
+   TAREFAS + FOCO
+===================================================== */
+
+.dashboard-grid-bottom {
+
+    grid-template-columns:
+            minmax(0, 1.45fr)
+            minmax(280px, .8fr);
+
+    margin-bottom: 22px;
+}
+
+.text-button {
+    padding: 5px;
+
+    border: 0;
+
+    background: transparent;
+
+    color: var(--primary);
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* TASK */
+
+.tasks-list {
+
+    display: flex;
+    flex-direction: column;
+}
+
+.task-item {
+
+    min-height: 62px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    border-bottom:
+            1px solid #f0f0f4;
+}
+
+.task-item:last-child {
+    border-bottom: none;
+}
+
+.task-check {
+
+    width: 23px;
+    height: 23px;
+
+    flex-shrink: 0;
+
+    border:
+            2px solid #d8dae3;
+
+    border-radius: 7px;
+
+    background: white;
+}
+
+.task-check.completed {
+
+    border-color: var(--success);
+
+    background: var(--success);
+
+    color: white;
+
+    font-size: 11px;
+}
+
+.task-content {
+
+    min-width: 0;
+
+    flex: 1;
+}
+
+.task-content strong {
+
+    display: block;
+
+    overflow: hidden;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.task-content span {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--text-light);
+
+    font-size: 9px;
+}
+
+.task-completed {
+
+    color: #a7a9b1;
+
+    text-decoration: line-through;
+}
+
+.abcde-badge {
+
+    width: 27px;
+    height: 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 7px;
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.badge-a {
+    color: #FFFFFF;
+    background: var(--abcde-a);
+}
+
+.badge-b {
+    color: #FFFFFF;
+    background: var(--abcde-b);
+}
+
+.badge-c {
+    color: #5D4A16;
+    background: var(--abcde-c);
+}
+
+.badge-d {
+    color: #FFFFFF;
+    background: var(--abcde-d);
+}
+
+.badge-e {
+    color: #FFFFFF;
+    background: var(--abcde-e);
+}
+
+/* TAREFAS ESTRATÉGICAS */
+.task-item-title,
+.task-title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--text-primary);
+}
+
+.task-item-subtitle,
+.task-meta,
+.task-subtitle {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--text-secondary);
+}
+
+.task-priority-badge,
+.priority-badge {
+    font-size: 13px;
+    font-weight: 800;
+    min-width: 32px;
+    height: 32px;
+}
+
+/* POMODORO */
+
+.focus-card {
+
+    display: flex;
+    flex-direction: column;
+}
+
+.pomodoro {
+
+    margin: 7px 0 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pomodoro-label {
+    margin-bottom: 6px;
+
+    color: var(--secondary);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+.pomodoro strong {
+
+    font-size: 42px;
+
+    letter-spacing: -2px;
+}
+
+.pomodoro span:last-child {
+
+    margin-top: -4px;
+
+    color: var(--text-light);
+
+    font-size: 9px;
+}
+
+.secondary-focus-button {
+    height: 43px;
+
+    border: none;
+    border-radius: var(--radius-control);
+
+    background: var(--secondary);
+
+    color: white;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.secondary-focus-button:hover {
+    background: var(--secondary-dark);
+}
+
+.focus-tip {
+
+    margin-top: 13px;
+
+    text-align: center;
+
+    color: var(--text-light);
+
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   OBJETIVOS
+===================================================== */
+
+.goals-card {
+
+    margin-bottom: 24px;
+}
+
+.goals-grid {
+
+    display: grid;
+
+    grid-template-columns:
+            repeat(3, 1fr);
+
+    gap: 14px;
+}
+
+.goal-item {
+
+    padding: 17px;
+
+    border:
+            1px solid var(--border);
+
+    border-radius: 13px;
+
+    background: #fbfbfd;
+}
+
+.goal-header {
+
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+}
+
+.goal-icon {
+
+    width: 39px;
+    height: 39px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: var(--primary-light);
+
+    font-size: 17px;
+}
+
+.goal-header span {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--primary);
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: .7px;
+}
+
+.goal-header strong {
+
+    display: block;
+
+    font-size: 11px;
+}
+
+.goal-progress {
+
+    margin-top: 16px;
+}
+
+.goal-progress-header {
+
+    margin-bottom: 7px;
+
+    display: flex;
+    justify-content: space-between;
+
+    color: var(--text-secondary);
+
+    font-size: 9px;
+}
+
+.goal-progress-header strong {
+
+    color: var(--text-primary);
+}
+
+.progress-track.small {
+    height: 6px;
+}
+
+/* OBJETIVOS EM ANDAMENTO */
+.objective-category {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--secondary);
+    text-transform: uppercase;
+}
+
+.objective-title,
+.objective-name {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--text-primary);
+}
+
+.objective-progress-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.objective-progress-value,
+.objective-percentage {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.page-footer {
+
+    padding: 10px 3px 0;
+
+    display: flex;
+    justify-content: space-between;
+
+    color: var(--text-light);
+
+    font-size: 9px;
+}
+
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+@media (max-width: 1150px) {
+
+    .stats-grid {
+
+        grid-template-columns:
+                repeat(2, 1fr);
+    }
+
+    .goals-grid {
+
+        grid-template-columns:
+                1fr;
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .sidebar {
+
+        width: 80px;
+
+        padding-left: 11px;
+        padding-right: 11px;
+    }
+
+    .brand {
+
+        justify-content: center;
+
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .brand > div:not(.brand-icon),
+    .nav-item span:last-child,
+    .user-info,
+    .more-button {
+
+        display: none;
+    }
+
+    .nav-item {
+
+        justify-content: center;
+
+        padding: 0;
+    }
+
+    .main-content {
+
+        margin-left: 80px;
+
+        padding:
+                30px 25px;
+    }
+
+    .dashboard-grid-main,
+    .dashboard-grid-bottom {
+
+        grid-template-columns:
+                1fr;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .main-content {
+
+        margin-left: 0;
+
+        padding:
+                24px 16px;
+    }
+
+    .topbar {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .topbar-actions {
+
+        width: 100%;
+
+        flex-wrap: wrap;
+    }
+
+    .priority-card {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        padding:
+                25px 22px;
+    }
+
+    .priority-action {
+
+        width: 100%;
+
+        align-items: stretch;
+    }
+
+    .focus-button {
+
+        width: 100%;
+    }
+
+    .stats-grid {
+
+        grid-template-columns:
+                1fr;
+    }
+
+    .score-content {
+
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .section-title,
+    .card-title {
+        font-size: 30px;
+        font-weight: 800;
+        line-height: 1.2;
+    }
+    /* =====================================================
+   PRIORIS — POLIMENTO VISUAL
+   Tarefas estratégicas + Objetivos + Logo
+===================================================== */
+
+
+    /* ================= LOGO ================= */
+
+    .brand-icon {
+        width: 46px;
+        height: 46px;
+
+        flex-shrink: 0;
+
+        overflow: hidden;
+
+        border-radius: 12px;
+
+        background: #ffffff;
+
+        box-shadow:
+                0 5px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .brand-icon img {
+        display: block;
+
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+
+        border-radius: inherit;
+    }
+
+
+    /* =====================================================
+       TAREFAS ESTRATÉGICAS
+    ===================================================== */
+
+    .tasks-card {
+        padding: 28px;
+    }
+
+    .tasks-card .card-header {
+        margin-bottom: 18px;
+    }
+
+    .tasks-card .card-header h3 {
+        font-family: "Manrope", sans-serif;
+
+        font-size: 20px;
+        font-weight: 800;
+
+        line-height: 1.25;
+
+        color: var(--text-primary);
+    }
+
+
+    /* Cada linha de tarefa */
+
+    .task-item {
+        min-height: 76px;
+
+        padding: 10px 2px;
+
+        display: flex;
+        align-items: center;
+
+        gap: 14px;
+
+        border-bottom: 1px solid var(--border);
+
+        transition:
+                background .2s ease,
+                padding .2s ease;
+    }
+
+    .task-item:hover {
+        padding-left: 8px;
+        padding-right: 8px;
+
+        background: #fafbf9;
+
+        border-radius: 8px;
+    }
+
+
+    /* Checkbox */
+
+    .task-check {
+        width: 26px;
+        height: 26px;
+
+        flex-shrink: 0;
+
+        border: 2px solid #cfd7d8;
+        border-radius: 7px;
+
+        background: #ffffff;
+
+        transition:
+                border-color .2s ease,
+                background .2s ease;
+    }
+
+    .task-check:hover {
+        border-color: var(--secondary);
+    }
+
+    .task-check.completed {
+        border-color: var(--secondary);
+
+        background: var(--secondary);
+
+        color: #ffffff;
+
+        font-size: 12px;
+        font-weight: 800;
+    }
+
+
+    /* Conteúdo */
+
+    .task-content {
+        min-width: 0;
+
+        flex: 1;
+    }
+
+    .task-content strong {
+        display: block;
+
+        font-size: 15px;
+        font-weight: 650;
+
+        line-height: 1.35;
+
+        color: var(--text-primary);
+
+        white-space: normal;
+    }
+
+    .task-content span {
+        display: block;
+
+        margin-top: 5px;
+
+        font-size: 12px;
+        font-weight: 500;
+
+        line-height: 1.35;
+
+        color: var(--text-secondary);
+    }
+
+    .task-content .task-completed {
+        color: #929da1;
+
+        text-decoration: line-through;
+
+        text-decoration-thickness: 1px;
+    }
+
+
+    /* ABCDE */
+
+    .abcde-badge {
+        width: 32px;
+        height: 32px;
+
+        flex-shrink: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 8px;
+
+        font-family: "Manrope", sans-serif;
+
+        font-size: 12px;
+        font-weight: 800;
+    }
+
+
+    /* =====================================================
+       OBJETIVOS EM ANDAMENTO
+    ===================================================== */
+
+    .goals-card {
+        padding: 28px;
+    }
+
+    .goals-card .card-header {
+        margin-bottom: 22px;
+    }
+
+    .goals-card .card-header h3 {
+        font-family: "Manrope", sans-serif;
+
+        font-size: 20px;
+        font-weight: 800;
+
+        line-height: 1.25;
+
+        color: var(--text-primary);
+    }
+
+
+    /* Grid */
+
+    .goals-grid {
+        gap: 18px;
+    }
+
+
+    /* Card individual */
+
+    .goal-item {
+        min-height: 145px;
+
+        padding: 20px;
+
+        border: 1px solid var(--border);
+        border-radius: 12px;
+
+        background: #fbfcfa;
+
+        transition:
+                transform .2s ease,
+                border-color .2s ease,
+                box-shadow .2s ease;
+    }
+
+    .goal-item:hover {
+        transform: translateY(-2px);
+
+        border-color: rgba(42, 157, 143, 0.3);
+
+        box-shadow:
+                0 8px 20px rgba(23, 50, 77, 0.06);
+    }
+
+
+    /* Cabeçalho do objetivo */
+
+    .goal-header {
+        display: flex;
+        align-items: center;
+
+        gap: 14px;
+    }
+
+    .goal-icon {
+        width: 44px;
+        height: 44px;
+
+        flex-shrink: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 10px;
+
+        background: var(--primary-light);
+
+        font-size: 19px;
+    }
+
+    .goal-header span {
+        display: block;
+
+        margin-bottom: 5px;
+
+        color: var(--secondary-dark);
+
+        font-size: 10px;
+        font-weight: 800;
+
+        line-height: 1;
+
+        letter-spacing: 0.9px;
+    }
+
+    .goal-header strong {
+        display: block;
+
+        font-family: "Manrope", sans-serif;
+
+        font-size: 14px;
+        font-weight: 700;
+
+        line-height: 1.35;
+
+        color: var(--text-primary);
+    }
+
+
+    /* Progresso */
+
+    .goal-progress {
+        margin-top: 22px;
+    }
+
+    .goal-progress-header {
+        margin-bottom: 9px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        font-size: 11px;
+        font-weight: 500;
+
+        color: var(--text-secondary);
+    }
+
+    .goal-progress-header strong {
+        font-family: "JetBrains Mono", monospace;
+
+        font-size: 12px;
+        font-weight: 700;
+
+        color: var(--primary);
+    }
+
+    .goal-item .progress-track.small {
+        height: 7px;
+
+        background: #e9eeec;
+    }
+
+    .goal-item .progress-bar {
+        background: var(--secondary);
+    }
+
+
+    /* =====================================================
+       TÍTULOS / LABELS DESSAS SEÇÕES
+    ===================================================== */
+
+    .tasks-card .card-eyebrow,
+    .goals-card .card-eyebrow {
+        margin-bottom: 8px;
+
+        color: var(--secondary);
+
+        font-size: 10px;
+        font-weight: 800;
+
+        letter-spacing: 1.3px;
+    }
+
+    .tasks-card .text-button,
+    .goals-card .text-button {
+        font-size: 11px;
+        font-weight: 700;
+
+        color: var(--primary);
+
+        transition: color .2s ease;
+    }
+
+    .tasks-card .text-button:hover,
+    .goals-card .text-button:hover {
+        color: var(--secondary);
+    }
+
+
+    /* =====================================================
+       RESPONSIVIDADE
+    ===================================================== */
+
+    @media (max-width: 900px) {
+
+        .tasks-card,
+        .goals-card {
+            padding: 22px;
+        }
+
+        .task-content strong {
+            font-size: 14px;
+        }
+
+        .goal-header strong {
+            font-size: 14px;
+        }
+
+    }
+
+
+    @media (max-width: 650px) {
+
+        .tasks-card .card-header h3,
+        .goals-card .card-header h3 {
+            font-size: 18px;
+        }
+
+        .task-item {
+            min-height: 72px;
+        }
+
+        .task-content strong {
+            font-size: 14px;
+        }
+
+        .task-content span {
+            font-size: 11px;
+        }
+
+    }
+
+    /* =====================================================
+    ESTADOS DO DASHBOARD
+    ===================================================== */
+
+    .loading-text,
+    .empty-state {
+
+        padding: 28px 16px;
+
+        color: var(--text-secondary);
+
+        font-size: 13px;
+        line-height: 1.5;
+
+        text-align: center;
+    }
+
+    .empty-state {
+
+        width: 100%;
+
+        border: 1px dashed var(--border);
+
+        border-radius: var(--radius-control);
+
+        background: #fafbf9;
+    }
+
+    .error-state {
+        color: var(--danger);
+        background: var(--danger-light);
+    }
+}
+
+/* =====================================================
+   PRIORIS — PÁGINA DE TAREFAS
+===================================================== */
+
+
+/* =====================================================
+   FILTROS
+===================================================== */
+
+.tarefas-filtros {
+    margin-bottom: 22px;
+    padding: 18px 20px;
+}
+
+.tarefas-filtros-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(240px, 2fr)
+        minmax(170px, 1fr)
+        minmax(170px, 1fr);
+
+    gap: 14px;
+}
+
+.tarefas-filtros input,
+.tarefas-filtros select {
+    width: 100%;
+    height: 44px;
+
+    padding: 0 14px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-control);
+
+    outline: none;
+
+    background: var(--surface);
+
+    color: var(--text-primary);
+
+    font-size: 13px;
+
+    transition:
+            border-color .2s ease,
+            box-shadow .2s ease;
+}
+
+.tarefas-filtros input::placeholder {
+    color: var(--text-light);
+}
+
+.tarefas-filtros input:focus,
+.tarefas-filtros select:focus {
+    border-color: var(--secondary);
+
+    box-shadow:
+            0 0 0 3px rgba(42, 157, 143, .10);
+}
+
+
+/* =====================================================
+   CARD PRINCIPAL
+===================================================== */
+
+.tarefas-page-card {
+    padding: 26px 28px;
+}
+
+.tarefas-page-card .card-header {
+    margin-bottom: 8px;
+}
+
+.tarefas-page-card .card-header h3 {
+    font-family: "Manrope", sans-serif;
+
+    font-size: 19px;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   LISTAGEM
+===================================================== */
+
+.tarefas-page-list {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* TAREFA */
+
+.tarefa-page-item {
+    position: relative;
+
+    min-height: 100px;
+
+    padding: 20px 4px;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 15px;
+
+    border-bottom: 1px solid var(--border);
+
+    transition:
+            background .2s ease,
+            padding .2s ease,
+            border-radius .2s ease;
+}
+
+.tarefa-page-item:last-child {
+    border-bottom: none;
+}
+
+.tarefa-page-item:hover {
+    padding-left: 12px;
+    padding-right: 12px;
+
+    border-radius: 10px;
+
+    background: #fafbf9;
+}
+
+
+/* CHECKBOX */
+
+.tarefa-page-item .task-check {
+    margin-top: 2px;
+
+    width: 27px;
+    height: 27px;
+
+    flex-shrink: 0;
+}
+
+.tarefa-page-item .task-check:not(.completed):hover {
+    border-color: var(--secondary);
+
+    background: var(--secondary-light);
+}
+
+
+/* =====================================================
+   CONTEÚDO DA TAREFA
+===================================================== */
+
+.tarefa-page-content {
+    min-width: 0;
+    flex: 1;
+}
+
+.tarefa-page-title {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.tarefa-page-title strong {
+    font-family: "Manrope", sans-serif;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    color: var(--text-primary);
+}
+
+.tarefa-page-title .abcde-badge {
+    width: 29px;
+    height: 29px;
+
+    font-size: 11px;
+}
+
+
+/* METADADOS */
+
+.tarefa-page-meta {
+    margin-top: 7px;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px 15px;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.tarefa-page-meta span {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 4px;
+}
+
+
+/* DESCRIÇÃO */
+
+.tarefa-page-content > p {
+    max-width: 800px;
+
+    margin-top: 10px;
+
+    color: var(--text-secondary);
+
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+
+/* =====================================================
+   AÇÕES DA TAREFA
+===================================================== */
+
+.tarefa-page-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    margin-left: 12px;
+}
+
+.button-icon-edit,
+.button-icon-delete {
+    min-height: 34px;
+
+    padding: 0 11px;
+
+    border-radius: 7px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    transition:
+            background .2s ease,
+            color .2s ease,
+            border-color .2s ease;
+}
+
+
+/* EDITAR */
+
+.button-icon-edit {
+    border: 1px solid var(--border);
+
+    background: var(--surface);
+
+    color: var(--primary);
+}
+
+.button-icon-edit:hover {
+    border-color: var(--primary);
+
+    background: var(--primary-light);
+}
+
+
+/* EXCLUIR */
+
+.button-icon-delete {
+    border: 1px solid transparent;
+
+    background: transparent;
+
+    color: var(--danger);
+}
+
+.button-icon-delete:hover {
+    border-color: rgba(231, 111, 81, .22);
+
+    background: var(--danger-light);
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    padding: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+            rgba(15, 32, 48, .55);
+
+    backdrop-filter:
+            blur(4px);
+}
+
+
+/*
+ * IMPORTANTE:
+ * sem isto, a classe "hidden" não esconderá o modal.
+ */
+.hidden {
+    display: none !important;
+}
+
+
+.modal-card {
+    width: min(620px, 100%);
+    max-height: calc(100vh - 50px);
+
+    overflow-y: auto;
+
+    padding: 28px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-panel);
+
+    background: var(--surface);
+
+    box-shadow:
+            0 30px 70px rgba(23, 50, 77, .22);
+
+    animation:
+            priorisModalEntrada .18s ease-out;
+}
+
+@keyframes priorisModalEntrada {
+
+    from {
+        opacity: 0;
+
+        transform:
+                translateY(8px)
+                scale(.985);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+                translateY(0)
+                scale(1);
+    }
+}
+
+
+/* HEADER MODAL */
+
+.modal-header {
+    margin-bottom: 24px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.modal-header h2 {
+    font-family: "Manrope", sans-serif;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.modal-close {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    border: none;
+    border-radius: 8px;
+
+    background: var(--background);
+
+    color: var(--text-secondary);
+
+    font-size: 24px;
+    line-height: 1;
+
+    transition:
+            background .2s ease,
+            color .2s ease;
+}
+
+.modal-close:hover {
+    background: var(--danger-light);
+
+    color: var(--danger);
+}
+
+
+/* =====================================================
+   FORMULÁRIO
+===================================================== */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--text-primary);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-control);
+
+    outline: none;
+
+    background: var(--surface);
+
+    color: var(--text-primary);
+
+    font-size: 13px;
+
+    transition:
+            border-color .2s ease,
+            box-shadow .2s ease;
+}
+
+.form-group input,
+.form-group select {
+    height: 43px;
+
+    padding: 0 12px;
+}
+
+.form-group textarea {
+    min-height: 100px;
+
+    padding: 12px;
+
+    resize: vertical;
+
+    line-height: 1.5;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--secondary);
+
+    box-shadow:
+            0 0 0 3px rgba(42, 157, 143, .10);
+}
+
+
+/* DUAS COLUNAS */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+
+/* =====================================================
+   MENSAGEM DO FORM
+===================================================== */
+
+.form-message {
+    min-height: 18px;
+
+    margin-bottom: 10px;
+
+    color: var(--danger);
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   BOTÕES DO MODAL
+===================================================== */
+
+.modal-actions {
+    margin-top: 8px;
+
+    padding-top: 18px;
+
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    border-top: 1px solid var(--border);
+}
+
+.modal-actions .secondary-focus-button,
+.button-outline {
+    min-width: 115px;
+    height: 42px;
+
+    padding: 0 17px;
+
+    border-radius: var(--radius-control);
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.button-outline {
+    border: 1px solid var(--border);
+
+    background: var(--surface);
+
+    color: var(--text-secondary);
+}
+
+.button-outline:hover {
+    border-color: var(--primary);
+
+    color: var(--primary);
+
+    background: var(--primary-light);
+}
+
+
+/* =====================================================
+   BOTÃO NOVA TAREFA NO CABEÇALHO
+===================================================== */
+
+.topbar > .secondary-focus-button {
+    min-width: 145px;
+    height: 44px;
+
+    padding: 0 18px;
+
+    box-shadow:
+            0 7px 18px rgba(42, 157, 143, .16);
+}
+
+
+/* =====================================================
+   ABCDE COMPLETO
+===================================================== */
+
+.badge-a {
+    color: #ffffff;
+    background: var(--abcde-a);
+}
+
+.badge-b {
+    color: #ffffff;
+    background: var(--abcde-b);
+}
+
+.badge-c {
+    color: #5d4a16;
+    background: var(--abcde-c);
+}
+
+.badge-d {
+    color: #ffffff;
+    background: var(--abcde-d);
+}
+
+.badge-e {
+    color: #ffffff;
+    background: var(--abcde-e);
+}
+
+
+/* =====================================================
+   RESPONSIVIDADE — TAREFAS
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .tarefas-filtros-grid {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    #filtro-busca {
+        grid-column:
+                1 / -1;
+    }
+
+    .tarefa-page-item {
+        flex-wrap: wrap;
+    }
+
+    .tarefa-page-actions {
+        width: 100%;
+
+        margin-left: 42px;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .tarefas-filtros-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    #filtro-busca {
+        grid-column: auto;
+    }
+
+    .tarefas-page-card {
+        padding:
+                20px 16px;
+    }
+
+    .tarefa-page-item {
+        padding:
+                17px 2px;
+    }
+
+    .tarefa-page-title {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 7px;
+    }
+
+    .tarefa-page-title strong {
+        font-size: 14px;
+    }
+
+    .tarefa-page-actions {
+        margin-left: 41px;
+    }
+
+    .modal-overlay {
+        padding: 10px;
+    }
+
+    .modal-card {
+        padding: 21px 18px;
+
+        border-radius: 14px;
+    }
+
+    .form-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    .modal-actions button {
+        width: 100%;
+    }
+
+}
+
+/* =====================================================
+PRIORIS — PÁGINA DE TAREFAS
+===================================================== */
+
+
+/* =====================================================
+   FILTROS
+===================================================== */
+
+.tarefas-filtros {
+    margin-bottom: 22px;
+    padding: 18px 20px;
+}
+
+.tarefas-filtros-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(240px, 2fr)
+        minmax(170px, 1fr)
+        minmax(170px, 1fr);
+
+    gap: 14px;
+}
+
+.tarefas-filtros input,
+.tarefas-filtros select {
+    width: 100%;
+    height: 44px;
+
+    padding: 0 14px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-control);
+
+    outline: none;
+
+    background: var(--surface);
+
+    color: var(--text-primary);
+
+    font-size: 13px;
+
+    transition:
+            border-color .2s ease,
+            box-shadow .2s ease;
+}
+
+.tarefas-filtros input::placeholder {
+    color: var(--text-light);
+}
+
+.tarefas-filtros input:focus,
+.tarefas-filtros select:focus {
+    border-color: var(--secondary);
+
+    box-shadow:
+            0 0 0 3px rgba(42, 157, 143, .10);
+}
+
+
+/* =====================================================
+   CARD PRINCIPAL
+===================================================== */
+
+.tarefas-page-card {
+    padding: 26px 28px;
+}
+
+.tarefas-page-card .card-header {
+    margin-bottom: 8px;
+}
+
+.tarefas-page-card .card-header h3 {
+    font-family: "Manrope", sans-serif;
+
+    font-size: 19px;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   LISTAGEM
+===================================================== */
+
+.tarefas-page-list {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* TAREFA */
+
+.tarefa-page-item {
+    position: relative;
+
+    min-height: 100px;
+
+    padding: 20px 4px;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 15px;
+
+    border-bottom: 1px solid var(--border);
+
+    transition:
+            background .2s ease,
+            padding .2s ease,
+            border-radius .2s ease;
+}
+
+.tarefa-page-item:last-child {
+    border-bottom: none;
+}
+
+.tarefa-page-item:hover {
+    padding-left: 12px;
+    padding-right: 12px;
+
+    border-radius: 10px;
+
+    background: #fafbf9;
+}
+
+
+/* CHECKBOX */
+
+.tarefa-page-item .task-check {
+    margin-top: 2px;
+
+    width: 27px;
+    height: 27px;
+
+    flex-shrink: 0;
+}
+
+.tarefa-page-item .task-check:not(.completed):hover {
+    border-color: var(--secondary);
+
+    background: var(--secondary-light);
+}
+
+
+/* =====================================================
+   CONTEÚDO DA TAREFA
+===================================================== */
+
+.tarefa-page-content {
+    min-width: 0;
+    flex: 1;
+}
+
+.tarefa-page-title {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.tarefa-page-title strong {
+    font-family: "Manrope", sans-serif;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    color: var(--text-primary);
+}
+
+.tarefa-page-title .abcde-badge {
+    width: 29px;
+    height: 29px;
+
+    font-size: 11px;
+}
+
+
+/* METADADOS */
+
+.tarefa-page-meta {
+    margin-top: 7px;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px 15px;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.tarefa-page-meta span {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 4px;
+}
+
+
+/* DESCRIÇÃO */
+
+.tarefa-page-content > p {
+    max-width: 800px;
+
+    margin-top: 10px;
+
+    color: var(--text-secondary);
+
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+
+/* =====================================================
+   AÇÕES DA TAREFA
+===================================================== */
+
+.tarefa-page-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    margin-left: 12px;
+}
+
+.button-icon-edit,
+.button-icon-delete {
+    min-height: 34px;
+
+    padding: 0 11px;
+
+    border-radius: 7px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    transition:
+            background .2s ease,
+            color .2s ease,
+            border-color .2s ease;
+}
+
+
+/* EDITAR */
+
+.button-icon-edit {
+    border: 1px solid var(--border);
+
+    background: var(--surface);
+
+    color: var(--primary);
+}
+
+.button-icon-edit:hover {
+    border-color: var(--primary);
+
+    background: var(--primary-light);
+}
+
+
+/* EXCLUIR */
+
+.button-icon-delete {
+    border: 1px solid transparent;
+
+    background: transparent;
+
+    color: var(--danger);
+}
+
+.button-icon-delete:hover {
+    border-color: rgba(231, 111, 81, .22);
+
+    background: var(--danger-light);
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    padding: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+            rgba(15, 32, 48, .55);
+
+    backdrop-filter:
+            blur(4px);
+}
+
+
+/*
+ * IMPORTANTE:
+ * sem isto, a classe "hidden" não esconderá o modal.
+ */
+.hidden {
+    display: none !important;
+}
+
+
+.modal-card {
+    width: min(620px, 100%);
+    max-height: calc(100vh - 50px);
+
+    overflow-y: auto;
+
+    padding: 28px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-panel);
+
+    background: var(--surface);
+
+    box-shadow:
+            0 30px 70px rgba(23, 50, 77, .22);
+
+    animation:
+            priorisModalEntrada .18s ease-out;
+}
+
+@keyframes priorisModalEntrada {
+
+    from {
+        opacity: 0;
+
+        transform:
+                translateY(8px)
+                scale(.985);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+                translateY(0)
+                scale(1);
+    }
+}
+
+
+/* HEADER MODAL */
+
+.modal-header {
+    margin-bottom: 24px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.modal-header h2 {
+    font-family: "Manrope", sans-serif;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.modal-close {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    border: none;
+    border-radius: 8px;
+
+    background: var(--background);
+
+    color: var(--text-secondary);
+
+    font-size: 24px;
+    line-height: 1;
+
+    transition:
+            background .2s ease,
+            color .2s ease;
+}
+
+.modal-close:hover {
+    background: var(--danger-light);
+
+    color: var(--danger);
+}
+
+
+/* =====================================================
+   FORMULÁRIO
+===================================================== */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--text-primary);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-control);
+
+    outline: none;
+
+    background: var(--surface);
+
+    color: var(--text-primary);
+
+    font-size: 13px;
+
+    transition:
+            border-color .2s ease,
+            box-shadow .2s ease;
+}
+
+.form-group input,
+.form-group select {
+    height: 43px;
+
+    padding: 0 12px;
+}
+
+.form-group textarea {
+    min-height: 100px;
+
+    padding: 12px;
+
+    resize: vertical;
+
+    line-height: 1.5;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--secondary);
+
+    box-shadow:
+            0 0 0 3px rgba(42, 157, 143, .10);
+}
+
+
+/* DUAS COLUNAS */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+
+/* =====================================================
+   MENSAGEM DO FORM
+===================================================== */
+
+.form-message {
+    min-height: 18px;
+
+    margin-bottom: 10px;
+
+    color: var(--danger);
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   BOTÕES DO MODAL
+===================================================== */
+
+.modal-actions {
+    margin-top: 8px;
+
+    padding-top: 18px;
+
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    border-top: 1px solid var(--border);
+}
+
+.modal-actions .secondary-focus-button,
+.button-outline {
+    min-width: 115px;
+    height: 42px;
+
+    padding: 0 17px;
+
+    border-radius: var(--radius-control);
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.button-outline {
+    border: 1px solid var(--border);
+
+    background: var(--surface);
+
+    color: var(--text-secondary);
+}
+
+.button-outline:hover {
+    border-color: var(--primary);
+
+    color: var(--primary);
+
+    background: var(--primary-light);
+}
+
+
+/* =====================================================
+   BOTÃO NOVA TAREFA NO CABEÇALHO
+===================================================== */
+
+.topbar > .secondary-focus-button {
+    min-width: 145px;
+    height: 44px;
+
+    padding: 0 18px;
+
+    box-shadow:
+            0 7px 18px rgba(42, 157, 143, .16);
+}
+
+
+/* =====================================================
+   ABCDE COMPLETO
+===================================================== */
+
+.badge-a {
+    color: #ffffff;
+    background: var(--abcde-a);
+}
+
+.badge-b {
+    color: #ffffff;
+    background: var(--abcde-b);
+}
+
+.badge-c {
+    color: #5d4a16;
+    background: var(--abcde-c);
+}
+
+.badge-d {
+    color: #ffffff;
+    background: var(--abcde-d);
+}
+
+.badge-e {
+    color: #ffffff;
+    background: var(--abcde-e);
+}
+
+
+/* =====================================================
+   RESPONSIVIDADE — TAREFAS
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .tarefas-filtros-grid {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    #filtro-busca {
+        grid-column:
+                1 / -1;
+    }
+
+    .tarefa-page-item {
+        flex-wrap: wrap;
+    }
+
+    .tarefa-page-actions {
+        width: 100%;
+
+        margin-left: 42px;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .tarefas-filtros-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    #filtro-busca {
+        grid-column: auto;
+    }
+
+    .tarefas-page-card {
+        padding:
+                20px 16px;
+    }
+
+    .tarefa-page-item {
+        padding:
+                17px 2px;
+    }
+
+    .tarefa-page-title {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 7px;
+    }
+
+    .tarefa-page-title strong {
+        font-size: 14px;
+    }
+
+    .tarefa-page-actions {
+        margin-left: 41px;
+    }
+
+    .modal-overlay {
+        padding: 10px;
+    }
+
+    .modal-card {
+        padding: 21px 18px;
+
+        border-radius: 14px;
+    }
+
+    .form-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    .modal-actions button {
+        width: 100%;
+    }
+}
+
+/* =====================================================
+   PRIORIS — OBJETIVOS E METAS
+===================================================== */
+
+
+/* =====================================================
+   1. RESUMO
+===================================================== */
+
+.objectives-summary {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 22px;
+}
+
+
+/* =====================================================
+   2. FILTROS
+===================================================== */
+
+.objetivos-filtros {
+    margin-bottom: 28px;
+
+    padding: 18px 20px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+}
+
+.objetivos-filtros-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(240px, 2fr)
+        minmax(180px, 1fr)
+        minmax(180px, 1fr);
+
+    gap: 14px;
+}
+
+.objetivos-filtros input,
+.objetivos-filtros select {
+    width: 100%;
+    height: 44px;
+
+    padding: 0 14px;
+
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+
+    color: var(--text-primary);
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-control);
+
+    outline: none;
+
+    transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease,
+            background 0.2s ease;
+}
+
+.objetivos-filtros input::placeholder {
+    color: var(--text-light);
+}
+
+.objetivos-filtros input:focus,
+.objetivos-filtros select:focus {
+    border-color: var(--secondary);
+
+    box-shadow:
+            0 0 0 3px rgba(42, 157, 143, 0.10);
+}
+
+
+/* =====================================================
+   3. CABEÇALHO DA SEÇÃO
+===================================================== */
+
+.objetivos-section {
+    margin-bottom: 30px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 18px;
+}
+
+.section-heading h2 {
+    margin: 0;
+
+    font-family: "Manrope", sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+
+    color: var(--text-primary);
+}
+
+
+/* =====================================================
+   4. GRID DE OBJETIVOS
+===================================================== */
+
+.objetivos-page-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+
+    align-items: start;
+}
+
+
+/* =====================================================
+   5. CARD DE OBJETIVO
+===================================================== */
+
+.objetivo-page-card {
+    padding: 24px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+
+    box-shadow:
+            0 5px 16px rgba(23, 50, 77, 0.04);
+
+    transition:
+            transform 0.2s ease,
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+.objetivo-page-card:hover {
+    transform: translateY(-2px);
+
+    border-color:
+            rgba(42, 157, 143, 0.24);
+
+    box-shadow:
+            0 10px 26px rgba(23, 50, 77, 0.07);
+}
+
+
+/* =====================================================
+   6. CABEÇALHO DO OBJETIVO
+===================================================== */
+
+.objetivo-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.objetivo-identidade {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+}
+
+.objetivo-area-icon {
+    width: 46px;
+    height: 46px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: var(--primary-light);
+
+    font-size: 20px;
+}
+
+.objetivo-area {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--secondary);
+
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+}
+
+.objetivo-identidade h3 {
+    margin: 0;
+
+    font-family: "Manrope", sans-serif;
+
+    font-size: 17px;
+    font-weight: 800;
+
+    line-height: 1.3;
+
+    color: var(--text-primary);
+}
+
+
+/* =====================================================
+   7. STATUS DO OBJETIVO
+===================================================== */
+
+.objetivo-status {
+    flex-shrink: 0;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 7px 9px;
+
+    border-radius: 7px;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 0.6px;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+}
+
+
+/* ATIVO */
+
+.objetivo-status-ativo {
+    color: var(--secondary-dark);
+    background: var(--secondary-light);
+}
+
+
+/* PAUSADO */
+
+.objetivo-status-pausado {
+    color: #9b741e;
+    background: var(--accent-light);
+}
+
+
+/* CONCLUÍDO */
+
+.objetivo-status-concluido,
+.objetivo-status-concluida {
+    color: var(--primary);
+    background: var(--primary-light);
+}
+
+
+/* CANCELADO */
+
+.objetivo-status-cancelado,
+.objetivo-status-cancelada {
+    color: var(--danger);
+    background: var(--danger-light);
+}
+
+
+/* =====================================================
+   8. DESCRIÇÃO
+===================================================== */
+
+.objetivo-descricao {
+    margin: 18px 0 0;
+
+    color: var(--text-secondary);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   9. MOTIVO — "POR QUÊ?"
+===================================================== */
+
+.objetivo-motivo {
+    margin-top: 15px;
+
+    padding: 12px 14px;
+
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+
+    background: var(--accent-light);
+
+    color: var(--text-secondary);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.objetivo-motivo strong {
+    margin-right: 5px;
+
+    color: var(--primary);
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   10. PROGRESSO DO OBJETIVO
+===================================================== */
+
+.objetivo-progress-section {
+    margin-top: 20px;
+}
+
+.objetivo-progress-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 8px;
+
+    color: var(--text-secondary);
+
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+}
+
+.objetivo-progress-header strong {
+    font-family: "JetBrains Mono", monospace;
+
+    color: var(--secondary);
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.objetivo-progress-section .progress-track {
+    height: 7px;
+
+    overflow: hidden;
+
+    background: var(--border);
+
+    border-radius: 999px;
+}
+
+.objetivo-progress-section .progress-bar {
+    height: 100%;
+
+    background: var(--secondary);
+
+    border-radius: inherit;
+
+    transition:
+            width 0.4s ease;
+}
+
+
+/* =====================================================
+   11. PRAZO
+===================================================== */
+
+.objetivo-info-footer {
+    display: flex;
+    align-items: center;
+
+    margin-top: 13px;
+
+    color: var(--text-light);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 10px;
+}
+
+.objetivo-info-footer span {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 6px;
+}
+
+
+/* =====================================================
+   12. AÇÕES DO OBJETIVO
+===================================================== */
+
+.objetivo-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 20px;
+    padding-top: 16px;
+
+    border-top: 1px solid var(--border);
+}
+
+.objetivo-actions button {
+    min-height: 36px;
+
+    padding: 0 12px;
+
+    border-radius: var(--radius-control);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+            transform 0.15s ease,
+            background 0.2s ease,
+            color 0.2s ease,
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+.objetivo-actions button:hover {
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   13. BOTÃO — VER METAS
+===================================================== */
+
+.objetivo-actions .button-outline {
+    border: 1px solid var(--border);
+
+    background: var(--surface);
+
+    color: var(--primary);
+}
+
+.objetivo-actions .button-outline:hover {
+    border-color:
+            rgba(23, 50, 77, 0.25);
+
+    background: var(--background);
+}
+
+
+/* =====================================================
+   14. BOTÃO — NOVA META
+===================================================== */
+
+.button-meta {
+    border: 1px solid transparent;
+
+    background: var(--secondary-light);
+
+    color: var(--secondary-dark);
+}
+
+.button-meta:hover {
+    background: var(--secondary);
+
+    color: #ffffff;
+
+    box-shadow:
+            0 4px 12px rgba(42, 157, 143, 0.16);
+}
+
+
+/* =====================================================
+   15. BOTÃO — EDITAR
+===================================================== */
+
+.objetivo-actions .button-icon-edit,
+.meta-actions .button-icon-edit {
+    border: 1px solid transparent;
+
+    background: var(--primary-light);
+
+    color: var(--primary);
+}
+
+.objetivo-actions .button-icon-edit:hover,
+.meta-actions .button-icon-edit:hover {
+    background: #e3ecf2;
+}
+
+
+/* =====================================================
+   16. BOTÃO — CANCELAR
+===================================================== */
+
+.objetivo-actions .button-icon-delete,
+.meta-actions .button-icon-delete {
+    border: 1px solid transparent;
+
+    background: transparent;
+
+    color: var(--danger);
+}
+
+.objetivo-actions .button-icon-delete:hover,
+.meta-actions .button-icon-delete:hover {
+    background: var(--danger-light);
+}
+
+
+/* =====================================================
+   17. CONTAINER DE METAS
+===================================================== */
+
+.metas-container {
+    margin-top: 22px;
+    padding-top: 20px;
+
+    border-top:
+            1px solid var(--border);
+
+    animation:
+            priorisMetasEntrada 0.2s ease-out;
+}
+
+@keyframes priorisMetasEntrada {
+
+    from {
+        opacity: 0;
+
+        transform:
+                translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+                translateY(0);
+    }
+}
+
+
+/* =====================================================
+   18. CABEÇALHO DAS METAS
+===================================================== */
+
+.metas-header {
+    margin-bottom: 12px;
+}
+
+.metas-header > div {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.metas-header span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--secondary);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    text-transform: uppercase;
+}
+
+.metas-header strong {
+    font-family: "Manrope", sans-serif;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    color: var(--text-primary);
+}
+
+
+/* =====================================================
+   19. LISTA DE METAS
+===================================================== */
+
+.metas-list {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =====================================================
+   20. ITEM DE META
+===================================================== */
+
+.meta-item {
+    min-height: 78px;
+
+    padding: 14px 3px;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 12px;
+
+    border-bottom:
+            1px solid var(--border);
+
+    transition:
+            background 0.2s ease;
+}
+
+.meta-item:last-child {
+    border-bottom: none;
+}
+
+.meta-item:hover {
+    background: #fafbf9;
+}
+
+
+/* =====================================================
+   21. CHECK DA META
+===================================================== */
+
+.meta-item .task-check {
+    width: 25px;
+    height: 25px;
+
+    margin-top: 2px;
+    padding: 0;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border: 2px solid var(--border);
+    border-radius: 7px;
+
+    background: var(--surface);
+
+    color: var(--secondary);
+
+    cursor: pointer;
+
+    transition:
+            border-color 0.2s ease,
+            background 0.2s ease,
+            color 0.2s ease;
+}
+
+.meta-item .task-check:hover {
+    border-color: var(--secondary);
+}
+
+.meta-item .task-check.completed {
+    border-color: var(--secondary);
+
+    background: var(--secondary);
+
+    color: #ffffff;
+}
+
+.meta-item .task-check:disabled {
+    cursor: default;
+}
+
+
+/* =====================================================
+   22. CONTEÚDO DA META
+===================================================== */
+
+.meta-content {
+    min-width: 0;
+
+    flex: 1;
+}
+
+.meta-content > strong {
+    display: block;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--text-primary);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    line-height: 1.4;
+}
+
+.task-completed {
+    color: var(--text-light) !important;
+
+    text-decoration: line-through;
+}
+
+.meta-details {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 7px 14px;
+
+    margin-top: 5px;
+
+    color: var(--text-secondary);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 10px;
+}
+
+.meta-content p {
+    margin: 8px 0 0;
+
+    color: var(--text-secondary);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   23. AÇÕES DA META
+===================================================== */
+
+.meta-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    margin-left: 10px;
+}
+
+.meta-actions button {
+    min-height: 31px;
+
+    padding: 0 9px;
+
+    border-radius: var(--radius-control);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+            transform 0.15s ease,
+            background 0.2s ease,
+            color 0.2s ease;
+}
+
+.meta-actions button:hover {
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   24. ESTADO VAZIO
+===================================================== */
+
+.empty-state {
+    padding: 24px;
+
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-card);
+
+    background: var(--background);
+
+    color: var(--text-secondary);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 12px;
+
+    text-align: center;
+}
+
+.error-state {
+    border-color:
+            rgba(231, 111, 81, 0.25);
+
+    background: var(--danger-light);
+
+    color: var(--danger);
+}
+
+
+/* =====================================================
+   25. CONTEXTO DO MODAL DA META
+===================================================== */
+
+.modal-context {
+    margin-top: 5px;
+
+    color: var(--text-secondary);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   26. BOTÃO NOVO OBJETIVO
+===================================================== */
+
+.topbar #btn-novo-objetivo {
+    min-width: 155px;
+    height: 44px;
+
+    padding: 0 18px;
+
+    box-shadow:
+            0 7px 18px rgba(42, 157, 143, 0.16);
+}
+
+
+/* =====================================================
+   27. RESPONSIVIDADE — 1100px
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    .objetivos-page-grid {
+        grid-template-columns:
+            1fr;
+    }
+}
+
+
+/* =====================================================
+   28. RESPONSIVIDADE — 900px
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .objectives-summary {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .objetivos-filtros-grid {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    #filtro-objetivo {
+        grid-column:
+                1 / -1;
+    }
+}
+
+
+/* =====================================================
+   29. RESPONSIVIDADE — 650px
+===================================================== */
+
+@media (max-width: 650px) {
+
+    .objectives-summary {
+        grid-template-columns:
+            1fr;
+    }
+
+    .objetivos-filtros {
+        padding: 16px;
+    }
+
+    .objetivos-filtros-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    #filtro-objetivo {
+        grid-column:
+                auto;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .objetivo-page-card {
+        padding: 19px 16px;
+    }
+
+    .objetivo-page-header {
+        flex-direction: column;
+    }
+
+    .objetivo-status {
+        align-self: flex-start;
+    }
+
+    .objetivo-actions {
+        display: grid;
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .objetivo-actions button {
+        width: 100%;
+    }
+
+    .meta-item {
+        flex-wrap: wrap;
+    }
+
+    .meta-actions {
+        width: 100%;
+
+        margin-left: 37px;
+    }
+}
+
+
+/* =====================================================
+   30. RESPONSIVIDADE — 450px
+===================================================== */
+
+@media (max-width: 450px) {
+
+    .objetivo-actions {
+        grid-template-columns:
+            1fr;
+    }
+
+    .objetivo-identidade {
+        align-items: flex-start;
+    }
+
+    .objetivo-area-icon {
+        width: 40px;
+        height: 40px;
+
+        font-size: 18px;
+    }
+
+    .meta-actions {
+        margin-left: 0;
+
+        padding-left: 37px;
+
+        flex-wrap: wrap;
+    }
+}
+
+/* =====================================================
+   PRIORIS — CICLO DE 12 SEMANAS
+===================================================== */
+
+
+/* =====================================================
+   CICLO ATUAL
+===================================================== */
+
+.ciclo-atual-page {
+    position: relative;
+
+    margin-bottom: 20px;
+    padding: 28px;
+
+    overflow: hidden;
+}
+
+
+/* detalhe visual no topo */
+
+.ciclo-atual-page::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background:
+            linear-gradient(
+                    90deg,
+                    var(--secondary),
+                    var(--accent)
+            );
+}
+
+
+/* =====================================================
+   HEADER DO CICLO
+===================================================== */
+
+.ciclo-atual-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.ciclo-atual-header h2 {
+    margin-top: 5px;
+
+    font-family: "Manrope", sans-serif;
+
+    font-size: 23px;
+    font-weight: 800;
+
+    line-height: 1.3;
+
+    color: var(--text-primary);
+}
+
+
+/* =====================================================
+   STATUS DO CICLO
+===================================================== */
+
+.ciclo-status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    min-height: 28px;
+
+    padding: 0 11px;
+
+    border-radius: 999px;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .5px;
+
+    text-transform: uppercase;
+}
+
+
+/* PLANEJADO */
+
+.ciclo-status-planejado {
+    color: var(--primary);
+
+    background: var(--primary-light);
+}
+
+
+/* EM ANDAMENTO */
+
+.ciclo-status-em_andamento {
+    color: #147b70;
+
+    background: rgba(42, 157, 143, .12);
+}
+
+
+/* CONCLUÍDO */
+
+.ciclo-status-concluido {
+    color: #426c49;
+
+    background: rgba(132, 169, 140, .18);
+}
+
+
+/* CANCELADO */
+
+.ciclo-status-cancelado {
+    color: var(--danger);
+
+    background: var(--danger-light);
+}
+
+
+/* =====================================================
+   DESCRIÇÃO DO CICLO
+===================================================== */
+
+.ciclo-atual-descricao {
+    max-width: 780px;
+
+    margin-top: 16px;
+
+    color: var(--text-secondary);
+
+    font-size: 13px;
+
+    line-height: 1.65;
+}
+
+
+/* =====================================================
+   SEMANA ATUAL
+===================================================== */
+
+.ciclo-semana-destaque {
+    margin-top: 26px;
+    margin-bottom: 11px;
+
+    padding: 17px 19px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border: 1px solid rgba(42, 157, 143, .12);
+
+    border-radius: 12px;
+
+    background:
+            linear-gradient(
+                    135deg,
+                    rgba(42, 157, 143, .07),
+                    rgba(233, 196, 106, .05)
+            );
+}
+
+.ciclo-semana-destaque > div:first-child {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.ciclo-semana-destaque span {
+    color: var(--text-secondary);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.ciclo-semana-destaque strong {
+    font-family: "Manrope", sans-serif;
+
+    font-size: 19px;
+    font-weight: 800;
+
+    color: var(--primary);
+}
+
+
+/* =====================================================
+   PERCENTUAL DO CICLO
+===================================================== */
+
+.ciclo-percentual {
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    gap: 2px;
+}
+
+.ciclo-percentual strong {
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 22px;
+
+    color: var(--secondary);
+}
+
+.ciclo-percentual span {
+    font-size: 9px;
+
+    color: var(--text-secondary);
+}
+
+
+/* =====================================================
+   BARRA DE PROGRESSO
+===================================================== */
+
+.ciclo-atual-page .progress-track {
+    width: 100%;
+    height: 8px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: #e9eeeb;
+}
+
+.ciclo-atual-page .progress-bar {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+            linear-gradient(
+                    90deg,
+                    var(--secondary),
+                    #45b6a9
+            );
+
+    transition: width .4s ease;
+}
+
+
+/* =====================================================
+   DATAS DO CICLO
+===================================================== */
+
+.ciclo-datas {
+    margin-top: 22px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+}
+
+.ciclo-datas > div {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.ciclo-datas span {
+    color: var(--text-light);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .9px;
+}
+
+.ciclo-datas strong {
+    font-family: "JetBrains Mono", monospace;
+
+    color: var(--text-primary);
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.ciclo-data-arrow {
+    margin-top: 13px;
+
+    color: var(--secondary) !important;
+
+    font-size: 18px !important;
+}
+
+
+/* =====================================================
+   AÇÕES DO CICLO ATUAL
+===================================================== */
+
+.ciclo-atual-actions {
+    margin-top: 24px;
+    padding-top: 18px;
+
+    border-top: 1px solid var(--border);
+}
+
+.ciclo-atual-actions .button-icon-edit {
+    min-height: 36px;
+
+    padding: 0 13px;
+}
+
+
+/* =====================================================
+   OBJETIVOS ASSOCIADOS
+===================================================== */
+
+.objetivos-ciclo-page {
+    margin-bottom: 30px;
+
+    padding: 26px 28px;
+}
+
+.objetivos-ciclo-page .card-header {
+    margin-bottom: 20px;
+}
+
+.objetivos-ciclo-page .card-header h3 {
+    margin-top: 4px;
+
+    font-family: "Manrope", sans-serif;
+
+    font-size: 18px;
+    font-weight: 800;
+
+    color: var(--text-primary);
+}
+
+
+/* =====================================================
+   ASSOCIAR OBJETIVO
+===================================================== */
+
+.associar-objetivo {
+    display: grid;
+
+    grid-template-columns:
+        minmax(250px, 1fr)
+        auto;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+.associar-objetivo select {
+    width: 100%;
+    height: 43px;
+
+    padding: 0 13px;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    outline: none;
+
+    background: var(--surface);
+
+    color: var(--text-primary);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 12px;
+
+    transition:
+            border-color .2s ease,
+            box-shadow .2s ease;
+}
+
+.associar-objetivo select:focus {
+    border-color: var(--secondary);
+
+    box-shadow:
+            0 0 0 3px rgba(42, 157, 143, .10);
+}
+
+.associar-objetivo .button-meta {
+    min-width: 150px;
+    height: 43px;
+
+    padding: 0 15px;
+
+    border-radius: 8px;
+}
+
+
+/* botão desabilitado */
+
+.associar-objetivo button:disabled {
+    cursor: not-allowed;
+
+    opacity: .45;
+}
+
+
+/* =====================================================
+   LISTA DOS OBJETIVOS DO CICLO
+===================================================== */
+
+.lista-objetivos-ciclo {
+    display: flex;
+    flex-direction: column;
+}
+
+.objetivo-ciclo-item {
+    min-height: 70px;
+
+    padding: 14px 4px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    border-bottom: 1px solid var(--border);
+
+    transition:
+            background .2s ease,
+            padding .2s ease;
+}
+
+.objetivo-ciclo-item:last-child {
+    border-bottom: none;
+}
+
+.objetivo-ciclo-item:hover {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    border-radius: 9px;
+
+    background: #fafbf9;
+}
+
+
+/* ÍCONE */
+
+.objetivo-ciclo-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: var(--primary-light);
+
+    font-size: 18px;
+}
+
+
+/* TEXTO */
+
+.objetivo-ciclo-content {
+    min-width: 0;
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.objetivo-ciclo-content span {
+    color: var(--secondary);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .8px;
+
+    text-transform: uppercase;
+}
+
+.objetivo-ciclo-content strong {
+    font-family: "Manrope", sans-serif;
+
+    color: var(--text-primary);
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   HISTÓRICO
+===================================================== */
+
+.ciclos-section {
+    margin-top: 8px;
+    margin-bottom: 35px;
+}
+
+.ciclos-page-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+    align-items: start;
+}
+
+
+/* =====================================================
+   CARD DO HISTÓRICO
+===================================================== */
+
+.ciclo-historico-card {
+    position: relative;
+
+    padding: 22px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    background: var(--surface);
+
+    box-shadow:
+            0 5px 16px rgba(23, 50, 77, .04);
+
+    transition:
+            transform .2s ease,
+            box-shadow .2s ease,
+            border-color .2s ease;
+}
+
+.ciclo-historico-card:hover {
+    transform: translateY(-2px);
+
+    border-color:
+            rgba(42, 157, 143, .23);
+
+    box-shadow:
+            0 10px 25px rgba(23, 50, 77, .07);
+}
+
+
+/* DESTACA O CICLO ATUAL */
+
+.ciclo-historico-atual {
+    border-color:
+            rgba(42, 157, 143, .30);
+
+    box-shadow:
+            0 8px 22px rgba(42, 157, 143, .08);
+}
+
+.ciclo-historico-atual::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 18px;
+    right: 18px;
+
+    height: 3px;
+
+    border-radius:
+            0 0 5px 5px;
+
+    background: var(--secondary);
+}
+
+
+/* =====================================================
+   HEADER DO HISTÓRICO
+===================================================== */
+
+.ciclo-historico-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 14px;
+}
+
+.ciclo-historico-header h3 {
+    margin-top: 5px;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--text-primary);
+
+    font-size: 15px;
+    font-weight: 800;
+
+    line-height: 1.35;
+}
+
+
+/* descrição */
+
+.ciclo-historico-card > p {
+    margin-top: 13px;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+    line-height: 1.55;
+}
+
+
+/* =====================================================
+   DATAS DO HISTÓRICO
+===================================================== */
+
+.ciclo-historico-datas {
+    margin-top: 17px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: var(--text-secondary);
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   AÇÕES DO HISTÓRICO
+===================================================== */
+
+.ciclo-historico-actions {
+    margin-top: 18px;
+    padding-top: 14px;
+
+    display: flex;
+
+    gap: 8px;
+
+    border-top: 1px solid var(--border);
+}
+
+.ciclo-historico-actions button {
+    min-height: 33px;
+
+    padding: 0 10px;
+
+    font-size: 9px;
+}
+
+
+/* =====================================================
+   BOX EXPLICATIVO DO MODAL
+===================================================== */
+
+.ciclo-info-box {
+    margin-bottom: 18px;
+
+    padding: 14px 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    border: 1px solid
+    rgba(233, 196, 106, .38);
+
+    border-radius: 9px;
+
+    background:
+            rgba(233, 196, 106, .11);
+}
+
+.ciclo-info-box strong {
+    color: var(--primary);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.ciclo-info-box span {
+    color: var(--text-secondary);
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   ESTADO SEM CICLO
+===================================================== */
+
+.ciclo-empty-state {
+    min-height: 145px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    text-align: center;
+}
+
+.ciclo-empty-state strong {
+    font-family: "Manrope", sans-serif;
+
+    color: var(--primary);
+
+    font-size: 16px;
+}
+
+.ciclo-empty-state span {
+    max-width: 430px;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+
+    line-height: 1.55;
+}
+
+
+/* =====================================================
+   BOTÃO NOVO CICLO
+===================================================== */
+
+#btn-novo-ciclo {
+    min-width: 145px;
+    height: 44px;
+
+    padding: 0 18px;
+
+    box-shadow:
+            0 7px 18px
+            rgba(42, 157, 143, .16);
+}
+
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .ciclos-page-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .ciclo-atual-header {
+        flex-direction: column;
+    }
+
+    .ciclo-status-badge {
+        align-self: flex-start;
+    }
+
+
+    .associar-objetivo {
+        grid-template-columns:
+            1fr;
+    }
+
+    .associar-objetivo .button-meta {
+        width: 100%;
+    }
+
+
+    .ciclo-semana-destaque {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .ciclo-percentual {
+        align-items: flex-start;
+    }
+
+
+    .ciclo-datas {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+    .ciclo-data-arrow {
+        margin: 0;
+
+        transform: rotate(90deg);
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .ciclo-atual-page,
+    .objetivos-ciclo-page {
+        padding: 21px 17px;
+    }
+
+
+    .objetivo-ciclo-item {
+        flex-wrap: wrap;
+    }
+
+    .objetivo-ciclo-item
+    .button-icon-delete {
+        margin-left: 55px;
+    }
+
+
+    .ciclo-historico-header {
+        flex-direction: column;
+    }
+
+}
+
+/* =====================================================
+   PRIORIS — PLANEJAMENTO SEMANAL
+===================================================== */
+
+
+/* =====================================================
+   PLANEJAMENTO ATUAL
+===================================================== */
+
+.planejamento-atual-page {
+    position: relative;
+
+    margin-bottom: 20px;
+    padding: 28px;
+
+    overflow: hidden;
+}
+
+
+/* detalhe superior */
+
+.planejamento-atual-page::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background:
+            linear-gradient(
+                    90deg,
+                    var(--primary),
+                    var(--secondary),
+                    var(--accent)
+            );
+}
+
+
+/* =====================================================
+   HEADER DO PLANEJAMENTO
+===================================================== */
+
+.planejamento-atual-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.planejamento-atual-header h2 {
+    margin-top: 5px;
+
+    font-family: "Manrope", sans-serif;
+
+    font-size: 23px;
+    font-weight: 800;
+
+    line-height: 1.3;
+
+    color: var(--text-primary);
+}
+
+.planejamento-atual-header .button-icon-edit {
+    flex-shrink: 0;
+
+    min-height: 36px;
+
+    padding: 0 13px;
+}
+
+
+/* =====================================================
+   PERÍODO DA SEMANA
+===================================================== */
+
+.planejamento-periodo {
+    margin-top: 18px;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 9px 12px;
+
+    border-radius: 8px;
+
+    background: var(--background);
+
+    color: var(--text-secondary);
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   CICLO ASSOCIADO
+===================================================== */
+
+.planejamento-ciclo-info {
+    margin-top: 18px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.planejamento-ciclo-info span {
+    color: var(--secondary);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.planejamento-ciclo-info strong {
+    font-family: "Manrope", sans-serif;
+
+    color: var(--primary);
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   FOCO DA SEMANA
+===================================================== */
+
+.planejamento-foco-semana {
+    margin-top: 20px;
+
+    padding: 15px 17px;
+
+    border-left: 4px solid var(--accent);
+
+    border-radius:
+            0 10px 10px 0;
+
+    background:
+            rgba(233, 196, 106, .11);
+}
+
+.planejamento-foco-semana span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #96721f;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.planejamento-foco-semana p {
+    max-width: 850px;
+
+    color: var(--text-primary);
+
+    font-size: 12px;
+    font-weight: 500;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   SCORE — RESUMO SEMANAL
+===================================================== */
+
+.planejamento-score-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 20px;
+}
+
+
+/* destaque do score */
+
+#score-execucao-planejamento {
+    font-family: "JetBrains Mono", monospace;
+
+    color: var(--secondary);
+}
+
+
+/* =====================================================
+   TAREFAS ESTRATÉGICAS
+===================================================== */
+
+.tarefas-planejamento-page {
+    margin-bottom: 30px;
+
+    padding: 26px 28px;
+}
+
+.tarefas-planejamento-page .card-header {
+    margin-bottom: 8px;
+}
+
+.tarefas-planejamento-page .card-header h3 {
+    margin-top: 4px;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--text-primary);
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.planejamento-section-description {
+    max-width: 720px;
+
+    margin-bottom: 20px;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   ADICIONAR TAREFA
+===================================================== */
+
+.associar-tarefa-planejamento {
+    display: grid;
+
+    grid-template-columns:
+        minmax(280px, 1fr)
+        auto;
+
+    gap: 10px;
+
+    margin-bottom: 22px;
+}
+
+.associar-tarefa-planejamento select {
+    width: 100%;
+    height: 43px;
+
+    padding: 0 13px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-control);
+
+    outline: none;
+
+    background: var(--surface);
+
+    color: var(--text-primary);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 12px;
+
+    transition:
+            border-color .2s ease,
+            box-shadow .2s ease;
+}
+
+.associar-tarefa-planejamento select:focus {
+    border-color: var(--secondary);
+
+    box-shadow:
+            0 0 0 3px rgba(42, 157, 143, .10);
+}
+
+.associar-tarefa-planejamento .button-meta {
+    min-width: 155px;
+    height: 43px;
+
+    padding: 0 15px;
+}
+
+.associar-tarefa-planejamento button:disabled {
+    cursor: not-allowed;
+
+    opacity: .45;
+}
+
+
+/* =====================================================
+   LISTA DE TAREFAS ESTRATÉGICAS
+===================================================== */
+
+.lista-tarefas-planejamento {
+    display: flex;
+    flex-direction: column;
+}
+
+.tarefa-planejamento-item {
+    min-height: 78px;
+
+    padding: 15px 4px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    border-bottom: 1px solid var(--border);
+
+    transition:
+            background .2s ease,
+            padding .2s ease,
+            border-radius .2s ease;
+}
+
+.tarefa-planejamento-item:last-child {
+    border-bottom: none;
+}
+
+.tarefa-planejamento-item:hover {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    border-radius: 9px;
+
+    background: #fafbf9;
+}
+
+
+/* =====================================================
+   BADGE ABCDE
+===================================================== */
+
+.tarefa-planejamento-item .abcde-badge {
+    width: 31px;
+    height: 31px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   CONTEÚDO DA TAREFA
+===================================================== */
+
+.tarefa-planejamento-content {
+    min-width: 0;
+
+    flex: 1;
+}
+
+.tarefa-planejamento-content > strong {
+    display: block;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--text-primary);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    line-height: 1.45;
+}
+
+.tarefa-planejamento-meta {
+    margin-top: 6px;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 7px 14px;
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+}
+
+
+/* tarefa concluída */
+
+.tarefa-planejamento-content
+.task-completed {
+    color: var(--text-light);
+
+    text-decoration: line-through;
+}
+
+
+/* =====================================================
+   BOTÃO REMOVER TAREFA
+===================================================== */
+
+.tarefa-planejamento-item
+.button-icon-delete {
+    flex-shrink: 0;
+
+    min-height: 33px;
+
+    padding: 0 10px;
+
+    font-size: 9px;
+}
+
+
+/* =====================================================
+   HISTÓRICO SEMANAL
+===================================================== */
+
+.planejamentos-section {
+    margin-top: 7px;
+    margin-bottom: 35px;
+}
+
+.planejamentos-page-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+    align-items: start;
+}
+
+
+/* =====================================================
+   CARD DO HISTÓRICO
+===================================================== */
+
+.planejamento-historico-card {
+    position: relative;
+
+    padding: 22px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    background: var(--surface);
+
+    box-shadow:
+            0 5px 16px rgba(23, 50, 77, .04);
+
+    transition:
+            transform .2s ease,
+            border-color .2s ease,
+            box-shadow .2s ease;
+}
+
+.planejamento-historico-card:hover {
+    transform: translateY(-2px);
+
+    border-color:
+            rgba(42, 157, 143, .24);
+
+    box-shadow:
+            0 10px 25px rgba(23, 50, 77, .07);
+}
+
+
+/* semana atual */
+
+.planejamento-historico-atual {
+    border-color:
+            rgba(42, 157, 143, .30);
+
+    box-shadow:
+            0 8px 22px rgba(42, 157, 143, .08);
+}
+
+.planejamento-historico-atual::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 18px;
+    right: 18px;
+
+    height: 3px;
+
+    border-radius:
+            0 0 5px 5px;
+
+    background: var(--secondary);
+}
+
+
+/* =====================================================
+   HEADER DO HISTÓRICO
+===================================================== */
+
+.planejamento-historico-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 14px;
+}
+
+.planejamento-historico-header h3 {
+    margin-top: 5px;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--text-primary);
+
+    font-size: 16px;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   SCORE MINI
+===================================================== */
+
+.planejamento-score-mini {
+    min-width: 58px;
+
+    padding: 8px 9px;
+
+    border-radius: 8px;
+
+    background:
+            rgba(42, 157, 143, .10);
+
+    color: var(--secondary);
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   PERÍODO DO HISTÓRICO
+===================================================== */
+
+.planejamento-historico-periodo {
+    margin-top: 16px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    color: var(--text-secondary);
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   NÚMEROS DO HISTÓRICO
+===================================================== */
+
+.planejamento-historico-numeros {
+    margin-top: 15px;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+.planejamento-historico-numeros span {
+    padding: 6px 9px;
+
+    border-radius: 6px;
+
+    background: var(--background);
+
+    color: var(--text-secondary);
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* descrição */
+
+.planejamento-historico-card > p {
+    margin-top: 15px;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+    line-height: 1.55;
+}
+
+
+/* =====================================================
+   AÇÕES DO HISTÓRICO
+===================================================== */
+
+.planejamento-historico-actions {
+    margin-top: 18px;
+    padding-top: 14px;
+
+    display: flex;
+
+    gap: 8px;
+
+    border-top: 1px solid var(--border);
+}
+
+.planejamento-historico-actions button {
+    min-height: 33px;
+
+    padding: 0 10px;
+
+    font-size: 9px;
+}
+
+
+/* =====================================================
+   BOX DO MODAL
+===================================================== */
+
+.planejamento-info-box {
+    margin-bottom: 18px;
+
+    padding: 14px 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    border: 1px solid
+    rgba(233, 196, 106, .38);
+
+    border-radius: 9px;
+
+    background:
+            rgba(233, 196, 106, .11);
+}
+
+.planejamento-info-box strong {
+    color: var(--primary);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.planejamento-info-box span {
+    color: var(--text-secondary);
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   BOTÃO NOVA SEMANA
+===================================================== */
+
+#btn-novo-planejamento {
+    min-width: 145px;
+    height: 44px;
+
+    padding: 0 18px;
+
+    box-shadow:
+            0 7px 18px
+            rgba(42, 157, 143, .16);
+}
+
+
+/* =====================================================
+   SCORE — ÊNFASE VISUAL
+===================================================== */
+
+.planejamento-score-grid
+.stat-card:nth-child(3) {
+    position: relative;
+
+    overflow: hidden;
+
+    border-color:
+            rgba(233, 196, 106, .35);
+
+    background:
+            linear-gradient(
+                    135deg,
+                    #ffffff,
+                    rgba(233, 196, 106, .08)
+            );
+}
+
+.planejamento-score-grid
+.stat-card:nth-child(3)::after {
+    content: "";
+
+    position: absolute;
+
+    width: 75px;
+    height: 75px;
+
+    right: -25px;
+    bottom: -35px;
+
+    border-radius: 50%;
+
+    background:
+            rgba(233, 196, 106, .12);
+}
+
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .planejamentos-page-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .planejamento-score-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .planejamento-score-grid
+    .stat-card:last-child {
+        grid-column:
+                1 / -1;
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .planejamento-atual-header {
+        flex-direction: column;
+    }
+
+
+    .planejamento-atual-header
+    .button-icon-edit {
+        align-self: flex-start;
+    }
+
+
+    .associar-tarefa-planejamento {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .associar-tarefa-planejamento
+    .button-meta {
+        width: 100%;
+    }
+
+
+    .planejamento-periodo {
+        flex-wrap: wrap;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .planejamento-atual-page,
+    .tarefas-planejamento-page {
+        padding: 21px 17px;
+    }
+
+
+    .planejamento-score-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .planejamento-score-grid
+    .stat-card:last-child {
+        grid-column: auto;
+    }
+
+
+    .tarefa-planejamento-item {
+        flex-wrap: wrap;
+    }
+
+
+    .tarefa-planejamento-item
+    .button-icon-delete {
+        margin-left: 44px;
+    }
+
+
+    .planejamento-historico-header {
+        flex-direction: column;
+    }
+
+
+    .planejamento-score-mini {
+        align-self: flex-start;
+    }
+
+}
+
+/* =====================================================
+   PRIORIS — PRIORIDADE #1
+===================================================== */
+
+
+/* =====================================================
+   CARD PRINCIPAL — PRIORIDADE DO DIA
+===================================================== */
+
+.prioridade-destaque-page {
+    position: relative;
+
+    margin-bottom: 22px;
+    padding: 30px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(233, 196, 106, .45);
+    border-radius: var(--radius-panel);
+
+    background:
+            linear-gradient(
+                    135deg,
+                    #ffffff 0%,
+                    rgba(233, 196, 106, .10) 100%
+            );
+
+    box-shadow:
+            0 10px 28px rgba(23, 50, 77, .07);
+}
+
+
+/* detalhe superior */
+
+.prioridade-destaque-page::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 5px;
+
+    background:
+            linear-gradient(
+                    90deg,
+                    var(--accent),
+                    #f2d986,
+                    var(--secondary)
+            );
+}
+
+
+/* detalhe decorativo */
+
+.prioridade-destaque-page::after {
+    content: "★";
+
+    position: absolute;
+
+    right: -8px;
+    bottom: -45px;
+
+    color: rgba(233, 196, 106, .10);
+
+    font-size: 180px;
+    line-height: 1;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   ESTADO VAZIO
+===================================================== */
+
+.prioridade-empty {
+    position: relative;
+    z-index: 1;
+
+    min-height: 145px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 22px;
+}
+
+.prioridade-star {
+    width: 68px;
+    height: 68px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: var(--accent);
+
+    color: var(--primary);
+
+    font-size: 27px;
+
+    box-shadow:
+            0 9px 23px rgba(233, 196, 106, .25);
+}
+
+.prioridade-empty h2 {
+    margin-top: 5px;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--primary);
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.prioridade-empty p:not(.card-eyebrow) {
+    max-width: 600px;
+
+    margin-top: 8px;
+
+    color: var(--text-secondary);
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   HEADER — PRIORIDADE DEFINIDA
+===================================================== */
+
+.prioridade-atual-header {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 22px;
+}
+
+.prioridade-atual-header .card-eyebrow {
+    color: #9b751e;
+}
+
+.prioridade-data {
+    display: inline-block;
+
+    margin-top: 5px;
+
+    color: var(--text-light);
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   TAREFA PRINCIPAL
+===================================================== */
+
+.prioridade-principal {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 17px;
+}
+
+.prioridade-principal .abcde-badge {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+    font-weight: 800;
+
+    box-shadow:
+            0 6px 16px rgba(23, 50, 77, .08);
+}
+
+.prioridade-principal-content {
+    min-width: 0;
+}
+
+.prioridade-principal-content h2 {
+    max-width: 850px;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--primary);
+
+    font-size: 25px;
+    font-weight: 800;
+
+    line-height: 1.3;
+}
+
+
+/* =====================================================
+   METADADOS
+===================================================== */
+
+.prioridade-meta {
+    margin-top: 10px;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px 17px;
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.prioridade-meta span {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 4px;
+}
+
+
+/* =====================================================
+   FRASE DE FOCO
+===================================================== */
+
+.prioridade-frase {
+    position: relative;
+    z-index: 1;
+
+    margin-top: 25px;
+
+    padding: 14px 16px;
+
+    border-left: 4px solid var(--secondary);
+    border-radius: 0 9px 9px 0;
+
+    background:
+            rgba(42, 157, 143, .07);
+}
+
+.prioridade-frase span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--secondary);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.1px;
+}
+
+.prioridade-frase p {
+    color: var(--primary);
+
+    font-family: "Manrope", sans-serif;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   AÇÕES DA PRIORIDADE
+===================================================== */
+
+.prioridade-atual-actions {
+    position: relative;
+    z-index: 1;
+
+    margin-top: 24px;
+    padding-top: 18px;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    border-top:
+            1px solid rgba(233, 196, 106, .30);
+}
+
+.prioridade-atual-actions button {
+    min-height: 40px;
+
+    padding: 0 15px;
+}
+
+
+/* =====================================================
+   CARD — DEFINIR PRIORIDADE
+===================================================== */
+
+.definir-prioridade-card {
+    margin-bottom: 32px;
+
+    padding: 26px 28px;
+}
+
+.definir-prioridade-card .card-header {
+    margin-bottom: 7px;
+}
+
+.definir-prioridade-card .card-header h3 {
+    margin-top: 4px;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--text-primary);
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.prioridade-section-description {
+    max-width: 720px;
+
+    margin-bottom: 20px;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+    line-height: 1.65;
+}
+
+
+/* =====================================================
+   SELECT + BOTÃO
+===================================================== */
+
+.selecionar-prioridade {
+    display: grid;
+
+    grid-template-columns:
+        minmax(300px, 1fr)
+        auto;
+
+    gap: 10px;
+}
+
+.selecionar-prioridade select {
+    width: 100%;
+    height: 45px;
+
+    padding: 0 14px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-control);
+
+    outline: none;
+
+    background: var(--surface);
+
+    color: var(--text-primary);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 12px;
+
+    transition:
+            border-color .2s ease,
+            box-shadow .2s ease;
+}
+
+.selecionar-prioridade select:focus {
+    border-color: var(--accent);
+
+    box-shadow:
+            0 0 0 3px rgba(233, 196, 106, .16);
+}
+
+
+/* =====================================================
+   BOTÃO PRIORIDADE
+===================================================== */
+
+.priority-action-button {
+    min-width: 225px;
+    height: 45px;
+
+    padding: 0 18px;
+
+    border: none;
+    border-radius: var(--radius-control);
+
+    cursor: pointer;
+
+    background: var(--accent);
+
+    color: var(--primary);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    box-shadow:
+            0 7px 18px rgba(233, 196, 106, .24);
+
+    transition:
+            transform .2s ease,
+            box-shadow .2s ease,
+            background .2s ease;
+}
+
+.priority-action-button:hover {
+    transform: translateY(-1px);
+
+    background: #efd177;
+
+    box-shadow:
+            0 10px 22px rgba(233, 196, 106, .30);
+}
+
+.priority-action-button:active {
+    transform: translateY(0);
+}
+
+.priority-action-button:disabled {
+    cursor: not-allowed;
+
+    opacity: .45;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* =====================================================
+   REFLEXÃO
+===================================================== */
+
+.prioridade-reflexao {
+    margin-bottom: 34px;
+}
+
+.prioridade-perguntas-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 17px;
+}
+
+
+/* =====================================================
+   CARD DAS PERGUNTAS
+===================================================== */
+
+.prioridade-pergunta-card {
+    position: relative;
+
+    min-height: 185px;
+
+    padding: 22px;
+
+    overflow: hidden;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    background: var(--surface);
+
+    box-shadow:
+            0 5px 16px rgba(23, 50, 77, .04);
+
+    transition:
+            transform .2s ease,
+            border-color .2s ease,
+            box-shadow .2s ease;
+}
+
+.prioridade-pergunta-card:hover {
+    transform: translateY(-2px);
+
+    border-color:
+            rgba(42, 157, 143, .25);
+
+    box-shadow:
+            0 10px 24px rgba(23, 50, 77, .07);
+}
+
+
+/* número grande */
+
+.prioridade-pergunta-numero {
+    display: inline-block;
+
+    margin-bottom: 18px;
+
+    color: var(--accent);
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.prioridade-pergunta-card h3 {
+    position: relative;
+    z-index: 1;
+
+    max-width: 300px;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--primary);
+
+    font-size: 14px;
+    font-weight: 800;
+
+    line-height: 1.45;
+}
+
+.prioridade-pergunta-card p {
+    position: relative;
+    z-index: 1;
+
+    margin-top: 10px;
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+
+/* detalhe decorativo */
+
+.prioridade-pergunta-card::after {
+    content: "★";
+
+    position: absolute;
+
+    right: -10px;
+    bottom: -30px;
+
+    color: rgba(233, 196, 106, .08);
+
+    font-size: 95px;
+}
+
+
+/* =====================================================
+   HISTÓRICO
+===================================================== */
+
+.prioridade-historico-section {
+    margin-bottom: 35px;
+}
+
+.historico-prioridades-list {
+    overflow: hidden;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    background: var(--surface);
+
+    box-shadow:
+            0 5px 16px rgba(23, 50, 77, .04);
+}
+
+
+/* =====================================================
+   ITEM DO HISTÓRICO
+===================================================== */
+
+.prioridade-historico-item {
+    min-height: 74px;
+
+    padding: 14px 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    border-bottom: 1px solid var(--border);
+
+    transition:
+            background .2s ease;
+}
+
+.prioridade-historico-item:last-child {
+    border-bottom: none;
+}
+
+.prioridade-historico-item:hover {
+    background: #fafbf9;
+}
+
+
+/* =====================================================
+   DATA
+===================================================== */
+
+.prioridade-historico-data {
+    width: 46px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 1px;
+}
+
+.prioridade-historico-data strong {
+    font-family: "JetBrains Mono", monospace;
+
+    color: var(--primary);
+
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.prioridade-historico-data span {
+    color: var(--text-light);
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: .8px;
+}
+
+
+/* =====================================================
+   BADGE NO HISTÓRICO
+===================================================== */
+
+.prioridade-historico-item .abcde-badge {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 7px;
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   TEXTO DO HISTÓRICO
+===================================================== */
+
+.prioridade-historico-content {
+    min-width: 0;
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.prioridade-historico-content strong {
+    font-family: "Manrope", sans-serif;
+
+    color: var(--text-primary);
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.prioridade-historico-content span {
+    color: var(--text-secondary);
+
+    font-size: 9px;
+
+    text-transform: capitalize;
+}
+
+
+/* =====================================================
+   MENSAGEM DE ERRO
+===================================================== */
+
+#mensagem-prioridade {
+    margin-top: 9px;
+}
+
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+@media (max-width: 1050px) {
+
+    .prioridade-perguntas-grid {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .prioridade-pergunta-card:last-child {
+        grid-column:
+                1 / -1;
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .selecionar-prioridade {
+        grid-template-columns:
+            1fr;
+    }
+
+    .priority-action-button {
+        width: 100%;
+    }
+
+    .prioridade-principal-content h2 {
+        font-size: 21px;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .prioridade-destaque-page,
+    .definir-prioridade-card {
+        padding: 22px 17px;
+    }
+
+
+    .prioridade-empty {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .prioridade-principal {
+        flex-direction: column;
+    }
+
+
+    .prioridade-atual-actions {
+        flex-direction: column;
+    }
+
+    .prioridade-atual-actions button {
+        width: 100%;
+    }
+
+
+    .prioridade-perguntas-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .prioridade-pergunta-card:last-child {
+        grid-column: auto;
+    }
+
+
+    .prioridade-historico-item {
+        padding:
+                13px 11px;
+
+        gap: 10px;
+    }
+
+}
+
+/* =====================================================
+   PRIORIS — SESSÃO DE FOCO
+===================================================== */
+
+
+/* =====================================================
+   LAYOUT PRINCIPAL
+===================================================== */
+
+.foco-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.7fr)
+        minmax(280px, .75fr);
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+
+    align-items: stretch;
+}
+
+
+/* =====================================================
+   TIMER — CARD PRINCIPAL
+===================================================== */
+
+.foco-timer-card {
+    position: relative;
+
+    min-height: 430px;
+
+    padding: 34px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    text-align: center;
+
+    background:
+            linear-gradient(
+                    145deg,
+                    #ffffff 0%,
+                    rgba(42, 157, 143, .045) 100%
+            );
+}
+
+
+/* barra superior */
+
+.foco-timer-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background:
+            linear-gradient(
+                    90deg,
+                    var(--secondary),
+                    var(--primary)
+            );
+}
+
+
+/* detalhe decorativo */
+
+.foco-timer-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 260px;
+    height: 260px;
+
+    right: -120px;
+    bottom: -140px;
+
+    border-radius: 50%;
+
+    background:
+            rgba(42, 157, 143, .045);
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   MODO FOCO
+===================================================== */
+
+.foco-mode {
+    position: relative;
+    z-index: 1;
+
+    margin-bottom: 25px;
+}
+
+.foco-mode-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 72px;
+    height: 29px;
+
+    padding: 0 13px;
+
+    border-radius: 999px;
+
+    background:
+            rgba(42, 157, 143, .12);
+
+    color: var(--secondary);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+}
+
+
+/* =====================================================
+   TAREFA DA SESSÃO
+===================================================== */
+
+.foco-tarefa {
+    position: relative;
+    z-index: 1;
+
+    max-width: 650px;
+
+    margin-bottom: 19px;
+}
+
+.foco-tarefa > span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--text-light);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+}
+
+.foco-tarefa > strong {
+    display: block;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--primary);
+
+    font-size: 18px;
+    font-weight: 800;
+
+    line-height: 1.4;
+}
+
+
+/* =====================================================
+   RELÓGIO
+===================================================== */
+
+.foco-timer {
+    position: relative;
+    z-index: 1;
+
+    margin: 2px 0 9px;
+
+    font-family: "JetBrains Mono", monospace;
+
+    color: var(--primary);
+
+    font-size: clamp(64px, 8vw, 104px);
+    font-weight: 700;
+
+    line-height: 1;
+
+    letter-spacing: -6px;
+
+    font-variant-numeric:
+            tabular-nums;
+
+    text-shadow:
+            0 8px 26px rgba(23, 50, 77, .08);
+}
+
+
+/* =====================================================
+   TEXTO DO STATUS
+===================================================== */
+
+.foco-status-texto {
+    position: relative;
+    z-index: 1;
+
+    margin-top: 10px;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   CONTROLES
+===================================================== */
+
+.foco-controles {
+    position: relative;
+    z-index: 1;
+
+    margin-top: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+}
+
+.foco-controles button {
+    min-width: 120px;
+    height: 42px;
+
+    padding: 0 16px;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   BOTÃO INTERROMPER
+===================================================== */
+
+.button-danger-focus {
+    min-height: 42px;
+
+    border:
+            1px solid rgba(231, 111, 81, .28);
+
+    border-radius: 8px;
+
+    background:
+            rgba(231, 111, 81, .07);
+
+    color: var(--danger);
+
+    cursor: pointer;
+
+    font-family: "Inter", sans-serif;
+
+    transition:
+            background .2s ease,
+            border-color .2s ease,
+            transform .2s ease;
+}
+
+.button-danger-focus:hover {
+    transform: translateY(-1px);
+
+    border-color:
+            rgba(231, 111, 81, .48);
+
+    background:
+            rgba(231, 111, 81, .13);
+}
+
+
+/* =====================================================
+   CONFIGURAÇÃO
+===================================================== */
+
+.foco-config-card {
+    padding: 26px 24px;
+}
+
+.foco-config-card .card-header {
+    margin-bottom: 22px;
+}
+
+.foco-config-card .card-header h3 {
+    margin-top: 4px;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--text-primary);
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+
+/* selects */
+
+.foco-config-card select {
+    width: 100%;
+    height: 43px;
+
+    padding: 0 12px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-control);
+
+    outline: none;
+
+    background: var(--surface);
+
+    color: var(--text-primary);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 12px;
+
+    transition:
+            border-color .2s ease,
+            box-shadow .2s ease;
+}
+
+.foco-config-card select:focus {
+    border-color: var(--secondary);
+
+    box-shadow:
+            0 0 0 3px
+            rgba(42, 157, 143, .10);
+}
+
+.foco-config-card select:disabled {
+    cursor: not-allowed;
+
+    opacity: .6;
+
+    background: var(--background);
+}
+
+
+/* =====================================================
+   BOX DE CONFIGURAÇÃO
+===================================================== */
+
+.foco-config-info {
+    margin-top: 7px;
+
+    padding: 14px 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    border: 1px solid
+    rgba(42, 157, 143, .18);
+
+    border-radius: 9px;
+
+    background:
+            rgba(42, 157, 143, .055);
+}
+
+.foco-config-info strong {
+    color: var(--primary);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.foco-config-info span {
+    color: var(--text-secondary);
+
+    font-size: 10px;
+    line-height: 1.55;
+}
+
+
+/* =====================================================
+   SOM DE FOCO
+===================================================== */
+
+.foco-audio-card {
+    margin-bottom: 20px;
+
+    padding: 27px 28px;
+}
+
+.foco-audio-card .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 7px;
+}
+
+.foco-audio-card .card-header h3 {
+    margin-top: 4px;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--text-primary);
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   BADGE YOUTUBE
+===================================================== */
+
+.foco-youtube-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 27px;
+
+    padding: 0 10px;
+
+    border-radius: 999px;
+
+    background:
+            rgba(231, 111, 81, .10);
+
+    color: var(--danger);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .4px;
+}
+
+
+/* =====================================================
+   DESCRIÇÃO ÁUDIO
+===================================================== */
+
+.foco-audio-description {
+    max-width: 700px;
+
+    margin-bottom: 20px;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   LAYOUT PLAYER + OPÇÕES
+===================================================== */
+
+.foco-audio-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.6fr)
+        minmax(230px, .7fr);
+
+    gap: 18px;
+}
+
+
+/* =====================================================
+   PLACEHOLDER YOUTUBE
+===================================================== */
+
+.youtube-player-placeholder {
+    position: relative;
+
+    min-height: 235px;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border:
+            1px solid rgba(23, 50, 77, .11);
+
+    border-radius: 12px;
+
+    background:
+            linear-gradient(
+                    145deg,
+                    var(--primary),
+                    #204665
+            );
+}
+
+.youtube-player-placeholder::before {
+    content: "";
+
+    position: absolute;
+
+    width: 200px;
+    height: 200px;
+
+    top: -95px;
+    right: -80px;
+
+    border-radius: 50%;
+
+    background:
+            rgba(42, 157, 143, .10);
+}
+
+.youtube-player-placeholder::after {
+    content: "";
+
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    bottom: -80px;
+    left: -60px;
+
+    border-radius: 50%;
+
+    background:
+            rgba(233, 196, 106, .08);
+}
+
+
+/* conteúdo placeholder */
+
+.youtube-placeholder-content {
+    position: relative;
+    z-index: 1;
+
+    max-width: 360px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    color: #ffffff;
+}
+
+.youtube-placeholder-content > span {
+    width: 53px;
+    height: 53px;
+
+    margin:
+            0 auto
+            13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+            rgba(255, 255, 255, .10);
+
+    font-size: 23px;
+}
+
+.youtube-placeholder-content strong {
+    display: block;
+
+    font-family: "Manrope", sans-serif;
+
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.youtube-placeholder-content p {
+    margin-top: 7px;
+
+    color:
+            rgba(255, 255, 255, .70);
+
+    font-size: 10px;
+    line-height: 1.55;
+}
+
+
+/* =====================================================
+   OPÇÕES DE ÁUDIO
+===================================================== */
+
+.foco-audio-opcoes {
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+.foco-audio-option {
+    width: 100%;
+    min-height: 67px;
+
+    padding: 11px 13px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: var(--surface);
+
+    cursor: pointer;
+
+    text-align: left;
+
+    transition:
+            border-color .2s ease,
+            background .2s ease,
+            transform .2s ease,
+            box-shadow .2s ease;
+}
+
+.foco-audio-option:hover {
+    transform:
+            translateY(-1px);
+
+    border-color:
+            rgba(42, 157, 143, .30);
+
+    box-shadow:
+            0 6px 14px
+            rgba(23, 50, 77, .05);
+}
+
+.foco-audio-option > span {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: var(--background);
+
+    font-size: 17px;
+}
+
+.foco-audio-option div {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.foco-audio-option strong {
+    color: var(--text-primary);
+
+    font-family: "Manrope", sans-serif;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.foco-audio-option small {
+    color: var(--text-secondary);
+
+    font-size: 9px;
+}
+
+
+/* opção selecionada */
+
+.foco-audio-option.active {
+    border-color:
+            rgba(42, 157, 143, .35);
+
+    background:
+            rgba(42, 157, 143, .065);
+}
+
+.foco-audio-option.active > span {
+    background:
+            rgba(42, 157, 143, .13);
+}
+
+
+/* =====================================================
+   RESUMO
+===================================================== */
+
+.foco-resumo-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 32px;
+}
+
+
+/* minutos */
+
+#foco-total-minutos {
+    font-family:
+            "JetBrains Mono",
+            monospace;
+}
+
+
+/* =====================================================
+   HISTÓRICO
+===================================================== */
+
+.foco-historico-section {
+    margin-bottom: 35px;
+}
+
+.sessoes-foco-list {
+    overflow: hidden;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    background: var(--surface);
+
+    box-shadow:
+            0 5px 16px
+            rgba(23, 50, 77, .04);
+}
+
+
+/* =====================================================
+   SESSÃO DO HISTÓRICO
+===================================================== */
+
+.sessao-foco-item {
+    min-height: 76px;
+
+    padding: 14px 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    border-bottom:
+            1px solid var(--border);
+
+    transition:
+            background .2s ease;
+}
+
+.sessao-foco-item:last-child {
+    border-bottom: none;
+}
+
+.sessao-foco-item:hover {
+    background: #fafbf9;
+}
+
+
+/* =====================================================
+   ÍCONE DA SESSÃO
+===================================================== */
+
+.sessao-foco-icon {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background:
+            rgba(42, 157, 143, .09);
+
+    color: var(--secondary);
+
+    font-size: 17px;
+}
+
+
+/* =====================================================
+   CONTEÚDO DO HISTÓRICO
+===================================================== */
+
+.sessao-foco-content {
+    min-width: 0;
+
+    flex: 1;
+}
+
+.sessao-foco-content > strong {
+    display: block;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--text-primary);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    line-height: 1.4;
+}
+
+.sessao-foco-meta {
+    margin-top: 5px;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 7px 14px;
+
+    color: var(--text-secondary);
+
+    font-size: 9px;
+}
+
+
+/* =====================================================
+   STATUS DAS SESSÕES
+===================================================== */
+
+.sessao-status-badge {
+    flex-shrink: 0;
+
+    min-height: 27px;
+
+    padding: 0 9px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 999px;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: .4px;
+
+    text-transform: uppercase;
+}
+
+
+/* EM ANDAMENTO */
+
+.sessao-status-em_andamento {
+    color: var(--secondary);
+
+    background:
+            rgba(42, 157, 143, .11);
+}
+
+
+/* PAUSADA */
+
+.sessao-status-pausada {
+    color: #9a741f;
+
+    background:
+            rgba(233, 196, 106, .17);
+}
+
+
+/* CONCLUÍDA */
+
+.sessao-status-concluida {
+    color: #4d7654;
+
+    background:
+            rgba(132, 169, 140, .18);
+}
+
+
+/* INTERROMPIDA */
+
+.sessao-status-interrompida {
+    color: var(--danger);
+
+    background:
+            rgba(231, 111, 81, .10);
+}
+
+
+/* =====================================================
+   ESTADO DO TIMER DURANTE A EXECUÇÃO
+===================================================== */
+
+.foco-timer-card:has(#btn-pausar-foco:not(.hidden)) {
+    border-color:
+            rgba(42, 157, 143, .25);
+
+    box-shadow:
+            0 10px 28px
+            rgba(42, 157, 143, .08);
+}
+
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+@media (max-width: 1050px) {
+
+    .foco-layout {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .foco-config-card {
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap:
+                0 15px;
+    }
+
+
+    .foco-config-card
+    .card-header,
+    .foco-config-info,
+    #mensagem-foco {
+        grid-column:
+                1 / -1;
+    }
+
+
+    .foco-audio-layout {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .foco-audio-opcoes {
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .foco-resumo-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .foco-resumo-grid
+    .stat-card:last-child {
+        grid-column:
+                1 / -1;
+    }
+
+
+    .foco-config-card {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .foco-config-card
+    .card-header,
+    .foco-config-info,
+    #mensagem-foco {
+        grid-column: auto;
+    }
+
+
+    .foco-audio-opcoes {
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .foco-timer-card,
+    .foco-config-card,
+    .foco-audio-card {
+        padding:
+                22px 17px;
+    }
+
+
+    .foco-timer-card {
+        min-height: 390px;
+    }
+
+
+    .foco-timer {
+        font-size: 58px;
+
+        letter-spacing: -4px;
+    }
+
+
+    .foco-tarefa > strong {
+        font-size: 15px;
+    }
+
+
+    .foco-controles {
+        width: 100%;
+
+        flex-direction: column;
+    }
+
+
+    .foco-controles button {
+        width: 100%;
+    }
+
+
+    .foco-resumo-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .foco-resumo-grid
+    .stat-card:last-child {
+        grid-column: auto;
+    }
+
+
+    .sessao-foco-item {
+        flex-wrap: wrap;
+
+        padding:
+                13px 12px;
+    }
+
+
+    .sessao-status-badge {
+        margin-left: 51px;
+    }
+
+
+    .youtube-player-placeholder {
+        min-height: 200px;
+    }
+
+}
+
+/* =====================================================
+   PRIORIS — YOUTUBE PLAYER
+===================================================== */
+
+.youtube-player-shell {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    min-height: 235px;
+
+    overflow: hidden;
+
+    border-radius: 12px;
+
+    background: var(--primary);
+
+    box-shadow:
+            inset 0 0 0 1px
+            rgba(255, 255, 255, .06);
+}
+
+
+/* iframe criado pela API */
+
+.youtube-player-shell iframe,
+#youtube-player {
+    width: 100% !important;
+    height: 100% !important;
+
+    border: none;
+
+    border-radius: 12px;
+}
+
+
+/* carregamento */
+
+.youtube-player-loading {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    background:
+            linear-gradient(
+                    145deg,
+                    var(--primary),
+                    #204665
+            );
+
+    color: #ffffff;
+}
+
+.youtube-player-loading > span {
+    width: 50px;
+    height: 50px;
+
+    margin-bottom: 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+            rgba(255, 255, 255, .10);
+
+    font-size: 22px;
+
+    animation:
+            priorisAudioPulse
+            1.7s ease-in-out
+            infinite;
+}
+
+.youtube-player-loading strong {
+    font-family:
+            "Manrope",
+            sans-serif;
+
+    font-size: 14px;
+}
+
+.youtube-player-loading p {
+    color:
+            rgba(255, 255, 255, .65);
+
+    font-size: 9px;
+}
+
+
+/* mensagem */
+
+.foco-audio-message {
+    margin-top: 11px;
+
+    color: var(--text-secondary);
+
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+
+@keyframes priorisAudioPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: .75;
+    }
+
+    50% {
+        transform: scale(1.08);
+        opacity: 1;
+    }
+
+}
+
+/* =====================================================
+   PRIORIS — REVISÃO SEMANAL
+===================================================== */
+
+
+/* =====================================================
+   CARD DA SEMANA EM ANÁLISE
+===================================================== */
+
+.revisao-atual-card {
+    position: relative;
+
+    margin-bottom: 20px;
+    padding: 28px;
+
+    overflow: hidden;
+}
+
+
+/* detalhe superior */
+
+.revisao-atual-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background:
+            linear-gradient(
+                    90deg,
+                    var(--secondary),
+                    var(--accent),
+                    var(--primary)
+            );
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.revisao-planejamento-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.revisao-planejamento-header h2 {
+    margin-top: 5px;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--primary);
+
+    font-size: 23px;
+    font-weight: 800;
+
+    line-height: 1.3;
+}
+
+
+/* =====================================================
+   PERÍODO
+===================================================== */
+
+.revisao-periodo {
+    margin-top: 17px;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 9px 12px;
+
+    border-radius: 8px;
+
+    background: var(--background);
+
+    color: var(--text-secondary);
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   FOCO DEFINIDO NA SEMANA
+===================================================== */
+
+.revisao-foco-planejamento {
+    margin-top: 19px;
+
+    padding: 14px 16px;
+
+    border-left:
+            4px solid var(--accent);
+
+    border-radius:
+            0 9px 9px 0;
+
+    background:
+            rgba(233, 196, 106, .10);
+}
+
+.revisao-foco-planejamento span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #97721f;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.revisao-foco-planejamento p {
+    color: var(--text-primary);
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   SCORE DA REVISÃO
+===================================================== */
+
+.revisao-score-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 20px;
+}
+
+
+/* score */
+
+#revisao-score {
+    font-family:
+            "JetBrains Mono",
+            monospace;
+
+    color: var(--secondary);
+}
+
+
+/* card score destaque */
+
+.revisao-score-grid
+.stat-card:nth-child(3) {
+    position: relative;
+
+    overflow: hidden;
+
+    border-color:
+            rgba(233, 196, 106, .33);
+
+    background:
+            linear-gradient(
+                    135deg,
+                    #ffffff,
+                    rgba(233, 196, 106, .08)
+            );
+}
+
+
+/* =====================================================
+   FORMULÁRIO
+===================================================== */
+
+.revisao-form-card {
+    margin-bottom: 30px;
+
+    padding: 28px;
+}
+
+.revisao-form-card .card-header {
+    margin-bottom: 24px;
+}
+
+.revisao-form-card .card-header h3 {
+    margin-top: 4px;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--text-primary);
+
+    font-size: 19px;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   CAMPOS DE REFLEXÃO
+===================================================== */
+
+.revisao-campo {
+    margin-bottom: 20px;
+
+    padding: 20px;
+
+    border: 1px solid var(--border);
+    border-radius: 11px;
+
+    background: var(--surface);
+}
+
+.revisao-campo-header {
+    margin-bottom: 13px;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 12px;
+}
+
+.revisao-campo-icon {
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.revisao-campo-header label {
+    display: block;
+
+    color: var(--primary);
+
+    font-family: "Manrope", sans-serif;
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.revisao-campo-header p {
+    margin-top: 4px;
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+
+/* textarea */
+
+.revisao-campo textarea {
+    width: 100%;
+    min-height: 120px;
+
+    padding: 13px 14px;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    outline: none;
+
+    resize: vertical;
+
+    background: var(--surface);
+
+    color: var(--text-primary);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 12px;
+    line-height: 1.6;
+
+    transition:
+            border-color .2s ease,
+            box-shadow .2s ease;
+}
+
+.revisao-campo textarea:focus {
+    border-color: var(--secondary);
+
+    box-shadow:
+            0 0 0 3px
+            rgba(42, 157, 143, .10);
+}
+
+
+/* =====================================================
+   CORES POR TIPO
+===================================================== */
+
+.revisao-campo-conquistas {
+    border-color:
+            rgba(132, 169, 140, .28);
+
+    background:
+            rgba(132, 169, 140, .035);
+}
+
+.revisao-campo-conquistas
+.revisao-campo-icon {
+    color: #4f7957;
+
+    background:
+            rgba(132, 169, 140, .18);
+}
+
+
+/* dificuldades */
+
+.revisao-campo-dificuldades {
+    border-color:
+            rgba(231, 111, 81, .23);
+
+    background:
+            rgba(231, 111, 81, .025);
+}
+
+.revisao-campo-dificuldades
+.revisao-campo-icon {
+    color: var(--danger);
+
+    background:
+            rgba(231, 111, 81, .11);
+}
+
+
+/* ajustes */
+
+.revisao-campo-ajustes {
+    border-color:
+            rgba(42, 157, 143, .24);
+
+    background:
+            rgba(42, 157, 143, .03);
+}
+
+.revisao-campo-ajustes
+.revisao-campo-icon {
+    color: var(--secondary);
+
+    background:
+            rgba(42, 157, 143, .11);
+}
+
+
+/* =====================================================
+   BOX EXPLICATIVO
+===================================================== */
+
+.revisao-info-box {
+    margin-top: 7px;
+    margin-bottom: 17px;
+
+    padding: 14px 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    border:
+            1px solid rgba(233, 196, 106, .38);
+
+    border-radius: 9px;
+
+    background:
+            rgba(233, 196, 106, .10);
+}
+
+.revisao-info-box strong {
+    color: var(--primary);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.revisao-info-box span {
+    color: var(--text-secondary);
+
+    font-size: 10px;
+    line-height: 1.55;
+}
+
+
+/* =====================================================
+   AÇÕES DO FORM
+===================================================== */
+
+.revisao-form-actions {
+    margin-top: 0;
+}
+
+
+/* =====================================================
+   REVISÃO REALIZADA
+===================================================== */
+
+.revisao-realizada-card {
+    position: relative;
+
+    margin-bottom: 30px;
+    padding: 28px;
+
+    overflow: hidden;
+}
+
+.revisao-realizada-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: var(--secondary);
+}
+
+
+/* =====================================================
+   HEADER DA REVISÃO REALIZADA
+===================================================== */
+
+.revisao-realizada-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 23px;
+}
+
+.revisao-realizada-header h2 {
+    margin-top: 5px;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--primary);
+
+    font-size: 21px;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   SNAPSHOT DO SCORE
+===================================================== */
+
+.revisao-score-snapshot {
+    min-width: 125px;
+
+    padding: 12px 14px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    gap: 4px;
+
+    border-radius: 10px;
+
+    background:
+            rgba(42, 157, 143, .09);
+}
+
+.revisao-score-snapshot span {
+    color: var(--secondary);
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: .8px;
+}
+
+.revisao-score-snapshot strong {
+    color: var(--secondary);
+
+    font-family:
+            "JetBrains Mono",
+            monospace;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   GRID DAS RESPOSTAS
+===================================================== */
+
+.revisao-realizada-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+
+/* =====================================================
+   CARD DE RESPOSTA
+===================================================== */
+
+.revisao-resposta-card {
+    min-height: 180px;
+
+    padding: 19px;
+
+    border: 1px solid var(--border);
+    border-radius: 11px;
+
+    background: var(--surface);
+}
+
+.revisao-resposta-header {
+    margin-bottom: 13px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+}
+
+.revisao-resposta-header > span {
+    width: 29px;
+    height: 29px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.revisao-resposta-header strong {
+    color: var(--primary);
+
+    font-family: "Manrope", sans-serif;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.revisao-resposta-card > p {
+    color: var(--text-secondary);
+
+    font-size: 10px;
+    line-height: 1.65;
+}
+
+
+/* conquista */
+
+.revisao-resposta-conquistas {
+    border-color:
+            rgba(132, 169, 140, .25);
+}
+
+.revisao-resposta-conquistas
+.revisao-resposta-header > span {
+    color: #4f7957;
+
+    background:
+            rgba(132, 169, 140, .18);
+}
+
+
+/* dificuldade */
+
+.revisao-resposta-dificuldades {
+    border-color:
+            rgba(231, 111, 81, .22);
+}
+
+.revisao-resposta-dificuldades
+.revisao-resposta-header > span {
+    color: var(--danger);
+
+    background:
+            rgba(231, 111, 81, .11);
+}
+
+
+/* ajuste */
+
+.revisao-resposta-ajustes {
+    border-color:
+            rgba(42, 157, 143, .23);
+}
+
+.revisao-resposta-ajustes
+.revisao-resposta-header > span {
+    color: var(--secondary);
+
+    background:
+            rgba(42, 157, 143, .11);
+}
+
+
+/* =====================================================
+   OBSERVAÇÕES DA REVISÃO
+===================================================== */
+
+.revisao-observacoes-realizada {
+    margin-top: 18px;
+
+    padding: 15px 17px;
+
+    border-radius: 9px;
+
+    background: var(--background);
+}
+
+.revisao-observacoes-realizada span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--text-light);
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.revisao-observacoes-realizada p {
+    color: var(--text-secondary);
+
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   AÇÕES DA REVISÃO
+===================================================== */
+
+.revisao-realizada-actions {
+    margin-top: 20px;
+    padding-top: 16px;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    border-top:
+            1px solid var(--border);
+}
+
+
+/* =====================================================
+   HISTÓRICO
+===================================================== */
+
+.revisao-historico-section {
+    margin-bottom: 35px;
+}
+
+.revisoes-page-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+    align-items: start;
+}
+
+
+/* =====================================================
+   CARD DO HISTÓRICO
+===================================================== */
+
+.revisao-historico-card {
+    position: relative;
+
+    padding: 22px;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    background: var(--surface);
+
+    box-shadow:
+            0 5px 16px
+            rgba(23, 50, 77, .04);
+
+    transition:
+            transform .2s ease,
+            box-shadow .2s ease,
+            border-color .2s ease;
+}
+
+.revisao-historico-card:hover {
+    transform: translateY(-2px);
+
+    border-color:
+            rgba(42, 157, 143, .25);
+
+    box-shadow:
+            0 10px 25px
+            rgba(23, 50, 77, .07);
+}
+
+
+/* =====================================================
+   HEADER HISTÓRICO
+===================================================== */
+
+.revisao-historico-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.revisao-historico-header h3 {
+    margin-top: 5px;
+
+    font-family: "Manrope", sans-serif;
+
+    color: var(--primary);
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   SCORE DO HISTÓRICO
+===================================================== */
+
+.revisao-historico-score {
+    min-width: 70px;
+
+    padding: 8px 9px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 2px;
+
+    border-radius: 8px;
+
+    background:
+            rgba(42, 157, 143, .09);
+}
+
+.revisao-historico-score span {
+    color: var(--secondary);
+
+    font-size: 7px;
+    font-weight: 800;
+
+    letter-spacing: .7px;
+}
+
+.revisao-historico-score strong {
+    color: var(--secondary);
+
+    font-family:
+            "JetBrains Mono",
+            monospace;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   PRINCIPAL CONQUISTA
+===================================================== */
+
+.revisao-historico-destaque {
+    margin-top: 17px;
+
+    padding: 13px 14px;
+
+    border-left:
+            3px solid var(--rest);
+
+    border-radius:
+            0 8px 8px 0;
+
+    background:
+            rgba(132, 169, 140, .07);
+}
+
+.revisao-historico-destaque span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #57775d;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: .8px;
+}
+
+.revisao-historico-destaque p {
+    color: var(--text-secondary);
+
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   PRÓXIMO AJUSTE
+===================================================== */
+
+.revisao-historico-footer {
+    margin-top: 15px;
+    padding-top: 13px;
+
+    border-top: 1px solid var(--border);
+}
+
+.revisao-historico-footer span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--secondary);
+
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.revisao-historico-footer strong {
+    color: var(--text-primary);
+
+    font-size: 10px;
+    font-weight: 600;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+@media (max-width: 1050px) {
+
+    .revisao-realizada-grid {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .revisao-resposta-ajustes {
+        grid-column:
+                1 / -1;
+    }
+
+
+    .revisoes-page-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .revisao-score-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .revisao-score-grid
+    .stat-card:last-child {
+        grid-column:
+                1 / -1;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .revisao-realizada-header {
+        flex-direction: column;
+    }
+
+    .revisao-score-snapshot {
+        align-items: flex-start;
+    }
+
+
+    .revisao-realizada-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .revisao-resposta-ajustes {
+        grid-column: auto;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .revisao-atual-card,
+    .revisao-form-card,
+    .revisao-realizada-card {
+        padding:
+                21px 17px;
+    }
+
+
+    .revisao-score-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .revisao-score-grid
+    .stat-card:last-child {
+        grid-column: auto;
+    }
+
+
+    .revisao-periodo {
+        flex-wrap: wrap;
+    }
+
+
+    .revisao-campo {
+        padding: 16px 14px;
+    }
+
+
+    .revisao-realizada-actions {
+        flex-direction: column;
+    }
+
+    .revisao-realizada-actions button {
+        width: 100%;
+    }
+
+
+    .revisao-historico-header {
+        flex-direction: column;
+    }
+
+    .revisao-historico-score {
+        align-items: flex-start;
+    }
+
+}
+
+/* =====================================================
+   PRIORIS — AUTENTICAÇÃO / LOGIN
+===================================================== */
+
+
+.auth-body {
+    min-height: 100vh;
+
+    margin: 0;
+
+    background: var(--background);
+
+    font-family: "Inter", sans-serif;
+}
+
+
+.auth-page {
+    min-height: 100vh;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(430px, 1.05fr)
+        minmax(430px, .95fr);
+}
+
+
+/* =====================================================
+   PAINEL DA MARCA
+===================================================== */
+
+.auth-brand-panel {
+    position: relative;
+
+    min-height: 100vh;
+
+    padding: 46px 55px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    overflow: hidden;
+
+    background:
+            linear-gradient(
+                    145deg,
+                    #17324D 0%,
+                    #1D4357 58%,
+                    #245F67 100%
+            );
+
+    color: #ffffff;
+}
+
+
+.auth-brand-panel::before {
+    content: "";
+
+    position: absolute;
+
+    width: 430px;
+    height: 430px;
+
+    top: -190px;
+    right: -180px;
+
+    border-radius: 50%;
+
+    background:
+            rgba(42, 157, 143, .16);
+}
+
+
+.auth-brand-panel::after {
+    content: "";
+
+    position: absolute;
+
+    width: 330px;
+    height: 330px;
+
+    bottom: -180px;
+    left: -130px;
+
+    border-radius: 50%;
+
+    background:
+            rgba(233, 196, 106, .08);
+}
+
+
+.auth-brand-content,
+.auth-brand-footer {
+    position: relative;
+
+    z-index: 1;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.auth-brand {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    text-decoration: none;
+
+    color: #ffffff;
+}
+
+
+.auth-brand img {
+    width: 52px;
+    height: 52px;
+
+    object-fit: contain;
+}
+
+
+.auth-brand > div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+
+.auth-brand strong {
+    font-family: "Manrope", sans-serif;
+
+    font-size: 18px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+.auth-brand span {
+    color:
+            rgba(255, 255, 255, .60);
+
+    font-size: 9px;
+
+    letter-spacing: .3px;
+}
+
+
+/* =====================================================
+   MENSAGEM PRINCIPAL
+===================================================== */
+
+.auth-brand-message {
+    max-width: 570px;
+
+    margin-top: 85px;
+}
+
+
+.auth-eyebrow {
+    margin-bottom: 10px;
+
+    color: var(--secondary);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.auth-brand-message h1 {
+    max-width: 550px;
+
+    margin: 0;
+
+    font-family: "Manrope", sans-serif;
+
+    font-size: clamp(
+            38px,
+            4.5vw,
+            60px
+    );
+
+    font-weight: 800;
+
+    line-height: 1.06;
+
+    letter-spacing: -2px;
+}
+
+
+.auth-brand-message > p:last-child {
+    max-width: 510px;
+
+    margin-top: 21px;
+
+    color:
+            rgba(255, 255, 255, .69);
+
+    font-size: 13px;
+
+    line-height: 1.75;
+}
+
+
+/* =====================================================
+   FLUXO PRIORIS
+===================================================== */
+
+.auth-flow {
+    max-width: 510px;
+
+    margin-top: 50px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+.auth-flow-item {
+    padding: 13px 15px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    border:
+            1px solid
+            rgba(255, 255, 255, .08);
+
+    border-radius: 11px;
+
+    background:
+            rgba(255, 255, 255, .045);
+
+    backdrop-filter:
+            blur(6px);
+}
+
+
+.auth-flow-item > span {
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background:
+            rgba(42, 157, 143, .16);
+
+    color: #70C6BA;
+
+    font-family:
+            "JetBrains Mono",
+            monospace;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+.auth-flow-item strong {
+    display: block;
+
+    font-family:
+            "Manrope",
+            sans-serif;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+.auth-flow-item p {
+    margin-top: 3px;
+
+    color:
+            rgba(255, 255, 255, .58);
+
+    font-size: 9px;
+}
+
+
+/* =====================================================
+   FOOTER DA MARCA
+===================================================== */
+
+.auth-brand-footer {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color:
+            rgba(255, 255, 255, .40);
+
+    font-size: 7px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+/* =====================================================
+   PAINEL DO FORM
+===================================================== */
+
+.auth-form-panel {
+    min-height: 100vh;
+
+    padding: 50px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--surface);
+}
+
+
+.auth-form-container {
+    width: 100%;
+    max-width: 410px;
+}
+
+
+/* =====================================================
+   HEADER DO FORM
+===================================================== */
+
+.auth-form-header {
+    margin-bottom: 32px;
+}
+
+
+.auth-form-header h2 {
+    margin: 0;
+
+    font-family:
+            "Manrope",
+            sans-serif;
+
+    color: var(--primary);
+
+    font-size: 30px;
+    font-weight: 800;
+
+    letter-spacing: -1px;
+}
+
+
+.auth-form-header > p:last-child {
+    margin-top: 9px;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.auth-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+
+.auth-form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.auth-form-group label {
+    color: var(--text-primary);
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+.auth-label-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+.auth-input-wrapper {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+.auth-input-wrapper input {
+    width: 100%;
+    height: 49px;
+
+    padding:
+            0 72px
+            0 43px;
+
+    border:
+            1px solid var(--border);
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background:
+            var(--surface);
+
+    color:
+            var(--text-primary);
+
+    font-family:
+            "Inter",
+            sans-serif;
+
+    font-size: 11px;
+
+    transition:
+            border-color .2s ease,
+            box-shadow .2s ease,
+            background .2s ease;
+}
+
+
+.auth-input-wrapper input:focus {
+    border-color:
+            var(--secondary);
+
+    box-shadow:
+            0 0 0 3px
+            rgba(42, 157, 143, .10);
+}
+
+
+.auth-input-wrapper input::placeholder {
+    color: #A1AAAE;
+}
+
+
+.auth-input-icon {
+    position: absolute;
+
+    left: 15px;
+
+    color: var(--text-light);
+
+    font-family:
+            "JetBrains Mono",
+            monospace;
+
+    font-size: 12px;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   MOSTRAR SENHA
+===================================================== */
+
+.auth-password-toggle {
+    position: absolute;
+
+    right: 13px;
+
+    padding: 4px;
+
+    border: none;
+
+    outline: none;
+
+    background: none;
+
+    color: var(--secondary);
+
+    cursor: pointer;
+
+    font-family:
+            "Inter",
+            sans-serif;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   BOTÃO LOGIN
+===================================================== */
+
+.auth-submit-button {
+    width: 100%;
+    height: 50px;
+
+    margin-top: 2px;
+
+    padding: 0 18px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background:
+            var(--primary);
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-family:
+            "Inter",
+            sans-serif;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    transition:
+            transform .2s ease,
+            background .2s ease,
+            box-shadow .2s ease;
+}
+
+
+.auth-submit-button:hover {
+    transform:
+            translateY(-1px);
+
+    background: #204765;
+
+    box-shadow:
+            0 8px 20px
+            rgba(23, 50, 77, .16);
+}
+
+
+.auth-submit-button:disabled {
+    cursor: not-allowed;
+
+    opacity: .65;
+
+    transform: none;
+}
+
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
+
+.auth-message {
+    min-height: 16px;
+
+    color: var(--danger);
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   CADASTRO
+===================================================== */
+
+.auth-register {
+    margin-top: 26px;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+}
+
+
+.auth-register a {
+    color: var(--secondary);
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+.auth-register a:hover {
+    text-decoration: underline;
+}
+
+
+/* =====================================================
+   SEGURANÇA
+===================================================== */
+
+.auth-security {
+    margin-top: 32px;
+
+    padding: 12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    border-radius: 8px;
+
+    background: var(--background);
+
+    color: var(--text-secondary);
+
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   MOBILE LOGO
+===================================================== */
+
+.auth-mobile-logo {
+    display: none;
+}
+
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+@media (max-width: 950px) {
+
+    .auth-page {
+        grid-template-columns: 1fr;
+    }
+
+
+    .auth-brand-panel {
+        display: none;
+    }
+
+
+    .auth-form-panel {
+        padding:
+                35px 20px;
+    }
+
+
+    .auth-mobile-logo {
+        margin-bottom: 50px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 9px;
+    }
+
+
+    .auth-mobile-logo img {
+        width: 40px;
+        height: 40px;
+
+        object-fit: contain;
+    }
+
+
+    .auth-mobile-logo strong {
+        color: var(--primary);
+
+        font-family:
+                "Manrope",
+                sans-serif;
+
+        font-size: 16px;
+        font-weight: 800;
+
+        letter-spacing: 1px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .auth-form-panel {
+        align-items: flex-start;
+
+        padding:
+                28px 18px;
+    }
+
+
+    .auth-mobile-logo {
+        margin-bottom: 45px;
+    }
+
+
+    .auth-form-header h2 {
+        font-size: 26px;
+    }
+
+}
+
+/* =====================================================
+   PRIORIS — CADASTRO
+===================================================== */
+
+.auth-register-container {
+    max-width: 430px;
+}
+
+
+.auth-helper {
+    margin-top: 1px;
+
+    color: var(--text-secondary);
+
+    font-size: 8px;
+
+    line-height: 1.4;
+}
+
+
+.auth-message.error {
+    color: var(--danger);
+}
+
+
+@media (max-height: 760px) and (min-width: 951px) {
+
+    .auth-form-panel {
+        align-items: flex-start;
+
+        overflow-y: auto;
+
+        padding-top: 35px;
+        padding-bottom: 35px;
+    }
+
+
+    .auth-brand-message {
+        margin-top: 45px;
+    }
+
+
+    .auth-flow {
+        margin-top: 30px;
+    }
+
+}
+
+/* =====================================================
+   LOGIN — FEEDBACK
+===================================================== */
+
+.auth-message.success {
+    color: var(--secondary);
+}
+
+.auth-message.error {
+    color: var(--danger);
+}
+
+/* =====================================================
+   PRIORIS — LOGOUT
+===================================================== */
+
+.sidebar-footer {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+
+.sidebar-user {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.sidebar-logout {
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border:
+            1px solid var(--border);
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: var(--text-secondary);
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    transition:
+            color .2s ease,
+            border-color .2s ease,
+            background .2s ease;
+}
+
+
+.sidebar-logout:hover {
+    color: var(--danger);
+
+    border-color:
+            rgba(231, 111, 81, .28);
+
+    background:
+            rgba(231, 111, 81, .07);
+}
+
+/* =====================================================
+   DASHBOARD — AÇÃO DA PRIORIDADE #1
+===================================================== */
+
+.priority-action {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    min-width: 180px;
+
+    margin-left: auto;
+
+    text-align: center;
+}
+
+
+/* BOTÃO INICIAR FOCO */
+
+#btn-iniciar-foco-prioridade {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    width: 170px;
+    min-height: 48px;
+
+    padding: 0 20px;
+
+    white-space: nowrap;
+
+    text-align: center;
+}
+
+
+/* ÍCONE PLAY */
+
+.focus-button-icon {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    line-height: 1;
+}
+
+
+/* DESCRIÇÃO POMODORO */
+
+#descricao-foco-prioridade {
+    display: block;
+
+    width: 100%;
+
+    margin: 0;
+
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+
+    .priority-card {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .priority-action {
+        width: 100%;
+        min-width: 0;
+
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    #btn-iniciar-foco-prioridade {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+/* =====================================================
+   SIDEBAR COMPACTA — USUÁRIO + LOGOUT
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .sidebar-footer {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        gap: 8px;
+
+        padding:
+                12px 0 8px;
+    }
+
+
+    .sidebar-footer .user-avatar {
+        width: 34px;
+        height: 34px;
+    }
+
+
+    .sidebar-logout {
+        width: 34px;
+        height: 34px;
+
+        margin: 0;
+    }
+}
