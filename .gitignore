@@ -22,3 +22,27 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# Maven
+target/
+**/target/
+
+# Variáveis de ambiente e dados sensíveis
+.env
+.env.*
+!.env.example
+!**/.env.example
+
+# Arquivos locais do Spring
+application-local.properties
+application-local.yml
+application-local.yaml
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
